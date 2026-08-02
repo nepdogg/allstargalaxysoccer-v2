@@ -1,0 +1,15 @@
+{
+  "file": "updates.html",
+  "title": "Updates",
+  "accent": "#45ef63",
+  "rgb": "69,239,99",
+  "active": "updates",
+  "hero": [
+    "assets/images/heroes/pages/hero-updates-v233.png",
+    "assets/images/heroes/pages/hero-schedule.png",
+    "assets/images/heroes/pages/hero-news.png"
+  ],
+  "navTitle": "assets/images/titles/page-titles/navigation-title-updates.png",
+  "ticker": "Schedule, results, standings, and club news in one place.",
+  "icon": "\u2605"
+}

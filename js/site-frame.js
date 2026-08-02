@@ -1,0 +1,10 @@
+
+export function mountSiteFrame(site,page){
+ const host=document.querySelector('#site-frame'); host.className='site-frame';
+ host.innerHTML=`<div class="identity-row"><img class="brand-logo" src="${site.logo}" alt="Allstar Galaxy"><img class="nav-title" src="${page.navTitle}" alt="The Official Home of the Allstar Galaxy"><a class="search-control" href="search.html" aria-label="Search">Search</a></div><nav class="main-nav" aria-label="Main navigation">${site.nav.map(n=>`<a class="nav-link" href="${n.href}" ${n.id===page.active?'aria-current="page"':''}>${n.label}</a>`).join('')}</nav><div class="status-bar"><span class="status-icon">${page.icon||'★'}</span><span class="status-text">${page.ticker}</span><a class="status-open" href="#main">OPEN →</a></div><section class="hero" aria-label="${page.title} hero"><div class="hero-track">${page.hero.map((src,i)=>`<img class="hero-slide" src="${src}" alt="${page.title} hero ${i+1}">`).join('')}</div><div class="hero-dots">${page.hero.map((_,i)=>`<button class="hero-dot ${i===0?'is-active':''}" aria-label="Show hero ${i+1}" data-index="${i}"></button>`).join('')}</div></section>`;
+ const track=host.querySelector('.hero-track'),dots=[...host.querySelectorAll('.hero-dot')];let index=0,timer;
+ const show=i=>{index=(i+dots.length)%dots.length;track.style.transform=`translateX(-${index*100}%)`;dots.forEach((d,j)=>d.classList.toggle('is-active',j===index));};
+ dots.forEach(d=>d.addEventListener('click',()=>{show(+d.dataset.index);restart()}));
+ const restart=()=>{clearInterval(timer);if(dots.length>1)timer=setInterval(()=>show(index+1),7000)};restart();
+}
+export function mountFooter(site){const host=document.querySelector('#site-footer');host.className='site-footer';const icons=site.footer.social.map(name=>`<a href="#" aria-label="${name}"><img src="assets/images/icons/social/${name}.png" alt=""></a>`).join('');host.innerHTML=`<strong>${site.footer.credit}</strong><div class="footer-social">${icons}</div><div>${site.footer.copyright}</div><small>Universal platform foundation • GitHub Pages</small>`}

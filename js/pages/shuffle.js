@@ -1,0 +1,1 @@
+const root=document.querySelector('#page-content');root.innerHTML=`<section class="placeholder-panel"><h1>Galaxy Shuffle</h1><p>This page is connected to the new universal platform. Its legacy content will be migrated into <code>js/pages/shuffle.js</code>, <code>css/pages/shuffle.css</code>, and <code>data/pages/shuffle.json</code> without changing any other page.</p></section>`;

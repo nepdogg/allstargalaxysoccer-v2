@@ -1,0 +1,1 @@
+const root=document.querySelector('#page-content');root.innerHTML=`<section class="placeholder-panel"><h1>Updates</h1><p>This page is connected to the new universal platform. Its legacy content will be migrated into <code>js/pages/updates.js</code>, <code>css/pages/updates.css</code>, and <code>data/pages/updates.json</code> without changing any other page.</p></section>`;

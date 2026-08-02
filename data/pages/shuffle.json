@@ -1,0 +1,14 @@
+{
+  "file": "galaxy-shuffle.html",
+  "title": "Galaxy Shuffle",
+  "accent": "#ff7a1a",
+  "rgb": "255,122,26",
+  "active": "shuffle",
+  "hero": [
+    "assets/images/heroes/pages/hero-shuffle-v233.png",
+    "assets/images/heroes/pages/hero-shuffle.png"
+  ],
+  "navTitle": "assets/images/titles/page-titles/navigation-title-shuffle.png",
+  "ticker": "Let the Galaxy choose a random video from the archive.",
+  "icon": "\u2605"
+}

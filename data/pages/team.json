@@ -1,0 +1,13 @@
+{
+  "file": "team.html",
+  "title": "Team",
+  "accent": "#cf39ff",
+  "rgb": "207,57,255",
+  "active": "team",
+  "hero": [
+    "assets/images/heroes/pages/hero-team.png"
+  ],
+  "navTitle": "assets/images/titles/page-titles/navigation-title-team.png",
+  "ticker": "Meet the Allstar Galaxy roster and open every player profile.",
+  "icon": "\u2605"
+}

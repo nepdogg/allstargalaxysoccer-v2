@@ -1,0 +1,15 @@
+{
+  "file": "index.html",
+  "title": "Home",
+  "accent": "#f4c542",
+  "rgb": "244,197,66",
+  "active": "home",
+  "hero": [
+    "assets/images/heroes/pages/hero-home.png",
+    "assets/images/heroes/pages/hero-homepage.png",
+    "assets/images/heroes/pages/home-hero.png"
+  ],
+  "navTitle": "assets/images/titles/page-titles/navigation-title-home.png",
+  "ticker": "Explore the Allstar Galaxy \u2014 choose a feature to begin.",
+  "icon": "\u2605"
+}

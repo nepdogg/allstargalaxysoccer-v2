@@ -1,0 +1,13 @@
+{
+  "file": "livestream.html",
+  "title": "Live",
+  "accent": "#ff3347",
+  "rgb": "255,51,71",
+  "active": "live",
+  "hero": [
+    "assets/images/heroes/pages/hero-live.png"
+  ],
+  "navTitle": "assets/images/titles/page-titles/navigation-title-live.png",
+  "ticker": "Watch for upcoming and active Allstar Galaxy broadcasts.",
+  "icon": "\u2605"
+}

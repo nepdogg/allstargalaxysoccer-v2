@@ -1,0 +1,2 @@
+/* Media page content only. Do not style .site-frame, .identity-row, .main-nav, .status-bar, .hero, or .site-footer here. */
+body[data-page="media"]{}

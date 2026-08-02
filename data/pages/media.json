@@ -1,0 +1,13 @@
+{
+  "file": "media.html",
+  "title": "Media",
+  "accent": "#24bfff",
+  "rgb": "36,191,255",
+  "active": "media",
+  "hero": [
+    "assets/images/heroes/pages/hero-media.png"
+  ],
+  "navTitle": "assets/images/titles/page-titles/navigation-title-media.png",
+  "ticker": "Browse the complete Allstar Galaxy media library.",
+  "icon": "\u2605"
+}

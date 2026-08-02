@@ -1,0 +1,53 @@
+{
+  "siteName": "Allstar Galaxy",
+  "logo": "assets/images/logos/logo.png",
+  "background": "assets/images/backgrounds/galaxy-background.png",
+  "nav": [
+    {
+      "id": "home",
+      "label": "Home",
+      "href": "index.html"
+    },
+    {
+      "id": "team",
+      "label": "Team",
+      "href": "team.html"
+    },
+    {
+      "id": "updates",
+      "label": "Updates",
+      "href": "updates.html"
+    },
+    {
+      "id": "media",
+      "label": "Media",
+      "href": "media.html"
+    },
+    {
+      "id": "shuffle",
+      "label": "Shuffle",
+      "href": "galaxy-shuffle.html"
+    },
+    {
+      "id": "live",
+      "label": "Live",
+      "href": "livestream.html"
+    },
+    {
+      "id": "follow",
+      "label": "Follow",
+      "href": "follow.html"
+    }
+  ],
+  "footer": {
+    "credit": "Created by Xitlali Media",
+    "copyright": "\u00a9 2026 Allstar Galaxy",
+    "social": [
+      "facebook",
+      "instagram",
+      "youtube",
+      "tiktok",
+      "x"
+    ]
+  }
+}
