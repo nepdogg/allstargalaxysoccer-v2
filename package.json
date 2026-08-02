@@ -1,0 +1,7 @@
+{
+  "name": "allstar-galaxy-platform",
+  "private": true,
+  "scripts": {
+    "serve": "npx serve ."
+  }
+}
