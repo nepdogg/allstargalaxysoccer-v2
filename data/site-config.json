@@ -11,32 +11,107 @@
     {
       "id": "team",
       "label": "Team",
-      "href": "team.html"
+      "href": "team.html",
+      "submenu": [
+        {
+          "label": "Roster",
+          "href": "team.html#roster"
+        },
+        {
+          "label": "Team Stats",
+          "href": "team.html#team-stats"
+        },
+        {
+          "label": "Game Awards",
+          "href": "game-awards.html"
+        }
+      ]
     },
     {
       "id": "updates",
       "label": "Updates",
-      "href": "updates.html"
+      "href": "updates.html",
+      "submenu": [
+        {
+          "label": "Schedule & Standings",
+          "href": "updates.html#schedule-standings"
+        },
+        {
+          "label": "Latest News",
+          "href": "updates.html#latest-news"
+        }
+      ]
     },
     {
       "id": "media",
       "label": "Media",
-      "href": "media.html"
+      "href": "media.html",
+      "submenu": [
+        {
+          "label": "Latest Games",
+          "href": "media.html#latest-games"
+        },
+        {
+          "label": "Seasons",
+          "href": "seasons.html"
+        },
+        {
+          "label": "Best Of",
+          "href": "media.html#best-of"
+        },
+        {
+          "label": "Complete Archive",
+          "href": "media.html#complete-archive"
+        }
+      ]
     },
     {
-      "id": "shuffle",
-      "label": "Shuffle",
-      "href": "galaxy-shuffle.html"
+      "id": "explore",
+      "label": "Explore",
+      "href": "galaxy-shuffle.html",
+      "matches": [
+        "shuffle",
+        "search",
+        "about",
+        "follow"
+      ],
+      "submenu": [
+        {
+          "label": "Galaxy Shuffle",
+          "href": "galaxy-shuffle.html"
+        },
+        {
+          "label": "Search Everything",
+          "href": "search.html"
+        },
+        {
+          "label": "Game Awards",
+          "href": "game-awards.html"
+        },
+        {
+          "label": "Follow the Team",
+          "href": "follow.html"
+        },
+        {
+          "label": "About Allstar Galaxy",
+          "href": "about.html"
+        }
+      ]
     },
     {
       "id": "live",
       "label": "Live",
-      "href": "livestream.html"
-    },
-    {
-      "id": "follow",
-      "label": "Follow",
-      "href": "follow.html"
+      "href": "livestream.html",
+      "submenu": [
+        {
+          "label": "Live Stream",
+          "href": "livestream.html#live-stream"
+        },
+        {
+          "label": "Upcoming Broadcasts",
+          "href": "livestream.html#upcoming-broadcasts"
+        }
+      ]
     }
   ],
   "footer": {
@@ -48,6 +123,32 @@
       "youtube",
       "tiktok",
       "x"
+    ],
+    "links": [
+      {
+        "label": "Home",
+        "href": "index.html"
+      },
+      {
+        "label": "Team",
+        "href": "team.html"
+      },
+      {
+        "label": "Updates",
+        "href": "updates.html"
+      },
+      {
+        "label": "Media",
+        "href": "media.html"
+      },
+      {
+        "label": "Search",
+        "href": "search.html"
+      },
+      {
+        "label": "About",
+        "href": "about.html"
+      }
     ]
   }
 }

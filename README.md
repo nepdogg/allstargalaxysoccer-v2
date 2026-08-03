@@ -31,3 +31,10 @@ Changing a shared component changes it across the entire site. Changing a page m
 ## Safe deployment
 
 Test this repository in a new GitHub repository or branch before replacing production. Keep the current repository as a legacy archive until feature migration is complete.
+
+
+## V2.1 navigation and search update
+- Universal six-button navigation with accessible submenus.
+- Search is a standard white/platinum page with its own hero and search interface.
+- Only the universal header is sticky; hero artwork scrolls with page content.
+- Universal footer and desktop/mobile navigation were standardized.
