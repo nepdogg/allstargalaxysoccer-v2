@@ -33,8 +33,18 @@ Changing a shared component changes it across the entire site. Changing a page m
 Test this repository in a new GitHub repository or branch before replacing production. Keep the current repository as a legacy archive until feature migration is complete.
 
 
-## V2.1 navigation and search update
+## V2.2 navigation and search update
 - Universal six-button navigation with accessible submenus.
 - Search is a standard white/platinum page with its own hero and search interface.
 - Only the universal header is sticky; hero artwork scrolls with page content.
 - Universal footer and desktop/mobile navigation were standardized.
+
+## V2.2 shared header update
+
+- Desktop identity row now uses an Allstar Galaxy logo on both sides of the navigation title.
+- Search is a standard desktop navigation button.
+- The circular Search control is reserved for phone layouts.
+- Desktop navigation spans the full shared header width.
+- The status module now has permanent top and bottom accent borders.
+- White/silver energy bars move in opposite directions inside those borders.
+- Footer navigation and social links use the shared site configuration.

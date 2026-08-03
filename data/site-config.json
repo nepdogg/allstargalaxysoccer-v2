@@ -71,7 +71,6 @@
       "href": "galaxy-shuffle.html",
       "matches": [
         "shuffle",
-        "search",
         "about",
         "follow"
       ],
@@ -79,10 +78,6 @@
         {
           "label": "Galaxy Shuffle",
           "href": "galaxy-shuffle.html"
-        },
-        {
-          "label": "Search Everything",
-          "href": "search.html"
         },
         {
           "label": "Game Awards",
@@ -112,6 +107,11 @@
           "href": "livestream.html#upcoming-broadcasts"
         }
       ]
+    },
+    {
+      "id": "search",
+      "label": "Search",
+      "href": "search.html"
     }
   ],
   "footer": {
@@ -146,9 +146,28 @@
         "href": "search.html"
       },
       {
+        "label": "Shuffle",
+        "href": "galaxy-shuffle.html"
+      },
+      {
+        "label": "Live",
+        "href": "livestream.html"
+      },
+      {
+        "label": "Follow",
+        "href": "follow.html"
+      },
+      {
         "label": "About",
         "href": "about.html"
       }
     ]
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/profile.php?id=61591642103786",
+    "instagram": "https://www.instagram.com/allstargalaxysoccer/",
+    "youtube": "https://www.youtube.com/@Allstar-Galaxy",
+    "tiktok": "https://www.tiktok.com/@allstar.galaxy",
+    "x": "https://x.com/Allstar__Galaxy"
   }
 }
