@@ -1,3 +1,11 @@
+/* ============================================================================
+   ALLSTAR GALAXY V2 — UNIVERSAL SITE FRAME
+   ----------------------------------------------------------------------------
+   Builds the header, responsive navigation, dropdown menus, status bar, hero
+   carousel, and footer used by every public page. Editing this file changes the
+   shared framework site-wide. Page-specific content must not be added here.
+============================================================================ */
+
 function isActive(item,page){return item.id===page.active||(item.matches||[]).includes(page.active)}
 function submenuMarkup(item){
  if(!item.submenu?.length)return'';

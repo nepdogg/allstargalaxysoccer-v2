@@ -3,5 +3,7 @@
   "private": true,
   "scripts": {
     "serve": "npx serve ."
-  }
+  },
+  "version": "2.3.0",
+  "description": "Allstar Galaxy V2 universal modular GitHub Pages website"
 }

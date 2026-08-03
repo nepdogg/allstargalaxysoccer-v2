@@ -1,3 +1,109 @@
+/* ============================================================================
+   ALLSTAR GALAXY V2 — UNIVERSAL PAGE FOUNDATION
+   ----------------------------------------------------------------------------
+   PURPOSE
+   Controls the galaxy background, floating glass page shell, common content
+   spacing, cards, and responsive behavior used by every public page.
 
-body{min-height:100vh;overflow-x:hidden;overflow-y:auto;background-image:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),var(--site-bg);background-size:cover;background-attachment:fixed;background-position:center}.skip-link{position:fixed;left:1rem;top:-5rem;z-index:9999;background:#fff;color:#000;padding:.75rem 1rem}.skip-link:focus{top:1rem}.page-main,.site-footer,.site-shell{width:min(calc(100% - 32px),var(--shell));margin-inline:auto}.page-main{background:rgba(2,3,8,.92);min-height:45vh;padding:32px 24px 56px}.page-content{display:grid;gap:28px}.section-title{margin:0 auto;max-width:900px}.section-copy{text-align:center;color:var(--muted);font-size:clamp(1rem,1.4vw,1.35rem);max-width:900px;margin:0 auto}.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.feature-card{display:grid;grid-template-rows:auto 1fr auto;min-height:260px;padding:24px;border:2px solid var(--accent);border-radius:var(--radius);background:linear-gradient(145deg,rgba(var(--accent-rgb),.11),rgba(5,6,11,.96) 45%);box-shadow:0 0 20px rgba(var(--accent-rgb),.18)}.feature-card h2{margin:0;color:var(--accent);letter-spacing:.05em}.feature-card p{color:var(--muted);line-height:1.6}.feature-card a{color:var(--accent);font-weight:800;text-decoration:none}.placeholder-panel{padding:32px;border:1px solid rgba(var(--accent-rgb),.55);border-radius:var(--radius);background:rgba(7,9,16,.88)}
-@media(max-width:760px){.page-main,.site-footer,.site-shell{width:100%}.page-main{padding:24px 14px 44px}.feature-grid{grid-template-columns:1fr}.feature-card{min-height:210px}}
+   SAFE TO EDIT HERE
+   - Shared page width, opacity, spacing, glass effect, and generic cards.
+
+   DO NOT EDIT HERE FOR ONE PAGE
+   - Use css/pages/<page>.css for page-only changes.
+============================================================================ */
+
+/* The galaxy remains visible behind every page and through translucent panels. */
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, .28), rgba(0, 0, 0, .38)),
+    var(--site-bg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* A faint page-colored atmosphere gives each section its own identity. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 16%, rgba(var(--accent-rgb), .12), transparent 42%),
+    linear-gradient(rgba(var(--accent-rgb), .025), rgba(var(--accent-rgb), .055));
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -5rem;
+  z-index: 9999;
+  padding: .75rem 1rem;
+  color: #000;
+  background: #fff;
+}
+.skip-link:focus { top: 1rem; }
+
+/* Shared widths. The header, hero, content, and footer align exactly. */
+.page-main,
+.site-footer,
+.site-shell { width: min(calc(100% - 32px), var(--shell)); margin-inline: auto; }
+
+/* Universal glass content panel. */
+.page-main {
+  position: relative;
+  min-height: 45vh;
+  padding: 42px 28px 64px;
+  background:
+    linear-gradient(180deg, rgba(var(--accent-rgb), .065), transparent 20%),
+    rgba(3, 5, 12, .76);
+  border-inline: 1px solid rgba(var(--accent-rgb), .22);
+  box-shadow:
+    inset 0 0 70px rgba(var(--accent-rgb), .055),
+    0 22px 60px rgba(0, 0, 0, .42);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+}
+
+.page-content { display: grid; gap: 30px; }
+.section-title { margin: 0 auto; max-width: 900px; }
+.section-copy {
+  max-width: 900px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.4vw, 1.35rem);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.feature-card,
+.placeholder-panel {
+  border: 1px solid rgba(var(--accent-rgb), .72);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(145deg, rgba(var(--accent-rgb), .12), transparent 45%),
+    rgba(4, 6, 13, .72);
+  box-shadow:
+    inset 0 0 24px rgba(var(--accent-rgb), .05),
+    0 0 24px rgba(var(--accent-rgb), .15);
+  backdrop-filter: blur(10px);
+}
+.feature-card { display: grid; grid-template-rows: auto 1fr auto; min-height: 250px; padding: 24px; }
+.feature-card h2 { margin: 0; color: var(--accent); letter-spacing: .05em; }
+.feature-card p { color: var(--muted); line-height: 1.6; }
+.feature-card a { color: var(--accent); font-weight: 800; text-decoration: none; }
+.placeholder-panel { padding: 32px; }
+
+@media (max-width: 760px) {
+  body { background-attachment: scroll; }
+  .page-main, .site-footer, .site-shell { width: 100%; }
+  .page-main { padding: 28px 14px 52px; border-inline: 0; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .feature-card { min-height: 205px; }
+}

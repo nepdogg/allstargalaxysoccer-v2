@@ -48,3 +48,13 @@ Test this repository in a new GitHub repository or branch before replacing produ
 - The status module now has permanent top and bottom accent borders.
 - White/silver energy bars move in opposite directions inside those borders.
 - Footer navigation and social links use the shared site configuration.
+
+---
+
+## V2.3 universal framework update
+
+The current architecture is documented in `docs/DEVELOPER-GUIDE.md`.
+
+The downloadable update package is code-only: it intentionally does not contain the
+large `assets/` image library. Copy the update over the existing repository and keep
+all existing images in place.

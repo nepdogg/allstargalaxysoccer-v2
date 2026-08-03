@@ -12,9 +12,18 @@
       "id": "team",
       "label": "Team",
       "href": "team.html",
+      "matches": [
+        "team",
+        "follow",
+        "about"
+      ],
       "submenu": [
         {
-          "label": "Roster",
+          "label": "Meet the Team",
+          "href": "team.html#roster"
+        },
+        {
+          "label": "Player Profiles",
           "href": "team.html#roster"
         },
         {
@@ -22,8 +31,12 @@
           "href": "team.html#team-stats"
         },
         {
-          "label": "Game Awards",
-          "href": "game-awards.html"
+          "label": "Follow the Team",
+          "href": "follow.html"
+        },
+        {
+          "label": "About Allstar Galaxy",
+          "href": "about.html"
         }
       ]
     },
@@ -33,7 +46,15 @@
       "href": "updates.html",
       "submenu": [
         {
-          "label": "Schedule & Standings",
+          "label": "Schedule",
+          "href": "updates.html#schedule-standings"
+        },
+        {
+          "label": "Results",
+          "href": "updates.html#schedule-standings"
+        },
+        {
+          "label": "League Standings",
           "href": "updates.html#schedule-standings"
         },
         {
@@ -71,8 +92,7 @@
       "href": "galaxy-shuffle.html",
       "matches": [
         "shuffle",
-        "about",
-        "follow"
+        "awards"
       ],
       "submenu": [
         {
@@ -84,12 +104,16 @@
           "href": "game-awards.html"
         },
         {
-          "label": "Follow the Team",
-          "href": "follow.html"
+          "label": "Random Match",
+          "href": "galaxy-shuffle.html#shuffle"
         },
         {
-          "label": "About Allstar Galaxy",
-          "href": "about.html"
+          "label": "Random Player",
+          "href": "team.html#roster"
+        },
+        {
+          "label": "Featured Content",
+          "href": "media.html#best-of"
         }
       ]
     },
@@ -111,7 +135,11 @@
     {
       "id": "search",
       "label": "Search",
-      "href": "search.html"
+      "href": "search.html",
+      "matches": [
+        "search",
+        "404"
+      ]
     }
   ],
   "footer": {
@@ -160,6 +188,10 @@
       {
         "label": "About",
         "href": "about.html"
+      },
+      {
+        "label": "404",
+        "href": "404.html"
       }
     ]
   },

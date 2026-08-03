@@ -1,3 +1,25 @@
+/* ============================================================================
+   ALLSTAR GALAXY V2 — DESIGN TOKENS
+   ----------------------------------------------------------------------------
+   This file contains only shared design variables and basic normalization.
+   Editing a variable here changes the same visual property across every page.
+   Page-specific colors are loaded from data/pages/*.json by js/app.js.
+============================================================================ */
+:root {
+  --bg: #020309;
+  --panel: #080a12;
+  --text: #f7f7fb;
+  --muted: #c2c7d2;
+  --accent: #f4c542;
+  --accent-rgb: 244, 197, 66;
+  --shell: 1560px;
+  --radius: 20px;
+  --header-z: 1000;
+  --font: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
 
-:root{--bg:#05060b;--panel:#0b0d15;--text:#f7f7fb;--muted:#b9becb;--accent:#f4c542;--accent-rgb:244,197,66;--shell:1560px;--radius:18px;--header-z:1000;--font:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font-family:var(--font);background:#020309}button,a{font:inherit}img{max-width:100%;display:block}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; min-height: 100%; }
+body { margin: 0; min-height: 100%; color: var(--text); font-family: var(--font); background: var(--bg); }
+button, a { font: inherit; }
+img { display: block; max-width: 100%; }

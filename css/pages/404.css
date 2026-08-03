@@ -1,0 +1,11 @@
+/* ============================================================================
+   404 PAGE ONLY
+   ----------------------------------------------------------------------------
+   Recovery layout for missing links. This file does not alter any other page.
+============================================================================ */
+.error-intro { text-align: center; }
+.error-code { margin: 0; color: var(--accent); font-size: clamp(3rem, 9vw, 7rem); line-height: .9; text-shadow: 0 0 24px rgba(var(--accent-rgb), .65); }
+.error-title { margin: 12px 0 8px; font-size: clamp(2rem, 5vw, 4rem); text-transform: uppercase; }
+.error-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 24px; }
+.error-button { min-width: 210px; padding: 14px 20px; border: 2px solid var(--accent); border-radius: 999px; color: #fff; background: rgba(var(--accent-rgb), .16); box-shadow: 0 0 18px rgba(var(--accent-rgb), .25); text-align: center; text-decoration: none; font-weight: 900; text-transform: uppercase; }
+.error-button:hover, .error-button:focus-visible { outline: none; background: rgba(var(--accent-rgb), .32); box-shadow: 0 0 24px var(--accent); }
