@@ -107,3 +107,29 @@ body::before {
   .feature-grid { grid-template-columns: 1fr; }
   .feature-card { min-height: 205px; }
 }
+
+
+/* ==========================================================================
+   V2.4 UNIVERSAL BACKGROUND AND GLASS OVERRIDES
+   These rules restore the visible galaxy behind every page.
+============================================================================ */
+html { min-height:100%; background:#010208; }
+body {
+  background-color:#010208;
+  background-image:
+    linear-gradient(rgba(0,0,0,.16),rgba(0,0,0,.32)),
+    var(--site-bg, url("../assets/images/backgrounds/galaxy-background.png"));
+  background-size:cover;
+  background-position:center top;
+  background-repeat:no-repeat;
+}
+.page-main {
+  background:
+    linear-gradient(180deg,rgba(var(--accent-rgb),.11),transparent 22%),
+    rgba(3,5,12,.67);
+  backdrop-filter:blur(7px) saturate(118%);
+}
+.site-footer { background:rgba(3,4,10,.72); }
+@media(max-width:760px){
+  body{background-attachment:scroll;background-size:auto 100%}
+}

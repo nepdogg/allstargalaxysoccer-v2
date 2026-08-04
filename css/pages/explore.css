@@ -1,0 +1,9 @@
+/* Explore-page content only. Shared components must not be styled here. */
+body[data-page="explore"] .page-main{background:linear-gradient(180deg,rgba(var(--accent-rgb),.14),transparent 22%),rgba(9,4,2,.67)}
+.explore-intro{display:grid;gap:14px;max-width:980px;margin:auto;text-align:center}
+.explore-intro h1{margin:0;color:var(--accent);font-size:clamp(2rem,4vw,4rem);letter-spacing:.05em;text-transform:uppercase;text-shadow:0 0 18px rgba(var(--accent-rgb),.65)}
+.explore-card-icon{position:absolute;right:22px;top:20px;font-size:2rem;filter:drop-shadow(0 0 8px var(--accent))}
+.discovery-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;padding:18px;border-block:1px solid rgba(var(--accent-rgb),.65);background:rgba(2,3,8,.62)}
+.discovery-strip a{padding:10px 16px;border:1px solid var(--accent);border-radius:999px;color:#fff;background:rgba(var(--accent-rgb),.08);text-decoration:none;font-weight:850}
+.discovery-strip a:hover,.discovery-strip a:focus-visible{color:#000;background:var(--accent);outline:none}
+@media(max-width:760px){.explore-card-icon{right:18px;top:16px;font-size:1.65rem}}

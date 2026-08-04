@@ -89,12 +89,17 @@
     {
       "id": "explore",
       "label": "Explore",
-      "href": "galaxy-shuffle.html",
+      "href": "explore.html",
       "matches": [
+        "explore",
         "shuffle",
         "awards"
       ],
       "submenu": [
+        {
+          "label": "Explore & Discover",
+          "href": "explore.html"
+        },
         {
           "label": "Galaxy Shuffle",
           "href": "galaxy-shuffle.html"
@@ -104,16 +109,16 @@
           "href": "game-awards.html"
         },
         {
-          "label": "Random Match",
-          "href": "galaxy-shuffle.html#shuffle"
-        },
-        {
-          "label": "Random Player",
-          "href": "team.html#roster"
-        },
-        {
-          "label": "Featured Content",
+          "label": "Best of Allstar Galaxy",
           "href": "media.html#best-of"
+        },
+        {
+          "label": "Season Archive",
+          "href": "seasons.html"
+        },
+        {
+          "label": "Search Everything",
+          "href": "search.html"
         }
       ]
     },
@@ -135,13 +140,16 @@
     {
       "id": "search",
       "label": "Search",
-      "href": "search.html",
-      "matches": [
-        "search",
-        "404"
-      ]
+      "href": "search.html"
     }
   ],
+  "social": {
+    "facebook": "#",
+    "instagram": "#",
+    "youtube": "#",
+    "tiktok": "#",
+    "x": "#"
+  },
   "footer": {
     "credit": "Created by Xitlali Media",
     "copyright": "\u00a9 2026 Allstar Galaxy",
@@ -170,36 +178,17 @@
         "href": "media.html"
       },
       {
+        "label": "Explore",
+        "href": "explore.html"
+      },
+      {
         "label": "Search",
         "href": "search.html"
       },
       {
-        "label": "Shuffle",
-        "href": "galaxy-shuffle.html"
-      },
-      {
-        "label": "Live",
-        "href": "livestream.html"
-      },
-      {
-        "label": "Follow",
-        "href": "follow.html"
-      },
-      {
         "label": "About",
         "href": "about.html"
-      },
-      {
-        "label": "404",
-        "href": "404.html"
       }
     ]
-  },
-  "social": {
-    "facebook": "https://www.facebook.com/profile.php?id=61591642103786",
-    "instagram": "https://www.instagram.com/allstargalaxysoccer/",
-    "youtube": "https://www.youtube.com/@Allstar-Galaxy",
-    "tiktok": "https://www.tiktok.com/@allstar.galaxy",
-    "x": "https://x.com/Allstar__Galaxy"
   }
 }
