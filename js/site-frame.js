@@ -19,5 +19,5 @@ export function mountFooter(site){
  const h=document.querySelector('#site-footer');h.className='site-footer';
  const socials=(site.footer.social||[]).map(n=>{const href=site.social?.[n]||'#';return`<a href="${href}" ${href==='#'?'':'target="_blank" rel="noopener"'} aria-label="${n}"><img src="assets/images/icons/social/${n}.png" alt=""></a>`}).join('');
  const links=(site.footer.links||[]).map(x=>`<a href="${x.href}">${x.label}</a>`).join('');
- h.innerHTML=`<div class="footer-inner"><section class="footer-brand-block"><strong>${site.footer.credit}</strong><small>Preserving every game, player, and memory.</small></section><nav class="footer-links">${links}</nav><div class="footer-social">${socials}</div><div class="footer-divider"></div><div class="footer-meta"><span>${site.footer.copyright}</span><small>Allstar Galaxy V2.4 • Universal shared framework • GitHub Pages</small></div></div>`;
+ h.innerHTML=`<div class="footer-inner"><section class="footer-brand-block"><strong>${site.footer.credit}</strong><small>Preserving every game, player, and memory.</small></section><nav class="footer-links">${links}</nav><div class="footer-social">${socials}</div><div class="footer-divider"></div><div class="footer-meta"><span>${site.footer.copyright}</span><small>Allstar Galaxy V2.5 • Universal shared framework • GitHub Pages</small></div></div>`;
 }

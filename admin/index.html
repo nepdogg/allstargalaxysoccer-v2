@@ -1,3 +1,95 @@
 <!doctype html>
-<!-- V2.4 PAGE CONFIG EDITOR: edits one data/pages JSON file at a time. -->
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Allstar Galaxy Page Configuration</title><link rel="stylesheet" href="../css/tokens.css"><link rel="stylesheet" href="../css/base.css"><style>body{padding:28px}.admin{max-width:1100px;margin:auto;padding:28px;border:1px solid #888;border-radius:16px;background:rgba(8,10,18,.93)}.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}select,button,input{padding:11px 13px;border:1px solid #888;border-radius:8px;color:#fff;background:#02040a}button{cursor:pointer}.hero-list{display:grid;gap:10px;margin-block:18px}.hero-row{display:grid;grid-template-columns:1fr auto auto;gap:8px}textarea{width:100%;min-height:360px;padding:15px;color:#fff;background:#02040a}.help{color:#c2c7d2;line-height:1.55}@media(max-width:700px){body{padding:0}.admin{border-radius:0;padding:18px}.hero-row{grid-template-columns:1fr}}</style></head><body><main class="admin"><h1>Allstar Galaxy Page Configuration</h1><p class="help">Hero images can be added, removed, and reordered. The carousel creates one dot for every image path.</p><div class="toolbar"><label for="page">Page</label><select id="page"></select><button id="load">Reload Page</button><button id="addHero">Add Hero Image</button><button id="applyHeroes">Apply Hero List</button><button id="download">Download JSON</button></div><h2>Hero Images</h2><div id="heroList" class="hero-list"></div><h2>Complete Page JSON</h2><textarea id="editor" spellcheck="false"></textarea></main><script type="module" src="admin.js"></script></body></html>
+<!--
+  ALLSTAR GALAXY V2.5 ADMINISTRATION
+  This page is a static GitHub Pages configuration workspace. It can download
+  edited JSON files but cannot securely publish directly without authentication.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#05060b">
+  <title>Allstar Galaxy Administration</title>
+  <link rel="icon" href="../assets/images/icons/favicon.png">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <header>
+      <div class="admin-identity">
+        <img class="admin-logo" src="../assets/images/logos/logo.png" alt="Allstar Galaxy">
+        <div class="admin-title">Allstar Galaxy Administration</div>
+        <img class="admin-logo" src="../assets/images/logos/logo.png" alt="Allstar Galaxy">
+      </div>
+
+      <nav class="admin-nav" aria-label="Administration navigation">
+        <a class="is-active" href="#dashboard">Dashboard</a>
+        <a href="#content">Content</a>
+        <a href="#team">Team</a>
+        <a href="#media">Media</a>
+        <a href="#updates">Updates</a>
+        <a href="#website">Website</a>
+        <a href="#diagnostics">Diagnostics</a>
+        <a href="../index.html">View Site</a>
+      </nav>
+
+      <div class="admin-status">
+        <span aria-hidden="true">★</span>
+        <strong>Administration Center — configure isolated pages without changing unrelated sections.</strong>
+        <a href="#page-editor">OPEN →</a>
+      </div>
+    </header>
+
+    <section class="admin-hero" aria-label="Administration hero image">
+      <!-- Replace hero-admin.png with the final supplied Administration artwork at any time. -->
+      <img src="../assets/images/heroes/pages/hero-admin.png" alt="Allstar Galaxy Administration">
+      <div class="admin-hero-dots" aria-hidden="true"><span></span></div>
+    </section>
+
+    <main class="admin-main">
+      <section id="dashboard" class="admin-intro">
+        <h1>Administration Center</h1>
+        <p>Manage page configurations, hero carousels, team information, media, updates, website settings, and diagnostics from one organized workspace.</p>
+      </section>
+
+      <section class="admin-grid" aria-label="Administration sections">
+        <article class="admin-card"><h2>Content</h2><p>Configure page text, hero images, status messages, navigation, and footer content.</p><a href="#content">Open Content →</a></article>
+        <article class="admin-card"><h2>Team</h2><p>Prepare player records, roster status, team statistics, and featured-player content.</p><a href="#team">Open Team →</a></article>
+        <article class="admin-card"><h2>Media</h2><p>Organize games, seasons, playlists, awards, Best Of collections, and archives.</p><a href="#media">Open Media →</a></article>
+        <article class="admin-card"><h2>Updates</h2><p>Manage schedules, results, standings, news, and livestream information.</p><a href="#updates">Open Updates →</a></article>
+        <article class="admin-card"><h2>Website</h2><p>Control graphics, backgrounds, social links, site settings, and shared components.</p><a href="#website">Open Website →</a></article>
+        <article class="admin-card"><h2>Diagnostics</h2><p>Review missing files, broken links, configuration errors, and visual QA checks.</p><a href="#diagnostics">Open Diagnostics →</a></article>
+        <article class="admin-card"><h2>Public Website</h2><p>Open the current live public site in the same browser window.</p><a href="../index.html">View Site →</a></article>
+        <article class="admin-card"><h2>Documentation</h2><p>Read the developer guide and the V2.5 installation and maintenance notes.</p><a href="../docs/DEVELOPER-GUIDE.md">Open Guide →</a></article>
+      </section>
+
+      <section id="content" class="admin-panel"><h2>Content Controls</h2><p class="help">The Page Configuration Editor below controls one page JSON file at a time. Download the edited file and replace its matching file in <code>data/pages/</code>.</p></section>
+      <section id="team" class="admin-panel"><h2>Team Controls</h2><p class="help">The team module is isolated in <code>data/pages/team.json</code>, <code>js/pages/team.js</code>, and <code>css/pages/team.css</code>. Future player forms can be added here without changing public shared components.</p></section>
+      <section id="media" class="admin-panel"><h2>Media Controls</h2><p class="help">Games, seasons, playlists, awards, and archive records should remain in dedicated data files so media changes do not affect Team, Updates, or other pages.</p></section>
+      <section id="updates" class="admin-panel"><h2>Updates Controls</h2><p class="help">Schedule, results, standings, news, and livestream controls will use their own isolated data modules.</p></section>
+      <section id="website" class="admin-panel"><h2>Website Controls</h2><p class="help">Shared changes belong in <code>data/site-config.json</code>, <code>css/components.css</code>, or <code>js/site-frame.js</code>. Those files intentionally affect every public page.</p></section>
+      <section id="diagnostics" class="admin-panel"><h2>Diagnostics</h2><p class="help">This foundation reserves space for broken-link checks, missing-image checks, invalid JSON checks, and visual QA. Browser-only diagnostics can be added without changing page content.</p></section>
+
+      <section id="page-editor" class="admin-panel">
+        <h2>Page Configuration Editor</h2>
+        <p class="help">Hero images can be added, removed, and reordered. The public carousel automatically creates one control dot for every configured image, with no fixed image limit.</p>
+        <div class="toolbar">
+          <label for="page">Page</label>
+          <select id="page"></select>
+          <button id="load" type="button">Reload Page</button>
+          <button id="addHero" type="button">Add Hero Image</button>
+          <button id="applyHeroes" type="button">Apply Hero List</button>
+          <button id="download" type="button">Download JSON</button>
+        </div>
+        <h3>Hero Images</h3>
+        <div id="heroList" class="hero-list"></div>
+        <h3>Complete Page JSON</h3>
+        <textarea id="editor" spellcheck="false" aria-label="Page JSON editor"></textarea>
+      </section>
+    </main>
+
+    <footer class="admin-footer"><strong>Allstar Galaxy Administration</strong><br>Created by Xitlali Media • Static GitHub Pages configuration workspace</footer>
+  </div>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

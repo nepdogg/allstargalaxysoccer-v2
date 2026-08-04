@@ -188,6 +188,10 @@
       {
         "label": "About",
         "href": "about.html"
+      },
+      {
+        "label": "Administration",
+        "href": "admin/index.html"
       }
     ]
   }
