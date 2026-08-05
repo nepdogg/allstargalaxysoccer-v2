@@ -148,3 +148,18 @@ textarea { width:100%; min-height:360px; padding:15px; line-height:1.45; resize:
 @media(max-width:700px){
   body{background-attachment:scroll}.admin-shell{width:100%;margin:0;border-radius:0}.admin-identity{grid-template-columns:86px 1fr 86px;min-height:118px;padding:10px 8px 20px}.admin-logo{width:78px;height:78px}.admin-title{font-size:clamp(1.25rem,7vw,2.2rem)}.admin-nav{display:flex;overflow-x:auto;padding:0 7px 10px}.admin-nav a{min-width:118px}.admin-status{grid-template-columns:auto 1fr}.admin-status a{display:none}.admin-main{padding:18px 12px}.admin-grid{grid-template-columns:1fr}.hero-row{grid-template-columns:1fr 1fr}.hero-row input{grid-column:1/-1}.admin-panel{padding:16px}
 }
+
+
+/* ============================================================================
+   V2.6 ADMINISTRATION LOCKDOWN
+============================================================================ */
+html::before,html::after{content:"";position:fixed;left:0;right:0;height:2px;z-index:10000;background:var(--admin-accent);box-shadow:0 0 8px var(--admin-accent),0 0 16px rgba(var(--admin-rgb),.55);pointer-events:none}html::before{top:0}html::after{bottom:0}
+.admin-title-image{width:100%;height:104px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(var(--admin-rgb),.7))}
+.admin-logo{animation:admin-logo-pulse 3.2s ease-in-out infinite}.admin-logo:last-child{animation-delay:.65s}
+.admin-sticky{position:sticky;top:2px;z-index:1000;background:rgba(3,4,10,.97);box-shadow:0 10px 24px rgba(0,0,0,.35),0 0 18px rgba(var(--admin-rgb),.2);backdrop-filter:blur(14px)}
+.admin-status{grid-template-columns:76px minmax(0,1fr) 76px}.admin-status>span{justify-self:start}.admin-status strong{text-align:center;justify-self:stretch}.admin-status a{justify-self:end;margin-right:7px}
+.admin-test-button{display:inline-grid;place-items:center;min-height:44px;padding:10px 16px;border:1px solid var(--admin-accent);border-radius:999px;color:#fff;background:rgba(3,5,12,.7);font-weight:900;text-decoration:none}.admin-test-button:hover{color:#111;background:var(--admin-accent);box-shadow:0 0 14px var(--admin-accent)}
+.admin-footer{display:flex;align-items:center;justify-content:center;gap:14px}.admin-footer img{width:54px;height:54px;object-fit:contain;filter:drop-shadow(0 0 9px #aa61ff)}.admin-footer a{color:var(--admin-accent);text-decoration:none;font-weight:800}
+@keyframes admin-logo-pulse{50%{transform:scale(1.035);filter:drop-shadow(0 0 20px var(--admin-accent)) drop-shadow(0 0 32px rgba(var(--admin-rgb),.7))}}
+@media(max-width:700px){.admin-title-image{height:72px}.admin-sticky{top:2px}.admin-status{grid-template-columns:42px minmax(0,1fr) 42px}.admin-footer{flex-direction:column}.admin-footer img{width:48px;height:48px}}
+@media(prefers-reduced-motion:reduce){.admin-logo{animation:none}}

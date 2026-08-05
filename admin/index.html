@@ -18,11 +18,11 @@
     <header>
       <div class="admin-identity">
         <img class="admin-logo" src="../assets/images/logos/logo.png" alt="Allstar Galaxy">
-        <div class="admin-title">Allstar Galaxy Administration</div>
+        <img class="admin-title-image" src="../assets/images/titles/page-titles/navigation-title-admin.png" alt="Allstar Galaxy Administration">
         <img class="admin-logo" src="../assets/images/logos/logo.png" alt="Allstar Galaxy">
       </div>
 
-      <nav class="admin-nav" aria-label="Administration navigation">
+      <div class="admin-sticky"><nav class="admin-nav" aria-label="Administration navigation">
         <a class="is-active" href="#dashboard">Dashboard</a>
         <a href="#content">Content</a>
         <a href="#team">Team</a>
@@ -37,7 +37,7 @@
         <span aria-hidden="true">★</span>
         <strong>Administration Center — configure isolated pages without changing unrelated sections.</strong>
         <a href="#page-editor">OPEN →</a>
-      </div>
+      </div></div>
     </header>
 
     <section class="admin-hero" aria-label="Administration hero image">
@@ -68,7 +68,7 @@
       <section id="media" class="admin-panel"><h2>Media Controls</h2><p class="help">Games, seasons, playlists, awards, and archive records should remain in dedicated data files so media changes do not affect Team, Updates, or other pages.</p></section>
       <section id="updates" class="admin-panel"><h2>Updates Controls</h2><p class="help">Schedule, results, standings, news, and livestream controls will use their own isolated data modules.</p></section>
       <section id="website" class="admin-panel"><h2>Website Controls</h2><p class="help">Shared changes belong in <code>data/site-config.json</code>, <code>css/components.css</code>, or <code>js/site-frame.js</code>. Those files intentionally affect every public page.</p></section>
-      <section id="diagnostics" class="admin-panel"><h2>Diagnostics</h2><p class="help">This foundation reserves space for broken-link checks, missing-image checks, invalid JSON checks, and visual QA. Browser-only diagnostics can be added without changing page content.</p></section>
+      <section id="diagnostics" class="admin-panel"><h2>Diagnostics</h2><p class="help">Use the test below to verify that GitHub Pages serves the root <code>404.html</code> file for an invalid address.</p><p><a class="admin-test-button" href="../allstar-galaxy-404-test-does-not-exist" target="_blank" rel="noopener">Test 404 Page →</a></p></section>
 
       <section id="page-editor" class="admin-panel">
         <h2>Page Configuration Editor</h2>
@@ -88,7 +88,7 @@
       </section>
     </main>
 
-    <footer class="admin-footer"><strong>Allstar Galaxy Administration</strong><br>Created by Xitlali Media • Static GitHub Pages configuration workspace</footer>
+    <footer class="admin-footer"><img src="../assets/images/managed/xitlali-media-logo.png" alt="Xitlali Media"><div><strong>Allstar Galaxy Administration</strong><br>Created by Xitlali Media • Capturing Moments. Creating Legacies.<br><a href="mailto:allstargalaxy@example.com">✉ Contact Administrator</a></div></footer>
   </div>
   <script type="module" src="admin.js"></script>
 </body>

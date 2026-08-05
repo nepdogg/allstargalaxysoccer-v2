@@ -133,3 +133,19 @@ body {
 @media(max-width:760px){
   body{background-attachment:scroll;background-size:auto 100%}
 }
+
+
+/* V2.6 page frame: matching accent rails at the very top and bottom viewport edges. */
+html::before, html::after {
+  content:"";
+  position:fixed;
+  left:0;
+  right:0;
+  z-index:10000;
+  height:2px;
+  pointer-events:none;
+  background:var(--accent,#f4c542);
+  box-shadow:0 0 8px var(--accent,#f4c542),0 0 16px rgba(var(--accent-rgb,244,197,66),.55);
+}
+html::before { top:0; }
+html::after { bottom:0; }

@@ -320,3 +320,69 @@
   .main-nav { gap: 12px; padding-inline: 16px; }
   .nav-link { min-height: 52px; font-size: .96rem; }
 }
+
+
+/* ============================================================================
+   V2.6 UNIVERSAL LOCKDOWN OVERRIDES
+   ----------------------------------------------------------------------------
+   - Identity row scrolls away.
+   - Navigation + status remain sticky as one dependable unit.
+   - Status message is mathematically centered using equal side columns.
+   - Footer restores Xitlali Media branding, contact, mini navigation, and social.
+============================================================================ */
+.sticky-navigation-shell {
+  position: sticky;
+  top: 2px;
+  z-index: calc(var(--header-z) + 20);
+  width: min(calc(100% - 18px), var(--shell));
+  margin-inline: auto;
+  background: rgba(3,4,10,.96);
+  box-shadow: 0 10px 24px rgba(0,0,0,.34), 0 0 18px rgba(var(--accent-rgb),.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.sticky-navigation-shell .main-nav { padding-top: 10px; }
+.status-bar {
+  grid-template-columns: 76px minmax(0,1fr) 76px;
+  gap: 0;
+  padding-inline: 14px;
+}
+.status-icon { justify-self: start; }
+.status-text { justify-self: stretch; text-align: center; }
+.status-open { justify-self: end; margin-right: 8px; }
+
+.footer-inner { grid-template-columns: 1.25fr 2fr 1.35fr; }
+.footer-brand-block { grid-template-columns: 58px minmax(0,1fr); align-items:center; gap:13px; }
+.footer-brand-block > div { display:grid; gap:4px; }
+.footer-brand-block em { color:var(--accent); font-size:.72rem; font-style:normal; letter-spacing:.04em; }
+.footer-xitlali-logo { display:grid; place-items:center; width:56px; height:56px; border-radius:50%; }
+.footer-xitlali-logo img { width:56px; height:56px; object-fit:contain; filter:drop-shadow(0 0 8px #a95cff); transition:transform .2s ease,filter .2s ease; }
+.footer-xitlali-logo:hover img,.footer-xitlali-logo:focus-visible img { transform:scale(1.06); filter:drop-shadow(0 0 13px #c48cff); }
+.footer-links { gap:8px; }
+.footer-links a {
+  min-width:72px;
+  padding:7px 11px;
+  border:1px solid rgba(var(--accent-rgb),.62);
+  border-radius:999px;
+  background:rgba(3,5,12,.5);
+  text-align:center;
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.035em;
+}
+.footer-links a:hover,.footer-links a:focus-visible { color:#090b10; background:var(--accent); box-shadow:0 0 12px rgba(var(--accent-rgb),.62); text-shadow:none; }
+.footer-actions { display:grid; justify-items:end; gap:10px; }
+.footer-contact { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid rgba(var(--accent-rgb),.65); border-radius:999px; color:#fff; background:rgba(3,5,12,.62); text-decoration:none; font-size:.75rem; font-weight:850; }
+.footer-contact span { color:var(--accent); font-size:1rem; filter:drop-shadow(0 0 5px var(--accent)); }
+.footer-contact:hover,.footer-contact:focus-visible { outline:none; color:#05070c; background:var(--accent); box-shadow:0 0 13px rgba(var(--accent-rgb),.68); }
+
+@media (max-width:760px) {
+  .sticky-navigation-shell { top:2px; width:100%; }
+  .sticky-navigation-shell .main-nav { padding-top:7px; }
+  .status-bar { grid-template-columns:42px minmax(0,1fr) 42px; }
+  .status-open { display:none; }
+  .footer-brand-block { grid-template-columns:48px minmax(0,1fr); justify-self:center; text-align:left; }
+  .footer-xitlali-logo,.footer-xitlali-logo img { width:46px; height:46px; }
+  .footer-actions { justify-items:center; }
+  .footer-links a { min-width:78px; }
+}
