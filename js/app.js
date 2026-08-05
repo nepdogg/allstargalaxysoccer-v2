@@ -36,6 +36,7 @@ const [site, page] = await Promise.all([
 
 document.documentElement.style.setProperty('--accent', page.accent);
 document.documentElement.style.setProperty('--accent-rgb', page.rgb);
+document.documentElement.style.setProperty('--site-bg', `url("${site.background}")`);
 document.body.style.setProperty('--site-bg', `url("${site.background}")`);
 
 mountSiteFrame(site, page);

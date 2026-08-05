@@ -163,3 +163,36 @@ html::before,html::after{content:"";position:fixed;left:0;right:0;height:2px;z-i
 @keyframes admin-logo-pulse{50%{transform:scale(1.035);filter:drop-shadow(0 0 20px var(--admin-accent)) drop-shadow(0 0 32px rgba(var(--admin-rgb),.7))}}
 @media(max-width:700px){.admin-title-image{height:72px}.admin-sticky{top:2px}.admin-status{grid-template-columns:42px minmax(0,1fr) 42px}.admin-footer{flex-direction:column}.admin-footer img{width:48px;height:48px}}
 @media(prefers-reduced-motion:reduce){.admin-logo{animation:none}}
+
+
+/* ============================================================================
+   V2.7 ADMIN COMPLETE STICKY MASTHEAD
+============================================================================ */
+.admin-shell { overflow: visible; }
+.admin-complete-masthead {
+  position:sticky;
+  top:0;
+  z-index:1200;
+  border-top:3px solid var(--admin-accent);
+  background:rgba(3,4,10,.97);
+  box-shadow:0 0 9px var(--admin-accent),0 12px 26px rgba(0,0,0,.48);
+  backdrop-filter:blur(15px);
+}
+.admin-complete-masthead::before {
+  content:"";
+  position:absolute;
+  left:0;right:0;top:0;height:3px;
+  background:var(--admin-accent);
+  box-shadow:0 0 8px var(--admin-accent),0 0 18px rgba(var(--admin-rgb),.7);
+  pointer-events:none;
+}
+.admin-status { grid-template-columns:54px minmax(0,1fr) 54px; }
+.admin-status-center { display:flex; align-items:center; justify-content:center; gap:clamp(18px,3vw,48px); min-width:0; }
+.admin-status-center strong { text-align:center; }
+.admin-status-center a { flex:0 0 auto; margin:0; padding:4px 10px; border-radius:999px; }
+.admin-hero { border-top:2px solid var(--admin-accent); box-shadow:0 -2px 10px rgba(var(--admin-rgb),.55); }
+@media(max-width:700px){
+  .admin-complete-masthead{top:0}
+  .admin-status{grid-template-columns:38px minmax(0,1fr) 38px}
+  .admin-status-center a{display:none}
+}

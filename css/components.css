@@ -386,3 +386,105 @@
   .footer-actions { justify-items:center; }
   .footer-links a { min-width:78px; }
 }
+
+
+/* ============================================================================
+   V2.7 FINAL UNIVERSAL MASTHEAD, STATUS, AND FOOTER OVERRIDES
+   ----------------------------------------------------------------------------
+   These rules intentionally come last. They supersede V2.6's navigation-only
+   sticky behavior and keep the complete masthead together.
+============================================================================ */
+.site-frame.universal-sticky-masthead {
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--header-z) + 40);
+  margin-top: 0;
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 16px 16px;
+  box-shadow:
+    0 0 8px var(--accent),
+    0 0 22px rgba(var(--accent-rgb), .45),
+    0 12px 26px rgba(0,0,0,.48);
+  background: rgba(3,4,10,.965);
+  backdrop-filter: blur(15px) saturate(120%);
+  -webkit-backdrop-filter: blur(15px) saturate(120%);
+}
+.site-frame.universal-sticky-masthead::before {
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:3px;
+  z-index:100;
+  background:var(--accent);
+  box-shadow:0 0 8px var(--accent),0 0 18px rgba(var(--accent-rgb),.7);
+  pointer-events:none;
+}
+/* Disable the obsolete wrapper if an old cached script briefly creates one. */
+.sticky-navigation-shell { position: relative; top:auto; width:100%; margin:0; box-shadow:none; }
+
+/* The middle status cluster contains both the message and OPEN link. */
+.status-bar {
+  grid-template-columns: 54px minmax(0,1fr) 54px;
+  padding-inline: 16px;
+}
+.status-center {
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(18px,3vw,48px);
+  text-align:center;
+}
+.status-text { flex:0 1 auto; max-width:min(760px,75vw); }
+.status-open { flex:0 0 auto; margin:0; padding:4px 10px; border-radius:999px; }
+.status-open:hover,.status-open:focus-visible { background:rgba(var(--accent-rgb),.16); }
+.status-balance { width:1px; height:1px; }
+
+/* Thin illuminated separator between the sticky status module and hero. */
+.hero { border-top: 2px solid var(--accent); box-shadow: 0 -2px 10px rgba(var(--accent-rgb),.55); }
+
+/* Footer: brand | centered navigation/contact | social icons. */
+.footer-inner { grid-template-columns: 1.15fr 2.3fr 1.15fr; }
+.footer-navigation-zone { display:grid; justify-items:center; gap:11px; }
+.footer-links { gap:8px; }
+.footer-links a { min-width:76px; }
+.footer-contact { justify-self:center; }
+.footer-social a {
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+  --social-glow: var(--accent);
+}
+.footer-social a[data-social="facebook"] { --social-glow:#3b82f6; }
+.footer-social a[data-social="instagram"] { --social-glow:#ff3cac; }
+.footer-social a[data-social="youtube"] { --social-glow:#ff2424; }
+.footer-social a[data-social="tiktok"] { --social-glow:#25f4ee; }
+.footer-social a[data-social="x"] { --social-glow:#ffffff; }
+.footer-social a:hover,.footer-social a:focus-visible {
+  outline:none;
+  transform:translateY(-2px) scale(1.07);
+  border-color:var(--social-glow);
+  background:rgba(8,10,18,.96);
+  box-shadow:0 0 9px var(--social-glow),0 0 20px color-mix(in srgb,var(--social-glow) 65%,transparent);
+}
+.footer-social a:hover img,.footer-social a:focus-visible img { filter:drop-shadow(0 0 9px var(--social-glow)); }
+.footer-copyright { display:inline-flex; align-items:center; justify-content:center; gap:8px; }
+.footer-copyright-logo {
+  width:27px;
+  height:27px;
+  object-fit:contain;
+  border-radius:50%;
+  filter:drop-shadow(0 0 6px var(--accent));
+  animation:logo-pulse 3.2s ease-in-out infinite;
+}
+
+@media (max-width:760px) {
+  .site-frame.universal-sticky-masthead { top:0; border-radius:0; }
+  .status-bar { grid-template-columns:38px minmax(0,1fr) 38px; }
+  .status-center { gap:8px; }
+  .status-open { display:none; }
+  .status-text { max-width:100%; }
+  .footer-navigation-zone { width:100%; }
+  .footer-inner { grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion:reduce) { .footer-copyright-logo { animation:none; } }

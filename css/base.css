@@ -149,3 +149,41 @@ html::before, html::after {
 }
 html::before { top:0; }
 html::after { bottom:0; }
+
+
+/* ============================================================================
+   V2.7 GALAXY BACKGROUND LOCKDOWN
+   ----------------------------------------------------------------------------
+   The image is painted on html as well as body. This avoids page-specific solid
+   backgrounds hiding the galaxy and keeps it visible through translucent shells.
+============================================================================ */
+html {
+  min-height: 100%;
+  background-color: #010208;
+  background-image:
+    linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.36)),
+    var(--site-bg, url("../assets/images/backgrounds/galaxy-background.png"));
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+body {
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.22)),
+    var(--site-bg, url("../assets/images/backgrounds/galaxy-background.png")) !important;
+  background-position: center top !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+.page-main {
+  background:
+    linear-gradient(180deg, rgba(var(--accent-rgb), .115), transparent 24%),
+    rgba(3, 5, 12, .58) !important;
+}
+.site-footer { background: rgba(3, 4, 10, .62) !important; }
+@media (max-width:760px) {
+  html, body { background-attachment: scroll !important; }
+}
