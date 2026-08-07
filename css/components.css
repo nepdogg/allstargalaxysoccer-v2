@@ -751,3 +751,78 @@
 .status-side-left .status-open { order: 2; }
 .status-side-right .status-open { order: 1; }
 .status-side-right .status-icon { order: 2; }
+
+
+/* ============================================================================
+   V3.3 FINAL FOOTER CONSISTENCY LOCKDOWN
+   ----------------------------------------------------------------------------
+   The footer previously inherited a mixture of legacy page-specific borders,
+   shadows and divider rules. These terminal overrides make the footer divider
+   identical on every section while allowing only its accent color to change.
+============================================================================ */
+
+/* The Xitlali signature contains one brand tagline only. */
+.footer-brand-copy small { display: none !important; }
+.footer-brand-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 5px !important;
+}
+.footer-brand-copy em {
+  display: block !important;
+  margin: 0 !important;
+  font-style: normal !important;
+  line-height: 1.25 !important;
+}
+
+/* Exactly one internal divider below Contact Administrator. Inline values in
+   site-frame.js provide a final safeguard; these rules normalize dimensions
+   and prevent page modules from adding borders or pseudo-elements to it. */
+.footer-divider {
+  display: block !important;
+  grid-column: 1 / -1 !important;
+  position: relative !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 1px !important;
+  min-height: 1px !important;
+  max-height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  opacity: .82 !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(var(--accent-rgb), .60) 18%,
+    var(--accent) 50%,
+    rgba(var(--accent-rgb), .60) 82%,
+    transparent 100%) !important;
+  box-shadow: 0 0 5px rgba(var(--accent-rgb), .38) !important;
+  filter: none !important;
+}
+.footer-divider::before,
+.footer-divider::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Prevent neighboring footer rows from visually doubling the divider. */
+.footer-contact-row,
+.footer-meta {
+  border: 0 !important;
+  outline: 0 !important;
+}
+.footer-contact-row::before,
+.footer-contact-row::after,
+.footer-meta::before,
+.footer-meta::after {
+  content: none !important;
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .footer-brand-copy { align-items: center !important; }
+}
