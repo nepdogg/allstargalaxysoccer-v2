@@ -11,5 +11,6 @@
   "navTitle": "assets/images/titles/page-titles/navigation-title-home.png",
   "ticker": "Lost in the Galaxy? Search the site or choose a destination below.",
   "icon": "\u2726",
-  "section": "404"
+  "section": "404",
+  "tickerHref": "search.html"
 }

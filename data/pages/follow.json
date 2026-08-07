@@ -10,5 +10,6 @@
   "navTitle": "assets/images/titles/page-titles/navigation-title-follow.png",
   "ticker": "Follow Allstar Galaxy across every social platform.",
   "icon": "\u2605",
-  "section": "team"
+  "section": "team",
+  "tickerHref": "follow.html"
 }

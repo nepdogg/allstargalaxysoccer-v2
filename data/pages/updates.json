@@ -12,5 +12,6 @@
   "navTitle": "assets/images/titles/page-titles/navigation-title-updates.png",
   "ticker": "Schedule, results, standings, and club news in one place.",
   "icon": "\u2605",
-  "section": "updates"
+  "section": "updates",
+  "tickerHref": "updates.html"
 }

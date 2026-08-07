@@ -11,5 +11,6 @@
   "navTitle": "assets/images/titles/page-titles/navigation-title-shuffle.png",
   "ticker": "Explore, discover, and choose your next Allstar Galaxy destination.",
   "icon": "\u2605",
-  "section": "explore"
+  "section": "explore",
+  "tickerHref": "explore.html"
 }

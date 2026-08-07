@@ -10,5 +10,6 @@
   "navTitle": "assets/images/titles/page-titles/navigation-title-media.png",
   "ticker": "Browse the complete Allstar Galaxy media library.",
   "icon": "\u2605",
-  "section": "media"
+  "section": "media",
+  "tickerHref": "media.html#latest-games"
 }

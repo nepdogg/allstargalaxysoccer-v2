@@ -10,5 +10,6 @@
   "navTitle": "assets/images/titles/page-titles/navigation-title-media.png",
   "ticker": "Browse complete Allstar Galaxy seasons and historical collections.",
   "icon": "\u2605",
-  "section": "media"
+  "section": "media",
+  "tickerHref": "seasons.html"
 }

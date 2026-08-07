@@ -11,5 +11,6 @@
   "navTitle": "assets/images/titles/page-titles/navigation-title-about.png",
   "ticker": "Discover the story, mission, and production behind Allstar Galaxy.",
   "icon": "\u2605",
-  "section": "team"
+  "section": "team",
+  "tickerHref": "about.html"
 }

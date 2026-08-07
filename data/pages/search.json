@@ -10,5 +10,6 @@
   "navTitle": "assets/images/titles/page-titles/navigation-title-about.png",
   "ticker": "Search every player, game, season, award, video, and page.",
   "icon": "\u2315",
-  "section": "search"
+  "section": "search",
+  "tickerHref": "search.html#search"
 }

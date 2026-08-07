@@ -173,3 +173,45 @@ textarea { width:100%; min-height:360px; padding:15px; line-height:1.45; resize:
   height: 4px;
   border-radius: 0;
 }
+
+
+/* V3.1 admin status matches the public status interaction: one centered link,
+   with non-clickable inward pointers on equal-width sides. */
+.admin-status {
+  grid-template-columns: 150px minmax(0,1fr) 150px;
+  gap: 12px;
+}
+.admin-status-pointer {
+  color: var(--admin-accent);
+  font-weight: 900;
+  white-space: nowrap;
+  text-shadow: 0 0 7px rgba(var(--admin-rgb), .58);
+  pointer-events: none;
+  user-select: none;
+}
+.admin-status-pointer:last-child { text-align: right; }
+.admin-status-message {
+  display: grid;
+  place-items: center;
+  min-height: 34px;
+  padding: 4px 12px;
+  color: #fff !important;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: color .18s ease, background .18s ease, text-shadow .18s ease;
+}
+.admin-status-message:hover,
+.admin-status-message:focus-visible {
+  outline: none;
+  color: var(--admin-accent) !important;
+  background: rgba(var(--admin-rgb), .11);
+  text-shadow: 0 0 8px rgba(var(--admin-rgb), .85);
+}
+@media(max-width:700px){
+  .admin-status{grid-template-columns:32px minmax(0,1fr) 32px;gap:6px;padding-inline:10px}
+  .admin-status-pointer{font-size:0;color:transparent}
+  .admin-status-pointer::after{content:'★';font-size:1rem;color:var(--admin-accent)}
+  .admin-status-pointer:last-child{text-align:right}
+  .admin-status-message{display:grid!important;font-size:.82rem;line-height:1.25}
+}

@@ -195,7 +195,8 @@
       }
     ]
   },
-  "version": "3.0.0",
+  "version": "3.1.0",
   "contactEmail": "allstargalaxy@example.com",
-  "xitlaliLogo": "assets/images/logos/xitlali-media-logo.png"
+  "xitlaliLogo": "assets/images/logos/xitlali-media-logo.png",
+  "xitlaliUrl": "https://xitlalimedia.com/"
 }

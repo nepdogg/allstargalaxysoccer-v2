@@ -10,5 +10,6 @@
   "navTitle": "assets/images/titles/page-titles/navigation-title-live.png",
   "ticker": "Watch for upcoming and active Allstar Galaxy broadcasts.",
   "icon": "\u2605",
-  "section": "live"
+  "section": "live",
+  "tickerHref": "livestream.html#live-stream"
 }
