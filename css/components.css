@@ -323,218 +323,140 @@
 
 
 /* ============================================================================
-   V2.6 UNIVERSAL LOCKDOWN OVERRIDES
+   V2.9 SECTION COLOR + NAVIGATION USABILITY LOCKDOWN
    ----------------------------------------------------------------------------
-   - Identity row scrolls away.
-   - Navigation + status remain sticky as one dependable unit.
-   - Status message is mathematically centered using equal side columns.
-   - Footer restores Xitlali Media branding, contact, mini navigation, and social.
+   Parent-section color rule:
+   Team=purple, Updates=green, Media=blue, Explore=orange, Live=red,
+   Search=pink, Administration=silver, 404=white.
 ============================================================================ */
-.sticky-navigation-shell {
+
+/* The entire masthead is one sticky unit. Overflow must remain visible so
+   dropdowns can extend below the navigation without being clipped. */
+.site-frame {
   position: sticky;
-  top: 2px;
-  z-index: calc(var(--header-z) + 20);
-  width: min(calc(100% - 18px), var(--shell));
-  margin-inline: auto;
-  background: rgba(3,4,10,.96);
-  box-shadow: 0 10px 24px rgba(0,0,0,.34), 0 0 18px rgba(var(--accent-rgb),.18);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  top: 8px;
+  z-index: 4000;
+  overflow: visible;
+  border-radius: 0;
 }
-.sticky-navigation-shell .main-nav { padding-top: 10px; }
-.status-bar {
-  grid-template-columns: 76px minmax(0,1fr) 76px;
-  gap: 0;
-  padding-inline: 14px;
-}
-.status-icon { justify-self: start; }
-.status-text { justify-self: stretch; text-align: center; }
-.status-open { justify-self: end; margin-right: 8px; }
+.shared-header,
+.main-nav,
+.nav-item { overflow: visible; }
 
-.footer-inner { grid-template-columns: 1.25fr 2fr 1.35fr; }
-.footer-brand-block { grid-template-columns: 58px minmax(0,1fr); align-items:center; gap:13px; }
-.footer-brand-block > div { display:grid; gap:4px; }
-.footer-brand-block em { color:var(--accent); font-size:.72rem; font-style:normal; letter-spacing:.04em; }
-.footer-xitlali-logo { display:grid; place-items:center; width:56px; height:56px; border-radius:50%; }
-.footer-xitlali-logo img { width:56px; height:56px; object-fit:contain; filter:drop-shadow(0 0 8px #a95cff); transition:transform .2s ease,filter .2s ease; }
-.footer-xitlali-logo:hover img,.footer-xitlali-logo:focus-visible img { transform:scale(1.06); filter:drop-shadow(0 0 13px #c48cff); }
-.footer-links { gap:8px; }
-.footer-links a {
-  min-width:72px;
-  padding:7px 11px;
-  border:1px solid rgba(var(--accent-rgb),.62);
-  border-radius:999px;
-  background:rgba(3,5,12,.5);
-  text-align:center;
-  font-size:.72rem;
-  text-transform:uppercase;
-  letter-spacing:.035em;
-}
-.footer-links a:hover,.footer-links a:focus-visible { color:#090b10; background:var(--accent); box-shadow:0 0 12px rgba(var(--accent-rgb),.62); text-shadow:none; }
-.footer-actions { display:grid; justify-items:end; gap:10px; }
-.footer-contact { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid rgba(var(--accent-rgb),.65); border-radius:999px; color:#fff; background:rgba(3,5,12,.62); text-decoration:none; font-size:.75rem; font-weight:850; }
-.footer-contact span { color:var(--accent); font-size:1rem; filter:drop-shadow(0 0 5px var(--accent)); }
-.footer-contact:hover,.footer-contact:focus-visible { outline:none; color:#05070c; background:var(--accent); box-shadow:0 0 13px rgba(var(--accent-rgb),.68); }
-
-@media (max-width:760px) {
-  .sticky-navigation-shell { top:2px; width:100%; }
-  .sticky-navigation-shell .main-nav { padding-top:7px; }
-  .status-bar { grid-template-columns:42px minmax(0,1fr) 42px; }
-  .status-open { display:none; }
-  .footer-brand-block { grid-template-columns:48px minmax(0,1fr); justify-self:center; text-align:left; }
-  .footer-xitlali-logo,.footer-xitlali-logo img { width:46px; height:46px; }
-  .footer-actions { justify-items:center; }
-  .footer-links a { min-width:78px; }
-}
-
-
-/* ============================================================================
-   V2.7 FINAL UNIVERSAL MASTHEAD, STATUS, AND FOOTER OVERRIDES
-   ----------------------------------------------------------------------------
-   These rules intentionally come last. They supersede V2.6's navigation-only
-   sticky behavior and keep the complete masthead together.
-============================================================================ */
-.site-frame.universal-sticky-masthead {
-  position: sticky;
+/* Straight top rail contained to the same shell width as the footer. */
+.site-frame::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
   top: 0;
-  z-index: calc(var(--header-z) + 40);
-  margin-top: 0;
-  border-top: 3px solid var(--accent);
-  border-radius: 0 0 16px 16px;
-  box-shadow:
-    0 0 8px var(--accent),
-    0 0 22px rgba(var(--accent-rgb), .45),
-    0 12px 26px rgba(0,0,0,.48);
-  background: rgba(3,4,10,.965);
-  backdrop-filter: blur(15px) saturate(120%);
-  -webkit-backdrop-filter: blur(15px) saturate(120%);
+  height: 2px;
+  z-index: 5001;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent), 0 0 16px rgba(var(--accent-rgb), .48);
+  pointer-events: none;
 }
-.site-frame.universal-sticky-masthead::before {
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  height:3px;
-  z-index:100;
-  background:var(--accent);
-  box-shadow:0 0 8px var(--accent),0 0 18px rgba(var(--accent-rgb),.7);
+
+/* Dropdown bridge removes the dead hover gap that previously caused menus
+   to disappear while the pointer moved from a button into its submenu. */
+.nav-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 14px;
+  pointer-events: auto;
+}
+.submenu {
+  top: calc(100% - 1px);
+  margin-top: 0;
+  padding-top: 14px;
+  z-index: 6000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  display: block;
+  transform: translateY(4px);
+  transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
+}
+.nav-item:hover > .submenu,
+.nav-item:focus-within > .submenu,
+.nav-item.is-open > .submenu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Balanced status layout. The center message is mathematically centered
+   because both outside groups occupy equal widths. */
+.status-bar {
+  grid-template-columns: 118px minmax(0,1fr) 118px;
+  gap: 12px;
+  padding-inline: 18px;
+}
+.status-side {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+.status-side-left { justify-content: flex-start; }
+.status-side-right { justify-content: flex-end; }
+.status-text { justify-self: center; width: 100%; text-align: center; }
+
+/* Footer navigation is a compact secondary navigation system. */
+.footer-links { gap: 8px; }
+.footer-links a {
+  min-width: 82px;
+  padding: 8px 12px;
+  border: 1px solid rgba(var(--accent-rgb), .65);
+  border-radius: 999px;
+  background: rgba(2,4,10,.58);
+  text-align: center;
+  text-transform: uppercase;
+  font-size: .72rem;
+  letter-spacing: .04em;
+}
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: #fff;
+  background: rgba(var(--accent-rgb), .18);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), .62);
+}
+.footer-brand-line { display:flex; align-items:center; gap:12px; }
+.footer-xitlali-logo { width:52px; height:52px; object-fit:contain; filter:drop-shadow(0 0 8px #c8cdd5); }
+.footer-contact-row { grid-column:1/-1; display:flex; justify-content:center; }
+.footer-contact {
+  display:inline-flex; align-items:center; gap:9px; padding:9px 15px;
+  border:1px solid rgba(255,255,255,.5); border-radius:999px;
+  color:#fff; background:rgba(2,4,10,.65); text-decoration:none; font-weight:800;
+}
+.footer-contact:hover,.footer-contact:focus-visible { outline:none; border-color:var(--accent); box-shadow:0 0 12px var(--accent); }
+.footer-copyright { display:flex; justify-content:center; align-items:center; gap:8px; }
+.footer-mini-logo { width:25px; height:25px; object-fit:contain; filter:drop-shadow(0 0 5px var(--accent)); }
+.footer-social a[data-social="facebook"]:hover { box-shadow:0 0 16px #1877f2; border-color:#1877f2; }
+.footer-social a[data-social="instagram"]:hover { box-shadow:0 0 16px #ff3cac; border-color:#ff3cac; }
+.footer-social a[data-social="youtube"]:hover { box-shadow:0 0 16px #ff0033; border-color:#ff0033; }
+.footer-social a[data-social="tiktok"]:hover { box-shadow:0 0 16px #25f4ee; border-color:#25f4ee; }
+.footer-social a[data-social="x"]:hover { box-shadow:0 0 16px #fff; border-color:#fff; }
+
+/* A single straight bottom rail belongs to the footer itself. It is not fixed
+   to the viewport and therefore appears only at the real end of the page. */
+.site-footer { position:relative; border-radius:0; border-bottom:0; }
+.site-footer::after {
+  content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+  background:var(--accent); box-shadow:0 0 8px var(--accent),0 0 16px rgba(var(--accent-rgb),.48);
   pointer-events:none;
 }
-/* Disable the obsolete wrapper if an old cached script briefly creates one. */
-.sticky-navigation-shell { position: relative; top:auto; width:100%; margin:0; box-shadow:none; }
-
-/* The middle status cluster contains both the message and OPEN link. */
-.status-bar {
-  grid-template-columns: 54px minmax(0,1fr) 54px;
-  padding-inline: 16px;
-}
-.status-center {
-  min-width:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:clamp(18px,3vw,48px);
-  text-align:center;
-}
-.status-text { flex:0 1 auto; max-width:min(760px,75vw); }
-.status-open { flex:0 0 auto; margin:0; padding:4px 10px; border-radius:999px; }
-.status-open:hover,.status-open:focus-visible { background:rgba(var(--accent-rgb),.16); }
-.status-balance { width:1px; height:1px; }
-
-/* Thin illuminated separator between the sticky status module and hero. */
-.hero { border-top: 2px solid var(--accent); box-shadow: 0 -2px 10px rgba(var(--accent-rgb),.55); }
-
-/* Footer: brand | centered navigation/contact | social icons. */
-.footer-inner { grid-template-columns: 1.15fr 2.3fr 1.15fr; }
-.footer-navigation-zone { display:grid; justify-items:center; gap:11px; }
-.footer-links { gap:8px; }
-.footer-links a { min-width:76px; }
-.footer-contact { justify-self:center; }
-.footer-social a {
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
-  --social-glow: var(--accent);
-}
-.footer-social a[data-social="facebook"] { --social-glow:#3b82f6; }
-.footer-social a[data-social="instagram"] { --social-glow:#ff3cac; }
-.footer-social a[data-social="youtube"] { --social-glow:#ff2424; }
-.footer-social a[data-social="tiktok"] { --social-glow:#25f4ee; }
-.footer-social a[data-social="x"] { --social-glow:#ffffff; }
-.footer-social a:hover,.footer-social a:focus-visible {
-  outline:none;
-  transform:translateY(-2px) scale(1.07);
-  border-color:var(--social-glow);
-  background:rgba(8,10,18,.96);
-  box-shadow:0 0 9px var(--social-glow),0 0 20px color-mix(in srgb,var(--social-glow) 65%,transparent);
-}
-.footer-social a:hover img,.footer-social a:focus-visible img { filter:drop-shadow(0 0 9px var(--social-glow)); }
-.footer-copyright { display:inline-flex; align-items:center; justify-content:center; gap:8px; }
-.footer-copyright-logo {
-  width:27px;
-  height:27px;
-  object-fit:contain;
-  border-radius:50%;
-  filter:drop-shadow(0 0 6px var(--accent));
-  animation:logo-pulse 3.2s ease-in-out infinite;
-}
 
 @media (max-width:760px) {
-  .site-frame.universal-sticky-masthead { top:0; border-radius:0; }
-  .status-bar { grid-template-columns:38px minmax(0,1fr) 38px; }
-  .status-center { gap:8px; }
+  .site-frame { top: 0; }
+  .status-bar { grid-template-columns: 34px minmax(0,1fr) 34px; padding-inline:10px; }
   .status-open { display:none; }
-  .status-text { max-width:100%; }
-  .footer-navigation-zone { width:100%; }
-  .footer-inner { grid-template-columns:1fr; }
-}
-@media (prefers-reduced-motion:reduce) { .footer-copyright-logo { animation:none; } }
-
-
-/* ============================================================================
-   V2.8 BALANCED STATUS BAR AND MATCHED FRAME SPACING
-============================================================================ */
-.site-frame.universal-sticky-masthead {
-  top: 8px;
-  margin-top: 8px;
-  border-top: 0;
-  border-radius: 14px 14px 16px 16px;
-}
-.site-frame.universal-sticky-masthead::before { display: none; }
-.status-bar {
-  display: grid;
-  grid-template-columns: 88px 34px minmax(0, 1fr) 34px 88px;
-  align-items: center;
-  gap: 8px;
-  padding-inline: 16px;
-}
-.status-text {
-  min-width: 0;
-  max-width: none;
-  justify-self: center;
-  text-align: center;
-}
-.status-icon { justify-self: center; }
-.status-open {
-  margin: 0;
-  padding: 4px 8px;
-  border-radius: 999px;
-  text-align: center;
-  white-space: nowrap;
-}
-.status-open-left { justify-self: start; }
-.status-open-right { justify-self: end; }
-.site-footer {
-  margin-bottom: 8px;
-}
-@media (max-width: 760px) {
-  .site-frame.universal-sticky-masthead { top: 8px; margin-top: 8px; }
-  .status-bar {
-    grid-template-columns: 30px minmax(0, 1fr) 30px;
-    gap: 7px;
-    padding-inline: 10px;
-  }
-  .status-open { display: none; }
-  .status-icon-left { grid-column: 1; }
-  .status-text { grid-column: 2; }
-  .status-icon-right { grid-column: 3; }
+  .status-side { justify-content:center; }
+  .submenu { position:fixed; padding-top:8px; }
+  .footer-contact-row { grid-column:auto; }
+  .footer-brand-line { justify-content:center; }
 }

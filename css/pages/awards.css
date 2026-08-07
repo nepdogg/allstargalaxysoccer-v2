@@ -1,0 +1,2 @@
+/* Awards page only. Shared Explore-section chrome remains orange. */
+body[data-page="awards"]{}

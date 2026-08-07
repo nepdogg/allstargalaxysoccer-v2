@@ -3,7 +3,7 @@
    This stylesheet is isolated from public page CSS. It reuses the visual
    language of the public site while keeping administration controls separate.
 ============================================================================ */
-:root { --admin-accent:#ffc928; --admin-rgb:255,201,40; }
+:root { --admin-accent:#c7ccd4; --admin-rgb:199,204,212; }
 * { box-sizing:border-box; }
 html { min-height:100%; background:#020308; }
 body {
@@ -44,8 +44,8 @@ a { color:inherit; }
   font-weight:1000;
   text-transform:uppercase;
   letter-spacing:.02em;
-  color:#ffd84c;
-  text-shadow:0 3px 0 #7c4300,0 0 12px var(--admin-accent),0 0 28px rgba(var(--admin-rgb),.72);
+  color:#f3f5f8;
+  text-shadow:0 2px 0 #4d5158,0 0 12px var(--admin-accent),0 0 28px rgba(var(--admin-rgb),.72);
 }
 .admin-nav {
   display:grid;
@@ -70,7 +70,7 @@ a { color:inherit; }
 .admin-nav a:hover,.admin-nav a:focus-visible,.admin-nav a.is-active {
   outline:none;
   color:#111;
-  background:linear-gradient(#ffe986,#f2a900);
+  background:linear-gradient(#f7f8fa,#9ca3ad);
   box-shadow:0 0 12px var(--admin-accent),0 0 28px rgba(var(--admin-rgb),.72);
   transform:translateY(-1px);
 }
@@ -150,116 +150,13 @@ textarea { width:100%; min-height:360px; padding:15px; line-height:1.45; resize:
 }
 
 
-/* ============================================================================
-   V2.6 ADMINISTRATION LOCKDOWN
-============================================================================ */
-html::before,html::after{content:"";position:fixed;left:0;right:0;height:2px;z-index:10000;background:var(--admin-accent);box-shadow:0 0 8px var(--admin-accent),0 0 16px rgba(var(--admin-rgb),.55);pointer-events:none}html::before{top:0}html::after{bottom:0}
-.admin-title-image{width:100%;height:104px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(var(--admin-rgb),.7))}
-.admin-logo{animation:admin-logo-pulse 3.2s ease-in-out infinite}.admin-logo:last-child{animation-delay:.65s}
-.admin-sticky{position:sticky;top:2px;z-index:1000;background:rgba(3,4,10,.97);box-shadow:0 10px 24px rgba(0,0,0,.35),0 0 18px rgba(var(--admin-rgb),.2);backdrop-filter:blur(14px)}
-.admin-status{grid-template-columns:76px minmax(0,1fr) 76px}.admin-status>span{justify-self:start}.admin-status strong{text-align:center;justify-self:stretch}.admin-status a{justify-self:end;margin-right:7px}
-.admin-test-button{display:inline-grid;place-items:center;min-height:44px;padding:10px 16px;border:1px solid var(--admin-accent);border-radius:999px;color:#fff;background:rgba(3,5,12,.7);font-weight:900;text-decoration:none}.admin-test-button:hover{color:#111;background:var(--admin-accent);box-shadow:0 0 14px var(--admin-accent)}
-.admin-footer{display:flex;align-items:center;justify-content:center;gap:14px}.admin-footer img{width:54px;height:54px;object-fit:contain;filter:drop-shadow(0 0 9px #aa61ff)}.admin-footer a{color:var(--admin-accent);text-decoration:none;font-weight:800}
-@keyframes admin-logo-pulse{50%{transform:scale(1.035);filter:drop-shadow(0 0 20px var(--admin-accent)) drop-shadow(0 0 32px rgba(var(--admin-rgb),.7))}}
-@media(max-width:700px){.admin-title-image{height:72px}.admin-sticky{top:2px}.admin-status{grid-template-columns:42px minmax(0,1fr) 42px}.admin-footer{flex-direction:column}.admin-footer img{width:48px;height:48px}}
+/* V2.9 Administration belongs to the silver section. */
+.admin-shell { border-radius:0; position:relative; }
+.admin-shell::before,.admin-shell::after{content:"";position:absolute;left:0;right:0;height:2px;background:var(--admin-accent);box-shadow:0 0 8px var(--admin-accent),0 0 16px rgba(var(--admin-rgb),.5);pointer-events:none;z-index:50}
+.admin-shell::before{top:0}.admin-shell::after{bottom:0}
+.admin-logo{animation:admin-logo-pulse 3.2s ease-in-out infinite}
+.admin-logo:last-child{animation-delay:.65s}
+@keyframes admin-logo-pulse{50%{transform:scale(1.025);filter:drop-shadow(0 0 18px var(--admin-accent)) drop-shadow(0 0 30px rgba(var(--admin-rgb),.65))}}
 @media(prefers-reduced-motion:reduce){.admin-logo{animation:none}}
 
-
-/* ============================================================================
-   V2.7 ADMIN COMPLETE STICKY MASTHEAD
-============================================================================ */
-.admin-shell { overflow: visible; }
-.admin-complete-masthead {
-  position:sticky;
-  top:0;
-  z-index:1200;
-  border-top:3px solid var(--admin-accent);
-  background:rgba(3,4,10,.97);
-  box-shadow:0 0 9px var(--admin-accent),0 12px 26px rgba(0,0,0,.48);
-  backdrop-filter:blur(15px);
-}
-.admin-complete-masthead::before {
-  content:"";
-  position:absolute;
-  left:0;right:0;top:0;height:3px;
-  background:var(--admin-accent);
-  box-shadow:0 0 8px var(--admin-accent),0 0 18px rgba(var(--admin-rgb),.7);
-  pointer-events:none;
-}
-.admin-status { grid-template-columns:54px minmax(0,1fr) 54px; }
-.admin-status-center { display:flex; align-items:center; justify-content:center; gap:clamp(18px,3vw,48px); min-width:0; }
-.admin-status-center strong { text-align:center; }
-.admin-status-center a { flex:0 0 auto; margin:0; padding:4px 10px; border-radius:999px; }
-.admin-hero { border-top:2px solid var(--admin-accent); box-shadow:0 -2px 10px rgba(var(--admin-rgb),.55); }
-@media(max-width:700px){
-  .admin-complete-masthead{top:0}
-  .admin-status{grid-template-columns:38px minmax(0,1fr) 38px}
-  .admin-status-center a{display:none}
-}
-
-
-/* ============================================================================
-   V2.8 ADMIN BACKDROP, INSET RAILS, AND BALANCED STATUS BAR
-============================================================================ */
-body {
-  position: relative;
-  isolation: isolate;
-  background: transparent !important;
-}
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-color: #010208;
-  background-image:
-    linear-gradient(rgba(0,0,0,.06), rgba(0,0,0,.20)),
-    url("../assets/images/backgrounds/galaxy-background.png");
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  filter: saturate(112%) brightness(1.04);
-}
-html::before,
-html::after {
-  left: 50% !important;
-  right: auto !important;
-  width: min(calc(100% - 8px), 1600px);
-  height: 2px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-}
-html::before { top: 5px !important; }
-html::after { bottom: 5px !important; }
-.admin-complete-masthead {
-  top: 8px;
-  margin-top: 8px;
-  border-top: 0;
-  border-radius: 14px 14px 0 0;
-}
-.admin-complete-masthead::before { display: none; }
-.admin-status {
-  display: grid;
-  grid-template-columns: 88px 34px minmax(0,1fr) 34px 88px;
-  align-items: center;
-  gap: 8px;
-  padding-inline: 16px;
-}
-.admin-status > strong { justify-self: center; text-align: center; }
-.admin-status-star { justify-self: center; color: var(--admin-accent); filter: drop-shadow(0 0 6px var(--admin-accent)); }
-.admin-status-open { color: var(--admin-accent); text-decoration: none; font-weight: 900; padding: 4px 8px; border-radius: 999px; white-space: nowrap; }
-.admin-status-open:hover,.admin-status-open:focus-visible { color:#111; background:var(--admin-accent); box-shadow:0 0 12px var(--admin-accent); }
-.admin-status-open-left { justify-self: start; }
-.admin-status-open-right { justify-self: end; }
-.admin-footer { margin-bottom: 8px; }
-@media(max-width:700px){
-  body::before { background-size:auto 100%; }
-  html::before,html::after { width:calc(100% - 8px); }
-  .admin-complete-masthead { top:8px; margin-top:8px; }
-  .admin-status { grid-template-columns:30px minmax(0,1fr) 30px; gap:7px; padding-inline:10px; }
-  .admin-status-open { display:none; }
-  .admin-status-star:first-of-type { grid-column:1; }
-  .admin-status > strong { grid-column:2; }
-  .admin-status-star:last-of-type { grid-column:3; }
-}
+.admin-title-image{width:100%;height:108px;object-fit:contain;}

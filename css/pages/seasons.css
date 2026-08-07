@@ -1,0 +1,2 @@
+/* Seasons page only. Shared Media-section chrome remains blue. */
+body[data-page="seasons"]{}

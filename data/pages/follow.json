@@ -1,13 +1,14 @@
 {
   "file": "follow.html",
   "title": "Follow",
-  "accent": "#ff44b7",
-  "rgb": "255,68,183",
+  "accent": "#cf39ff",
+  "rgb": "207,57,255",
   "active": "follow",
   "hero": [
     "assets/images/heroes/pages/hero-follow.png"
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-follow.png",
   "ticker": "Follow Allstar Galaxy across every social platform.",
-  "icon": "\u2605"
+  "icon": "\u2605",
+  "section": "team"
 }

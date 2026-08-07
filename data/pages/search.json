@@ -1,13 +1,14 @@
 {
   "file": "search.html",
   "title": "Search",
-  "accent": "#ffffff",
-  "rgb": "255,255,255",
+  "accent": "#ff44b7",
+  "rgb": "255,68,183",
   "active": "search",
   "hero": [
     "assets/images/heroes/pages/hero-search.png"
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-about.png",
   "ticker": "Search every player, game, season, award, video, and page.",
-  "icon": "\u2315"
+  "icon": "\u2315",
+  "section": "search"
 }

@@ -1,14 +1,14 @@
 {
-  "file": "media.html",
-  "title": "Media",
+  "file": "seasons.html",
+  "title": "Seasons",
   "accent": "#24bfff",
   "rgb": "36,191,255",
-  "active": "media",
+  "active": "seasons",
   "hero": [
     "assets/images/heroes/pages/hero-media.png"
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-media.png",
-  "ticker": "Browse the complete Allstar Galaxy media library.",
+  "ticker": "Browse complete Allstar Galaxy seasons and historical collections.",
   "icon": "\u2605",
   "section": "media"
 }

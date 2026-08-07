@@ -135,99 +135,13 @@ body {
 }
 
 
-/* V2.6 page frame: matching accent rails at the very top and bottom viewport edges. */
-html::before, html::after {
-  content:"";
-  position:fixed;
-  left:0;
-  right:0;
-  z-index:10000;
-  height:2px;
-  pointer-events:none;
-  background:var(--accent,#f4c542);
-  box-shadow:0 0 8px var(--accent,#f4c542),0 0 16px rgba(var(--accent-rgb,244,197,66),.55);
-}
-html::before { top:0; }
-html::after { bottom:0; }
-
-
-/* ============================================================================
-   V2.7 GALAXY BACKGROUND LOCKDOWN
-   ----------------------------------------------------------------------------
-   The image is painted on html as well as body. This avoids page-specific solid
-   backgrounds hiding the galaxy and keeps it visible through translucent shells.
-============================================================================ */
-html {
-  min-height: 100%;
-  background-color: #010208;
-  background-image:
-    linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.36)),
-    var(--site-bg, url("../assets/images/backgrounds/galaxy-background.png"));
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-body {
-  background-color: transparent !important;
-  background-image:
-    linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.22)),
-    var(--site-bg, url("../assets/images/backgrounds/galaxy-background.png")) !important;
-  background-position: center top !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-attachment: fixed !important;
-}
-.page-main {
-  background:
-    linear-gradient(180deg, rgba(var(--accent-rgb), .115), transparent 24%),
-    rgba(3, 5, 12, .58) !important;
-}
-.site-footer { background: rgba(3, 4, 10, .62) !important; }
-@media (max-width:760px) {
-  html, body { background-attachment: scroll !important; }
-}
-
-
-/* ============================================================================
-   V2.8 FINAL GALAXY BACKDROP AND INSET FRAME RAILS
-   ----------------------------------------------------------------------------
-   A fixed backdrop element guarantees that the galaxy remains visible outside
-   the centered site shell. The top and bottom rails now share the same inset,
-   width, thickness, and viewport gap.
-============================================================================ */
-body {
-  position: relative;
-  isolation: isolate;
-  background: transparent !important;
-}
+/* V2.9 robust galaxy backdrop. This separate fixed layer prevents page-specific
+   backgrounds from accidentally replacing the shared galaxy artwork. */
+body { isolation:isolate; background-color:#010208; }
 .galaxy-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-color: #010208;
-  background-image:
-    linear-gradient(rgba(0,0,0,.06), rgba(0,0,0,.20)),
-    url("../assets/images/backgrounds/galaxy-background.png");
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  filter: saturate(112%) brightness(1.04);
+  position:fixed; inset:0; z-index:-3; pointer-events:none;
+  background:
+    linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.30)),
+    url("../assets/images/backgrounds/galaxy-background.png") center top/cover no-repeat;
 }
-html::before,
-html::after {
-  left: 50% !important;
-  right: auto !important;
-  width: min(calc(100% - 8px), var(--shell));
-  height: 2px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-}
-html::before { top: 5px !important; }
-html::after { bottom: 5px !important; }
-@media (max-width: 760px) {
-  .galaxy-backdrop { background-size: auto 100%; background-position: center top; }
-  html::before,
-  html::after { width: calc(100% - 8px); }
-}
+body::before { z-index:-2; }

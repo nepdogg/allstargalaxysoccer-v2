@@ -1,8 +1,8 @@
 {
   "file": "404.html",
   "title": "Page Not Found",
-  "accent": "#f4c542",
-  "rgb": "244,197,66",
+  "accent": "#ffffff",
+  "rgb": "255,255,255",
   "active": "404",
   "hero": [
     "assets/images/heroes/pages/hero-404.png",
@@ -10,5 +10,6 @@
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-home.png",
   "ticker": "Lost in the Galaxy? Search the site or choose a destination below.",
-  "icon": "✦"
+  "icon": "\u2726",
+  "section": "404"
 }

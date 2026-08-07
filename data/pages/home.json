@@ -11,5 +11,6 @@
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-home.png",
   "ticker": "Explore the Allstar Galaxy \u2014 choose a feature to begin.",
-  "icon": "\u2605"
+  "icon": "\u2605",
+  "section": "home"
 }

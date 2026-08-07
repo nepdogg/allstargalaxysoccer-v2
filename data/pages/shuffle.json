@@ -10,5 +10,6 @@
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-shuffle.png",
   "ticker": "Let the Galaxy choose a random video from the archive.",
-  "icon": "\u2605"
+  "icon": "\u2605",
+  "section": "explore"
 }

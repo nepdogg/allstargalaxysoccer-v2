@@ -9,5 +9,6 @@
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-team.png",
   "ticker": "Meet the Allstar Galaxy roster and open every player profile.",
-  "icon": "\u2605"
+  "icon": "\u2605",
+  "section": "team"
 }

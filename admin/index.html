@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  ALLSTAR GALAXY V2.8 ADMINISTRATION
+  ALLSTAR GALAXY V2.5 ADMINISTRATION
   This page is a static GitHub Pages configuration workspace. It can download
   edited JSON files but cannot securely publish directly without authentication.
 -->
@@ -15,10 +15,10 @@
 </head>
 <body>
   <div class="admin-shell">
-    <header class="admin-sticky admin-complete-masthead">
+    <header>
       <div class="admin-identity">
         <img class="admin-logo" src="../assets/images/logos/logo.png" alt="Allstar Galaxy">
-        <img class="admin-title-image" src="../assets/images/titles/page-titles/navigation-title-admin.png" alt="Allstar Galaxy Administration">
+        <img class="admin-title admin-title-image" src="../assets/images/titles/page-titles/navigation-title-admin.png" alt="Allstar Galaxy Administration">
         <img class="admin-logo" src="../assets/images/logos/logo.png" alt="Allstar Galaxy">
       </div>
 
@@ -34,11 +34,9 @@
       </nav>
 
       <div class="admin-status">
-        <a class="admin-status-open admin-status-open-left" href="#page-editor">← OPEN</a>
-        <span class="admin-status-star" aria-hidden="true">★</span>
+        <span aria-hidden="true">★</span>
         <strong>Administration Center — configure isolated pages without changing unrelated sections.</strong>
-        <span class="admin-status-star" aria-hidden="true">★</span>
-        <a class="admin-status-open admin-status-open-right" href="#page-editor">OPEN →</a>
+        <a href="#page-editor">OPEN →</a>
       </div>
     </header>
 
@@ -70,7 +68,7 @@
       <section id="media" class="admin-panel"><h2>Media Controls</h2><p class="help">Games, seasons, playlists, awards, and archive records should remain in dedicated data files so media changes do not affect Team, Updates, or other pages.</p></section>
       <section id="updates" class="admin-panel"><h2>Updates Controls</h2><p class="help">Schedule, results, standings, news, and livestream controls will use their own isolated data modules.</p></section>
       <section id="website" class="admin-panel"><h2>Website Controls</h2><p class="help">Shared changes belong in <code>data/site-config.json</code>, <code>css/components.css</code>, or <code>js/site-frame.js</code>. Those files intentionally affect every public page.</p></section>
-      <section id="diagnostics" class="admin-panel"><h2>Diagnostics</h2><p class="help">Use the test below to verify that GitHub Pages serves the root <code>404.html</code> file for an invalid address.</p><p><a class="admin-test-button" href="../allstar-galaxy-404-test-does-not-exist" target="_blank" rel="noopener">Test 404 Page →</a></p></section>
+      <section id="diagnostics" class="admin-panel"><h2>Diagnostics</h2><p class="help">This foundation reserves space for broken-link checks, missing-image checks, invalid JSON checks, and visual QA. Browser-only diagnostics can be added without changing page content.</p></section>
 
       <section id="page-editor" class="admin-panel">
         <h2>Page Configuration Editor</h2>
@@ -90,7 +88,7 @@
       </section>
     </main>
 
-    <footer class="admin-footer"><img src="../assets/images/managed/xitlali-media-logo.png" alt="Xitlali Media"><div><strong>Allstar Galaxy Administration</strong><br>Created by Xitlali Media • Capturing Moments. Creating Legacies.<br><a href="mailto:allstargalaxy@example.com">✉ Contact Administrator</a></div></footer>
+    <footer class="admin-footer"><strong>Allstar Galaxy Administration</strong><br>Created by Xitlali Media • Static GitHub Pages configuration workspace</footer>
   </div>
   <script type="module" src="admin.js"></script>
 </body>

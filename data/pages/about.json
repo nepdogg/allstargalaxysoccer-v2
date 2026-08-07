@@ -1,8 +1,8 @@
 {
   "file": "about.html",
   "title": "About",
-  "accent": "#e8edf5",
-  "rgb": "232,237,245",
+  "accent": "#cf39ff",
+  "rgb": "207,57,255",
   "active": "about",
   "hero": [
     "assets/images/heroes/pages/about-hero.png",
@@ -10,5 +10,6 @@
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-about.png",
   "ticker": "Discover the story, mission, and production behind Allstar Galaxy.",
-  "icon": "\u2605"
+  "icon": "\u2605",
+  "section": "team"
 }

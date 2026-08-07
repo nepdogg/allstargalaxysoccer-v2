@@ -144,11 +144,11 @@
     }
   ],
   "social": {
-    "facebook": "https://www.facebook.com/profile.php?id=61591642103786",
-    "instagram": "https://www.instagram.com/allstargalaxysoccer/",
-    "youtube": "https://www.youtube.com/@Allstar-Galaxy",
-    "tiktok": "https://www.tiktok.com/@allstar.galaxy",
-    "x": "https://x.com/Allstar__Galaxy"
+    "facebook": "#",
+    "instagram": "#",
+    "youtube": "#",
+    "tiktok": "#",
+    "x": "#"
   },
   "footer": {
     "credit": "Created by Xitlali Media",
@@ -193,13 +193,9 @@
         "label": "Administration",
         "href": "admin/index.html"
       }
-    ],
-    "tagline": "Capturing Moments. Creating Legacies.",
-    "description": "Preserving every game, player, and memory.",
-    "xitlaliLogo": "assets/images/managed/xitlali-media-logo.png",
-    "xitlaliHref": "https://xitlalimedia.com",
-    "contactLabel": "Contact Administrator",
-    "contactEmail": "allstargalaxy@example.com",
-    "version": "Allstar Galaxy V2.8 \u2022 Balanced status bar \u2022 Inset frame rails \u2022 Restored galaxy backdrop \u2022 GitHub Pages"
-  }
+    ]
+  },
+  "version": "2.9.0",
+  "contactEmail": "allstargalaxy@example.com",
+  "xitlaliLogo": "assets/images/logos/xitlali-media-logo.png"
 }

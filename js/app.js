@@ -36,8 +36,14 @@ const [site, page] = await Promise.all([
 
 document.documentElement.style.setProperty('--accent', page.accent);
 document.documentElement.style.setProperty('--accent-rgb', page.rgb);
-document.documentElement.style.setProperty('--site-bg', `url("${site.background}")`);
 document.body.style.setProperty('--site-bg', `url("${site.background}")`);
+/* A dedicated fixed backdrop is more reliable than relying on body backgrounds
+   because page-specific CSS can no longer cover or replace the galaxy. */
+const galaxyBackdrop = document.createElement('div');
+galaxyBackdrop.className = 'galaxy-backdrop';
+galaxyBackdrop.setAttribute('aria-hidden', 'true');
+document.body.prepend(galaxyBackdrop);
+
 
 mountSiteFrame(site, page);
 mountFooter(site);

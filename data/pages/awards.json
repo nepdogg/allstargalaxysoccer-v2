@@ -1,15 +1,15 @@
 {
-  "file": "explore.html",
-  "title": "Explore & Discover",
+  "file": "game-awards.html",
+  "title": "Game Awards",
   "accent": "#ff7a1a",
   "rgb": "255,122,26",
-  "active": "explore",
+  "active": "awards",
   "hero": [
     "assets/images/heroes/pages/hero-explore.png"
   ],
   "heroInterval": 7000,
   "navTitle": "assets/images/titles/page-titles/navigation-title-shuffle.png",
-  "ticker": "Explore, discover, and choose your next Allstar Galaxy destination.",
+  "ticker": "Explore Allstar Galaxy goals, saves, assists, plays, and player awards.",
   "icon": "\u2605",
   "section": "explore"
 }
