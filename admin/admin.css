@@ -215,3 +215,9 @@ textarea { width:100%; min-height:360px; padding:15px; line-height:1.45; resize:
   .admin-status-pointer:last-child{text-align:right}
   .admin-status-message{display:grid!important;font-size:.82rem;line-height:1.25}
 }
+
+
+/* V3.2 final admin status order mirrors the public framework:
+   ★ OPEN →   clickable message   ← OPEN ★ */
+.admin-status-pointer:first-child { text-align: left; }
+.admin-status-pointer:last-child { text-align: right; }

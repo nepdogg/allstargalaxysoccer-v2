@@ -182,6 +182,10 @@
         "href": "explore.html"
       },
       {
+        "label": "Live",
+        "href": "livestream.html"
+      },
+      {
         "label": "Search",
         "href": "search.html"
       },
@@ -195,7 +199,7 @@
       }
     ]
   },
-  "version": "3.1.0",
+  "version": "3.2.0",
   "contactEmail": "allstargalaxy@example.com",
   "xitlaliLogo": "assets/images/logos/xitlali-media-logo.png",
   "xitlaliUrl": "https://xitlalimedia.com/"

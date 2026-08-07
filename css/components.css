@@ -702,3 +702,52 @@
   .status-message-link { white-space: normal; line-height: 1.25; padding-inline: 7px; }
   .status-side .status-open { display: none; }
 }
+
+
+/* ============================================================================
+   V3.2 FINAL FRAMEWORK LOCKDOWN
+   ----------------------------------------------------------------------------
+   Final shared-framework polish:
+   - Footer includes the complete nine-link public navigation set.
+   - Footer receives one subtle top separator and one strong bottom frame rail.
+   - Status decorations place stars on the outside and OPEN arrows inward.
+============================================================================ */
+
+/* Keep all nine footer destinations on one desktop row. The center column may
+   shrink, while the compact pills reduce just enough to avoid wrapping. */
+@media (min-width: 1181px) {
+  .footer-inner {
+    grid-template-columns: minmax(245px, .9fr) minmax(720px, 2.75fr) minmax(210px, .8fr);
+  }
+  .footer-links {
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+  .footer-links a {
+    padding-inline: 8px;
+    font-size: .64rem;
+  }
+}
+
+/* One quiet separator at the true beginning of the footer. This is distinct
+   from the stronger 4px bottom frame rail and does not duplicate the internal
+   divider beneath Contact Administrator. */
+.site-footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  z-index: 2;
+  background: rgba(var(--accent-rgb), .82);
+  box-shadow: 0 0 5px rgba(var(--accent-rgb), .48), 0 0 10px rgba(var(--accent-rgb), .20);
+  pointer-events: none;
+}
+
+/* Status order is now: ★ OPEN →   message   ← OPEN ★. The stars visually
+   anchor the outside edges while both arrows point toward the clickable text. */
+.status-side-left .status-icon { order: 1; }
+.status-side-left .status-open { order: 2; }
+.status-side-right .status-open { order: 1; }
+.status-side-right .status-icon { order: 2; }
