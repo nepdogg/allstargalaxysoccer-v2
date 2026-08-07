@@ -187,3 +187,47 @@ body {
 @media (max-width:760px) {
   html, body { background-attachment: scroll !important; }
 }
+
+
+/* ============================================================================
+   V2.8 FINAL GALAXY BACKDROP AND INSET FRAME RAILS
+   ----------------------------------------------------------------------------
+   A fixed backdrop element guarantees that the galaxy remains visible outside
+   the centered site shell. The top and bottom rails now share the same inset,
+   width, thickness, and viewport gap.
+============================================================================ */
+body {
+  position: relative;
+  isolation: isolate;
+  background: transparent !important;
+}
+.galaxy-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: #010208;
+  background-image:
+    linear-gradient(rgba(0,0,0,.06), rgba(0,0,0,.20)),
+    url("../assets/images/backgrounds/galaxy-background.png");
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: saturate(112%) brightness(1.04);
+}
+html::before,
+html::after {
+  left: 50% !important;
+  right: auto !important;
+  width: min(calc(100% - 8px), var(--shell));
+  height: 2px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+}
+html::before { top: 5px !important; }
+html::after { bottom: 5px !important; }
+@media (max-width: 760px) {
+  .galaxy-backdrop { background-size: auto 100%; background-position: center top; }
+  html::before,
+  html::after { width: calc(100% - 8px); }
+}

@@ -488,3 +488,53 @@
   .footer-inner { grid-template-columns:1fr; }
 }
 @media (prefers-reduced-motion:reduce) { .footer-copyright-logo { animation:none; } }
+
+
+/* ============================================================================
+   V2.8 BALANCED STATUS BAR AND MATCHED FRAME SPACING
+============================================================================ */
+.site-frame.universal-sticky-masthead {
+  top: 8px;
+  margin-top: 8px;
+  border-top: 0;
+  border-radius: 14px 14px 16px 16px;
+}
+.site-frame.universal-sticky-masthead::before { display: none; }
+.status-bar {
+  display: grid;
+  grid-template-columns: 88px 34px minmax(0, 1fr) 34px 88px;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 16px;
+}
+.status-text {
+  min-width: 0;
+  max-width: none;
+  justify-self: center;
+  text-align: center;
+}
+.status-icon { justify-self: center; }
+.status-open {
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 999px;
+  text-align: center;
+  white-space: nowrap;
+}
+.status-open-left { justify-self: start; }
+.status-open-right { justify-self: end; }
+.site-footer {
+  margin-bottom: 8px;
+}
+@media (max-width: 760px) {
+  .site-frame.universal-sticky-masthead { top: 8px; margin-top: 8px; }
+  .status-bar {
+    grid-template-columns: 30px minmax(0, 1fr) 30px;
+    gap: 7px;
+    padding-inline: 10px;
+  }
+  .status-open { display: none; }
+  .status-icon-left { grid-column: 1; }
+  .status-text { grid-column: 2; }
+  .status-icon-right { grid-column: 3; }
+}

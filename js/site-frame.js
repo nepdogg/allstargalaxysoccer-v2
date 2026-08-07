@@ -1,5 +1,5 @@
 /* ============================================================================
-   ALLSTAR GALAXY V2.7 — UNIVERSAL SITE FRAME
+   ALLSTAR GALAXY V2.8 — UNIVERSAL SITE FRAME
    ----------------------------------------------------------------------------
    The complete masthead (identity, navigation, and status) is one sticky unit.
    This keeps the title, logos, navigation, and status available together on
@@ -10,6 +10,13 @@ function submenu(item){return !item.submenu?.length?'':`<button class="submenu-t
 function nav(site,page){return site.nav.map(item=>`<div class="nav-item ${active(item,page)?'is-active':''} ${item.id==='search'?'nav-search-item':''}"><a class="nav-link" href="${item.href}" ${active(item,page)?'aria-current="page"':''}>${item.label}</a>${submenu(item)}</div>`).join('')}
 
 export function mountSiteFrame(site,page){
+  /* A real fixed element is more dependable than nested CSS backgrounds. */
+  if(!document.querySelector('.galaxy-backdrop')){
+    const backdrop=document.createElement('div');
+    backdrop.className='galaxy-backdrop';
+    backdrop.setAttribute('aria-hidden','true');
+    document.body.prepend(backdrop);
+  }
   const host=document.querySelector('#site-frame');
   const images=Array.isArray(page.hero)?page.hero.map(value=>String(value||'').trim()).filter(Boolean):[];
 
@@ -32,9 +39,11 @@ export function mountSiteFrame(site,page){
       <span class="status-border status-border-top"></span>
       <span class="energy-rail energy-rail-top"><i></i></span>
       <div class="status-bar">
-        <span class="status-icon">${page.icon||'★'}</span>
-        <span class="status-center"><span class="status-text">${page.ticker||''}</span><a class="status-open" href="#main">OPEN →</a></span>
-        <span class="status-balance" aria-hidden="true"></span>
+        <a class="status-open status-open-left" href="#main" aria-label="Open page content">← OPEN</a>
+        <span class="status-icon status-icon-left" aria-hidden="true">${page.icon||'★'}</span>
+        <span class="status-text">${page.ticker||''}</span>
+        <span class="status-icon status-icon-right" aria-hidden="true">${page.icon||'★'}</span>
+        <a class="status-open status-open-right" href="#main" aria-label="Open page content">OPEN →</a>
       </div>
       <span class="energy-rail energy-rail-bottom"><i></i></span>
       <span class="status-border status-border-bottom"></span>

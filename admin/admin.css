@@ -196,3 +196,70 @@ html::before,html::after{content:"";position:fixed;left:0;right:0;height:2px;z-i
   .admin-status{grid-template-columns:38px minmax(0,1fr) 38px}
   .admin-status-center a{display:none}
 }
+
+
+/* ============================================================================
+   V2.8 ADMIN BACKDROP, INSET RAILS, AND BALANCED STATUS BAR
+============================================================================ */
+body {
+  position: relative;
+  isolation: isolate;
+  background: transparent !important;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: #010208;
+  background-image:
+    linear-gradient(rgba(0,0,0,.06), rgba(0,0,0,.20)),
+    url("../assets/images/backgrounds/galaxy-background.png");
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: saturate(112%) brightness(1.04);
+}
+html::before,
+html::after {
+  left: 50% !important;
+  right: auto !important;
+  width: min(calc(100% - 8px), 1600px);
+  height: 2px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+}
+html::before { top: 5px !important; }
+html::after { bottom: 5px !important; }
+.admin-complete-masthead {
+  top: 8px;
+  margin-top: 8px;
+  border-top: 0;
+  border-radius: 14px 14px 0 0;
+}
+.admin-complete-masthead::before { display: none; }
+.admin-status {
+  display: grid;
+  grid-template-columns: 88px 34px minmax(0,1fr) 34px 88px;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 16px;
+}
+.admin-status > strong { justify-self: center; text-align: center; }
+.admin-status-star { justify-self: center; color: var(--admin-accent); filter: drop-shadow(0 0 6px var(--admin-accent)); }
+.admin-status-open { color: var(--admin-accent); text-decoration: none; font-weight: 900; padding: 4px 8px; border-radius: 999px; white-space: nowrap; }
+.admin-status-open:hover,.admin-status-open:focus-visible { color:#111; background:var(--admin-accent); box-shadow:0 0 12px var(--admin-accent); }
+.admin-status-open-left { justify-self: start; }
+.admin-status-open-right { justify-self: end; }
+.admin-footer { margin-bottom: 8px; }
+@media(max-width:700px){
+  body::before { background-size:auto 100%; }
+  html::before,html::after { width:calc(100% - 8px); }
+  .admin-complete-masthead { top:8px; margin-top:8px; }
+  .admin-status { grid-template-columns:30px minmax(0,1fr) 30px; gap:7px; padding-inline:10px; }
+  .admin-status-open { display:none; }
+  .admin-status-star:first-of-type { grid-column:1; }
+  .admin-status > strong { grid-column:2; }
+  .admin-status-star:last-of-type { grid-column:3; }
+}
