@@ -460,3 +460,144 @@
   .footer-contact-row { grid-column:auto; }
   .footer-brand-line { justify-content:center; }
 }
+
+/* ============================================================================
+   V3.0 FINAL FRAME + FOOTER REPAIR
+   ----------------------------------------------------------------------------
+   - Removes the transparent top/bottom viewport gaps.
+   - Uses one straight 4px accent rail at the real top and real bottom.
+   - Keeps the desktop footer navigation on one line.
+   - Stacks the Xitlali Media credit, description, and tagline cleanly.
+============================================================================ */
+
+/* The sticky masthead starts at the very top. No page content can scroll
+   through a transparent strip above it. */
+.site-frame {
+  top: 0;
+  margin-top: 0;
+  border-radius: 0;
+}
+
+/* A stronger straight top rail. It belongs to the masthead shell rather than
+   the viewport, so it does not create a second floating line. */
+.site-frame::before {
+  height: 4px;
+  border-radius: 0;
+}
+
+/* The footer reaches the true end of the document. The bottom rail is part of
+   the footer and is never fixed to the browser window. */
+.site-footer {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+.site-footer::after {
+  height: 4px;
+  border-radius: 0;
+}
+
+/* Desktop footer: brand / navigation / social columns. The center column gets
+   the most room so all eight mini-navigation pills stay on one row. */
+.footer-inner {
+  grid-template-columns: minmax(250px, .95fr) minmax(650px, 2.5fr) minmax(220px, .85fr);
+  gap: 22px;
+  padding: 28px 34px 30px;
+}
+.footer-brand-block { min-width: 0; }
+.footer-brand-line {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+.footer-brand-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+.footer-brand-copy strong,
+.footer-brand-copy small,
+.footer-brand-copy em {
+  display: block;
+  margin: 0;
+  line-height: 1.3;
+}
+.footer-brand-copy strong { color: #fff; }
+.footer-brand-copy small { color: var(--muted); }
+.footer-brand-copy em {
+  color: var(--accent);
+  font-size: .76rem;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.footer-links {
+  flex-wrap: nowrap;
+  gap: 7px;
+  min-width: 0;
+}
+.footer-links a {
+  min-width: 0;
+  flex: 0 1 auto;
+  padding: 7px 10px;
+  white-space: nowrap;
+  font-size: .67rem;
+}
+.footer-social { align-items: center; }
+.footer-contact-row {
+  grid-column: 2;
+  justify-self: center;
+  margin-top: -8px;
+}
+
+/* Give every social icon a smooth platform-colored hover transition. */
+.footer-social a {
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.footer-social a:hover,
+.footer-social a:focus-visible {
+  outline: none;
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Intermediate desktop widths: keep the navigation together by giving the
+   footer two rows before switching to the full mobile stack. */
+@media (max-width: 1180px) and (min-width: 761px) {
+  .footer-inner {
+    grid-template-columns: minmax(230px, .9fr) minmax(0, 2.1fr);
+  }
+  .footer-social {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+  .footer-contact-row { grid-column: 2; }
+  .footer-links { gap: 6px; }
+  .footer-links a { padding-inline: 8px; font-size: .64rem; }
+}
+
+@media (max-width: 760px) {
+  .site-frame { top: 0; margin-top: 0; }
+  .site-footer { margin-bottom: 0; }
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .footer-brand-line {
+    grid-template-columns: 48px minmax(0, 1fr);
+    justify-content: center;
+    max-width: 380px;
+    margin-inline: auto;
+  }
+  .footer-brand-copy { align-items: flex-start; text-align: left; }
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-contact-row {
+    grid-column: auto;
+    margin-top: 0;
+  }
+  .footer-social { justify-content: center; }
+}
