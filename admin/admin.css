@@ -217,7 +217,7 @@ textarea { width:100%; min-height:360px; padding:15px; line-height:1.45; resize:
 }
 
 
-/* V3.2 final admin status order mirrors the public framework:
+/* V3.4 final admin status order mirrors the public framework:
    ★ OPEN →   clickable message   ← OPEN ★ */
 .admin-status-pointer:first-child { text-align: left; }
 .admin-status-pointer:last-child { text-align: right; }

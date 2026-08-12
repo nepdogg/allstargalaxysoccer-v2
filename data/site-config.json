@@ -197,10 +197,57 @@
         "label": "Administration",
         "href": "admin/index.html"
       }
+    ],
+    "primaryLinks": [
+      {
+        "label": "Home",
+        "href": "index.html"
+      },
+      {
+        "label": "Team",
+        "href": "team.html"
+      },
+      {
+        "label": "Updates",
+        "href": "updates.html"
+      },
+      {
+        "label": "Media",
+        "href": "media.html"
+      },
+      {
+        "label": "Explore",
+        "href": "explore.html"
+      },
+      {
+        "label": "Live",
+        "href": "livestream.html"
+      },
+      {
+        "label": "Search",
+        "href": "search.html"
+      }
+    ],
+    "utilityLinks": [
+      {
+        "label": "About",
+        "href": "about.html"
+      },
+      {
+        "label": "Administration",
+        "href": "admin/index.html"
+      }
     ]
   },
-  "version": "3.3.0",
+  "version": "3.4.0",
   "contactEmail": "allstargalaxy@example.com",
   "xitlaliLogo": "assets/images/logos/xitlali-media-logo.png",
-  "xitlaliUrl": "https://xitlalimedia.com/"
+  "xitlaliUrl": "https://xitlalimedia.com/",
+  "statusBar": {
+    "enabled": true,
+    "feed": "data/latest-update.json",
+    "fallbackLabel": "LATEST",
+    "fallbackMessage": "Open Latest Games to see the newest Allstar Galaxy game and videos.",
+    "fallbackHref": "media.html#latest-games"
+  }
 }
