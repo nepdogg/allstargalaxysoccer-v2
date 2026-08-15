@@ -122,8 +122,11 @@
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), #fff 48%, #dbe1e8 62%, transparent);
   box-shadow: 0 0 10px #fff, 0 0 20px var(--accent);
 }
-.energy-rail-top i { animation: energy-right 4.2s linear infinite; }
-.energy-rail-bottom i { animation: energy-left 4.2s linear infinite; }
+/* Final status energy behavior: each rail travels to the opposite side and then
+   reverses instead of teleporting back to its start. Top and bottom are always
+   moving in opposite directions. */
+.energy-rail-top i { animation: energy-right 4.2s linear infinite alternate; }
+.energy-rail-bottom i { animation: energy-left 4.2s linear infinite alternate; }
 .status-bar {
   position: relative;
   z-index: 2;

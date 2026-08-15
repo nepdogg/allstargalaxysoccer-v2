@@ -1,21 +1,10 @@
-ALLSTAR GALAXY V2 — HOME FINAL + TEAM RESTORATION UPDATE
+ALLSTAR GALAXY V3.5 — FINAL HOME LIVE CARDS + STATUS RAILS
 
 1. Extract this ZIP.
-2. Copy the css, js, assets, and docs folders into the root of your local
-   allstargalaxysoccer-v2 GitHub repository.
-3. Choose Replace when Windows asks about matching files.
+2. Copy the css, js, data, and docs folders into the root of your local allstargalaxysoccer-v2 repository.
+3. Choose Replace the files in the destination when Windows asks.
 4. Commit in GitHub Desktop.
 5. Push origin.
-6. Hard-refresh the site after GitHub Pages rebuilds.
+6. Wait for GitHub Pages to rebuild, then hard-refresh the site (Ctrl+F5).
 
-This update intentionally DOES NOT modify the locked universal framework.
-
-HOME:
-- Removes the temporary Latest Games carousel restoration if it is installed.
-- Restores the finalized Home layout: Hero -> Explore cards -> Footer.
-
-TEAM:
-- Restores the visual data-driven roster carousel.
-- Adds player profile viewer.
-- Adds live Team Stats cards.
-- Adds responsive phone/tablet behavior.
+No hero images or other large graphics are included.

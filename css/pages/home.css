@@ -1,2 +1,187 @@
-/* Home page content only. Do not style .site-frame, .identity-row, .main-nav, .status-bar, .hero, or .site-footer here. */
-body[data-page="home"]{}
+/* ============================================================================
+   ALLSTAR GALAXY — HOME PAGE ONLY
+   Final Home design: six large, fully clickable, data-driven navigation cards.
+   Do not place universal header/status/footer rules in this file.
+============================================================================ */
+body[data-page="home"] .page-content { gap: 0; }
+
+.home-explore {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+}
+
+.home-explore-title {
+  width: min(760px, 74%);
+  filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), .28));
+}
+
+.home-live-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* Entire card is one anchor: there is no small click target to miss. */
+.home-live-card {
+  position: relative;
+  min-height: 300px;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  align-content: start;
+  gap: 13px;
+  padding: 34px 32px 30px;
+  overflow: hidden;
+  border: 2px solid rgba(var(--accent-rgb), .92);
+  border-radius: 24px;
+  color: #fff;
+  text-decoration: none;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(var(--accent-rgb), .27), transparent 43%),
+    linear-gradient(145deg, rgba(var(--accent-rgb), .13), transparent 50%),
+    rgba(3, 4, 9, .91);
+  box-shadow:
+    inset 0 0 34px rgba(var(--accent-rgb), .055),
+    0 0 18px rgba(var(--accent-rgb), .23),
+    0 12px 28px rgba(0,0,0,.46);
+  transform: translateY(0) scale(1);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  cursor: pointer;
+}
+
+.home-live-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at 52% 42%, rgba(var(--accent-rgb), .17), transparent 58%);
+  transition: opacity .18s ease;
+}
+
+.home-live-card:hover,
+.home-live-card:focus-visible {
+  outline: none;
+  transform: translateY(-5px) scale(1.012);
+  border-color: var(--accent);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(var(--accent-rgb), .38), transparent 45%),
+    linear-gradient(145deg, rgba(var(--accent-rgb), .18), transparent 54%),
+    rgba(3, 4, 9, .94);
+  box-shadow:
+    inset 0 0 38px rgba(var(--accent-rgb), .08),
+    0 0 16px var(--accent),
+    0 0 35px rgba(var(--accent-rgb), .55),
+    0 18px 34px rgba(0,0,0,.55);
+}
+.home-live-card:hover::after,
+.home-live-card:focus-visible::after { opacity: 1; }
+
+.home-live-card h2 {
+  position: relative;
+  z-index: 1;
+  max-width: 78%;
+  margin: 0;
+  color: var(--accent);
+  font-size: clamp(2rem, 3.15vw, 3.7rem);
+  line-height: .91;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  text-shadow: 0 3px 0 rgba(0,0,0,.82), 0 0 14px rgba(var(--accent-rgb), .2);
+}
+
+.home-live-card p {
+  position: relative;
+  z-index: 1;
+  max-width: 92%;
+  margin: 0;
+  color: rgba(255,255,255,.9);
+  font-size: clamp(.98rem, 1.3vw, 1.22rem);
+  line-height: 1.5;
+}
+
+.home-card-icon {
+  position: absolute;
+  z-index: 2;
+  top: 24px;
+  right: 24px;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  color: #fff;
+  font-size: 2.45rem;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 0 9px var(--accent), 0 2px 3px #000;
+  filter: drop-shadow(0 0 7px rgba(var(--accent-rgb), .72));
+  transition: transform .18s ease, filter .18s ease;
+}
+.home-live-card:hover .home-card-icon,
+.home-live-card:focus-visible .home-card-icon {
+  transform: scale(1.09) rotate(-3deg);
+  filter: drop-shadow(0 0 12px var(--accent));
+}
+
+.home-card-metric {
+  position: relative;
+  z-index: 1;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 31px;
+  max-width: 100%;
+  padding: 6px 12px;
+  border: 1px solid rgba(var(--accent-rgb), .9);
+  border-radius: 999px;
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), .075);
+  box-shadow: inset 0 0 10px rgba(var(--accent-rgb), .08), 0 0 10px rgba(var(--accent-rgb), .12);
+  font-size: clamp(.72rem, .85vw, .9rem);
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.home-card-cta {
+  position: relative;
+  z-index: 1;
+  align-self: end;
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .045em;
+  transition: color .18s ease, transform .18s ease, text-shadow .18s ease;
+}
+.home-live-card:hover .home-card-cta,
+.home-live-card:focus-visible .home-card-cta {
+  color: var(--accent);
+  transform: translateX(4px);
+  text-shadow: 0 0 8px rgba(var(--accent-rgb), .72);
+}
+
+@media (max-width: 900px) {
+  .home-live-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-live-card { min-height: 270px; }
+}
+
+@media (max-width: 620px) {
+  .home-explore { gap: 12px; }
+  .home-explore-title { width: min(94%, 600px); }
+  .home-live-grid { grid-template-columns: 1fr; gap: 14px; }
+  .home-live-card { min-height: 224px; padding: 25px 23px 23px; border-radius: 19px; }
+  .home-live-card h2 { max-width: 76%; font-size: clamp(2rem, 11vw, 3rem); }
+  .home-card-icon { top: 18px; right: 18px; width: 44px; height: 44px; font-size: 2rem; }
+  .home-card-metric { font-size: .72rem; white-space: normal; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-live-card,
+  .home-card-icon,
+  .home-card-cta { transition: none; }
+  .home-live-card:hover,
+  .home-live-card:focus-visible { transform: none; }
+}
