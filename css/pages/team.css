@@ -603,3 +603,171 @@ body.team-modal-open { overflow: hidden; }
   .team-profile-fact { min-height: 25px; font-size: .43rem; }
   .team-player-modal-nav { width: 32px; height: 58px; }
 }
+
+/* ============================================================================
+   V3.8 — VIEWPORT PLAYER VIEWER + CLICK-TO-ENLARGE CARDS
+   ----------------------------------------------------------------------------
+   1. The JS moves the viewer directly under <body>, so position:fixed is truly
+      relative to the browser viewport and never to a transformed page layer.
+   2. Both cards fit inside the popup at normal 100% browser zoom.
+   3. Either card can be clicked to open a dedicated full-size card lightbox.
+============================================================================ */
+
+/* The player viewer must always be a true viewport overlay. */
+body > .team-player-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 100000 !important;
+  display: grid;
+  place-items: center;
+  padding: clamp(10px, 2vh, 22px);
+  overflow: hidden;
+}
+body > .team-player-modal[hidden] { display: none !important; }
+body > .team-player-modal .team-player-modal-backdrop { position: absolute; inset: 0; }
+body > .team-player-modal .team-player-modal-dialog {
+  width: min(1040px, 94vw);
+  max-height: min(880px, 92dvh);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: clamp(28px, 4vh, 42px) clamp(48px, 5vw, 68px) clamp(24px, 3vh, 34px);
+}
+body > .team-player-modal .team-player-modal-content { gap: clamp(12px, 2vh, 20px); }
+body > .team-player-modal .team-player-modal-cards {
+  grid-template-columns: repeat(2, minmax(0, min(310px, 31vw)));
+  gap: clamp(22px, 4vw, 56px);
+}
+body > .team-player-modal .team-player-modal-card,
+body > .team-player-modal .team-profile-card { width: min(310px, 31vw); }
+
+/* Each visible card is now an obvious clickable target. */
+.team-card-zoom-trigger {
+  position: relative;
+  border-radius: 16px;
+  cursor: zoom-in;
+  transition: transform .2s ease, filter .2s ease;
+}
+.team-card-zoom-trigger::after {
+  content: 'CLICK TO ENLARGE';
+  position: absolute;
+  left: 50%;
+  bottom: -22px;
+  translate: -50% 0;
+  color: rgba(255,255,255,.7);
+  font-size: .62rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+.team-card-zoom-trigger:hover,
+.team-card-zoom-trigger:focus-visible {
+  outline: none;
+  transform: translateY(-3px);
+  filter: brightness(1.08);
+}
+.team-card-zoom-trigger:hover::after,
+.team-card-zoom-trigger:focus-visible::after { opacity: 1; }
+.team-card-zoom-trigger:hover .team-player-card-label,
+.team-card-zoom-trigger:focus-visible .team-player-card-label {
+  color: var(--accent);
+  box-shadow: 0 0 10px var(--accent), 0 0 22px rgba(var(--accent-rgb), .42);
+}
+
+/* Full-size single-card viewer. */
+.team-card-lightbox[hidden] { display: none !important; }
+.team-card-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 110000;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+}
+.team-card-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.94);
+  backdrop-filter: blur(14px);
+}
+.team-card-lightbox-dialog {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  width: min(620px, 96vw);
+  max-height: 96dvh;
+  padding: 22px 26px 18px;
+  border: 2px solid var(--accent);
+  border-radius: 22px;
+  background: radial-gradient(circle at 50% 35%, rgba(var(--accent-rgb), .18), transparent 48%), rgba(3,4,10,.98);
+  box-shadow: 0 0 28px var(--accent), 0 0 80px rgba(var(--accent-rgb), .52);
+}
+.team-card-lightbox-title {
+  color: var(--accent);
+  font-size: .8rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+.team-card-lightbox-content { display: grid; place-items: center; min-height: 0; }
+.team-card-lightbox-card { display: grid; place-items: center; }
+.team-card-lightbox-front .team-player-card,
+.team-card-lightbox-front .team-player-frame,
+.team-card-lightbox-profile .team-profile-card {
+  width: auto !important;
+  height: min(82dvh, 760px) !important;
+  max-width: 88vw;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+.team-card-lightbox-front .team-player-frame { aspect-ratio: 2 / 3; }
+.team-card-lightbox-profile .team-profile-card { aspect-ratio: 1079 / 1457; }
+.team-card-lightbox-front .team-player-card {
+  border: 0;
+  background: transparent;
+  pointer-events: none;
+}
+.team-card-lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(3,4,10,.96);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), .45);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.team-card-lightbox-close:hover,
+.team-card-lightbox-close:focus-visible { outline: none; color: var(--accent); box-shadow: 0 0 12px var(--accent); }
+
+/* The carousel transform is composed in JS with translateY(-50%). This keeps
+   the full active card vertically centered instead of clipping its bottom. */
+.team-carousel-track { transform: translateY(-50%); }
+
+@media (max-width: 760px) {
+  body > .team-player-modal { padding: 8px; }
+  body > .team-player-modal .team-player-modal-dialog {
+    width: 98vw;
+    max-height: 96dvh;
+    padding: 48px 24px 24px;
+  }
+  body > .team-player-modal .team-player-modal-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  body > .team-player-modal .team-player-modal-card,
+  body > .team-player-modal .team-profile-card { width: 100%; }
+  .team-card-zoom-trigger::after { display: none; }
+  .team-card-lightbox-dialog { width: 98vw; padding-inline: 14px; }
+  .team-card-lightbox-front .team-player-card,
+  .team-card-lightbox-front .team-player-frame,
+  .team-card-lightbox-profile .team-profile-card { height: min(78dvh, 660px) !important; }
+}

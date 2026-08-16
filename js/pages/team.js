@@ -247,7 +247,7 @@ function setActive(nextIndex, options = {}) {
   if (viewport && activeCard) {
     const cardCenter = activeCard.offsetLeft + activeCard.offsetWidth / 2;
     const viewportCenter = viewport.clientWidth / 2;
-    track.style.transform = `translateX(${viewportCenter - cardCenter}px)`;
+    track.style.transform = `translateX(${viewportCenter - cardCenter}px) translateY(-50%)`; // Keep the original vertical centering while moving horizontally.
   }
 
   if (options.focus) cardButtons[activeIndex]?.focus({ preventScroll: true });
@@ -274,6 +274,50 @@ carousel?.addEventListener('touchend', event => {
 const modal = root.querySelector('[data-team-player-modal]');
 const modalContent = modal?.querySelector('.team-player-modal-content');
 let modalIndex = 0;
+
+/*
+ * IMPORTANT: move the modal out of #page-content and attach it directly to
+ * <body>. Some of the visual page layers use transforms/filters. A fixed
+ * element inside one of those layers can behave like an absolutely positioned
+ * page element instead of a true viewport overlay. That was why the player
+ * viewer appeared far down the Team page and could only be seen at 25% zoom.
+ */
+if (modal && modal.parentElement !== document.body) document.body.append(modal);
+
+/* Full-card lightbox --------------------------------------------------------
+   Clicking either card in the player viewer opens that card by itself at the
+   largest size that fits the current viewport. */
+const cardLightbox = document.createElement('div');
+cardLightbox.className = 'team-card-lightbox';
+cardLightbox.hidden = true;
+cardLightbox.innerHTML = `
+  <div class="team-card-lightbox-backdrop" data-card-lightbox-close></div>
+  <section class="team-card-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Full size player card">
+    <button class="team-card-lightbox-close" type="button" data-card-lightbox-close aria-label="Close full size card">×</button>
+    <div class="team-card-lightbox-title"></div>
+    <div class="team-card-lightbox-content"></div>
+  </section>`;
+document.body.append(cardLightbox);
+
+function closeCardLightbox() {
+  cardLightbox.hidden = true;
+  cardLightbox.querySelector('.team-card-lightbox-content').innerHTML = '';
+}
+
+function openCardLightbox(type) {
+  const player = players[modalIndex];
+  if (!player) return;
+  const title = cardLightbox.querySelector('.team-card-lightbox-title');
+  const content = cardLightbox.querySelector('.team-card-lightbox-content');
+  title.textContent = type === 'profile' ? 'PROFILE CARD' : 'FRONT CARD';
+  content.innerHTML = type === 'profile'
+    ? `<div class="team-card-lightbox-card team-card-lightbox-profile">${profileCard(player)}</div>`
+    : `<div class="team-card-lightbox-card team-card-lightbox-front">${playerCard(player, modalIndex, 'is-full-card')}</div>`;
+  cardLightbox.hidden = false;
+  cardLightbox.querySelector('.team-card-lightbox-close')?.focus();
+}
+
+cardLightbox.querySelectorAll('[data-card-lightbox-close]').forEach(el => el.addEventListener('click', closeCardLightbox));
 
 function profileCard(player) {
   const { first, last } = splitPlayerName(player);
@@ -317,11 +361,11 @@ function modalMarkup(player, index) {
     </header>
 
     <div class="team-player-modal-cards">
-      <div class="team-player-modal-panel">
+      <div class="team-player-modal-panel team-card-zoom-trigger" data-card-zoom="front" role="button" tabindex="0" aria-label="Open full size front player card">
         <span class="team-player-card-label">FRONT CARD</span>
         <div class="team-player-modal-card">${playerCard(player, index, 'is-modal-card')}</div>
       </div>
-      <div class="team-player-modal-panel">
+      <div class="team-player-modal-panel team-card-zoom-trigger" data-card-zoom="profile" role="button" tabindex="0" aria-label="Open full size profile card">
         <span class="team-player-card-label">PROFILE CARD</span>
         ${profileCard(player)}
       </div>
@@ -336,6 +380,13 @@ function showModal(index) {
   if (!modal || !modalContent || !players.length) return;
   modalIndex = (index + players.length) % players.length;
   modalContent.innerHTML = modalMarkup(players[modalIndex], modalIndex);
+  modalContent.querySelectorAll('[data-card-zoom]').forEach(panel => {
+    const open = () => openCardLightbox(panel.dataset.cardZoom);
+    panel.addEventListener('click', open);
+    panel.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(); }
+    });
+  });
   modal.hidden = false;
   document.body.classList.add('team-modal-open');
   modal.querySelector('.team-player-modal-close')?.focus();
@@ -343,6 +394,7 @@ function showModal(index) {
 
 function closeModal() {
   if (!modal) return;
+  closeCardLightbox();
   modal.hidden = true;
   document.body.classList.remove('team-modal-open');
   cardButtons[activeIndex]?.focus({ preventScroll: true });
@@ -357,6 +409,10 @@ modal?.querySelector('.team-player-modal-prev')?.addEventListener('click', () =>
 modal?.querySelector('.team-player-modal-next')?.addEventListener('click', () => showModal(modalIndex + 1));
 
 document.addEventListener('keydown', event => {
+  if (!cardLightbox.hidden) {
+    if (event.key === 'Escape') closeCardLightbox();
+    return;
+  }
   if (!modal || modal.hidden) return;
   if (event.key === 'Escape') closeModal();
   if (event.key === 'ArrowLeft') showModal(modalIndex - 1);
