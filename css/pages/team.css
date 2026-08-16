@@ -34,49 +34,64 @@ body[data-page="team"] .team-stats-title { width: min(650px, 80%); }
 }
 .team-carousel-track {
   position: absolute;
-  left: 0;
-  top: 50%;
-  display: flex;
-  align-items: center;
-  gap: clamp(20px, 2vw, 36px);
-  width: max-content;
-  transform: translateY(-50%);
-  transition: transform .45s cubic-bezier(.2,.75,.2,1);
-  will-change: transform;
+  inset: 0;
+  overflow: visible;
 }
 
+/* Original-style stacked roster carousel: the selected card stays centered while
+   the surrounding roster fans out behind it on both sides. */
 .team-player-card {
-  flex: 0 0 clamp(180px, 18vw, 270px);
+  position: absolute;
+  left: 50%;
+  top: 50%;
   width: clamp(180px, 18vw, 270px);
   padding: 0;
   border: 0;
   border-radius: 20px;
   background: transparent;
-  opacity: .34;
-  filter: brightness(.7) saturate(.72);
-  transform: scale(.72);
-  transition: transform .35s ease, opacity .35s ease, filter .35s ease;
+  opacity: var(--card-opacity, 0);
+  filter: brightness(var(--card-brightness, .62)) saturate(var(--card-saturation, .7));
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--slot, 0) * clamp(105px, 12vw, 170px)))
+    scale(var(--card-scale, .68));
+  transform-origin: center center;
+  transition: transform .42s cubic-bezier(.2,.75,.2,1), opacity .35s ease, filter .35s ease;
+  z-index: var(--card-z, 0);
   cursor: pointer;
-}
-.team-player-card.is-neighbor {
-  opacity: .72;
-  filter: brightness(.9) saturate(1);
-  transform: scale(.88);
+  pointer-events: var(--card-events, none);
 }
 .team-player-card.is-active {
-  z-index: 4;
-  opacity: 1;
-  filter: brightness(1.08) saturate(1.16);
-  transform: scale(1.12);
+  --card-opacity: 1;
+  --card-brightness: 1.08;
+  --card-saturation: 1.16;
+  --card-scale: 1.12;
+  --card-z: 10;
+  --card-events: auto;
+}
+.team-player-card.is-neighbor {
+  --card-opacity: .66;
+  --card-brightness: .82;
+  --card-saturation: .9;
+  --card-scale: .82;
+  --card-z: 7;
+  --card-events: auto;
+}
+.team-player-card.is-far-neighbor {
+  --card-opacity: .36;
+  --card-brightness: .68;
+  --card-saturation: .72;
+  --card-scale: .69;
+  --card-z: 4;
+  --card-events: auto;
 }
 .team-player-card:hover,
 .team-player-card:focus-visible {
   outline: none;
-  opacity: 1;
   filter: brightness(1.08) saturate(1.18);
 }
 .team-player-card.is-active:hover,
-.team-player-card.is-active:focus-visible { transform: scale(1.15); }
+.team-player-card.is-active:focus-visible { --card-scale: 1.15; }
 
 .team-player-frame {
   position: relative;

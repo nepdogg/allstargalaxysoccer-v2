@@ -231,24 +231,27 @@ function setActive(nextIndex, options = {}) {
   activeIndex = (nextIndex + cardButtons.length) % cardButtons.length;
 
   cardButtons.forEach((card, index) => {
-    const distance = Math.abs(index - activeIndex);
-    card.classList.toggle('is-active', index === activeIndex);
+    // Use circular distance so the first/last players wrap around and the
+    // carousel always has cards visible on BOTH sides, like the original site.
+    let offset = index - activeIndex;
+    const half = cardButtons.length / 2;
+    if (offset > half) offset -= cardButtons.length;
+    if (offset < -half) offset += cardButtons.length;
+    const distance = Math.abs(offset);
+
+    card.style.setProperty('--slot', String(offset));
+    card.classList.toggle('is-active', offset === 0);
     card.classList.toggle('is-neighbor', distance === 1);
-    card.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
+    card.classList.toggle('is-far-neighbor', distance === 2 || distance === 3);
+    card.setAttribute('aria-current', offset === 0 ? 'true' : 'false');
+    card.setAttribute('aria-hidden', distance > 3 ? 'true' : 'false');
+    card.tabIndex = distance <= 3 ? 0 : -1;
   });
 
   dotsRoot?.querySelectorAll('.team-carousel-dot').forEach((dot, index) => {
     dot.classList.toggle('is-active', index === activeIndex);
     dot.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
   });
-
-  const viewport = carousel.querySelector('.team-carousel-viewport');
-  const activeCard = cardButtons[activeIndex];
-  if (viewport && activeCard) {
-    const cardCenter = activeCard.offsetLeft + activeCard.offsetWidth / 2;
-    const viewportCenter = viewport.clientWidth / 2;
-    track.style.transform = `translateX(${viewportCenter - cardCenter}px)`;
-  }
 
   if (options.focus) cardButtons[activeIndex]?.focus({ preventScroll: true });
 }
