@@ -231,27 +231,24 @@ function setActive(nextIndex, options = {}) {
   activeIndex = (nextIndex + cardButtons.length) % cardButtons.length;
 
   cardButtons.forEach((card, index) => {
-    // Use circular distance so the first/last players wrap around and the
-    // carousel always has cards visible on BOTH sides, like the original site.
-    let offset = index - activeIndex;
-    const half = cardButtons.length / 2;
-    if (offset > half) offset -= cardButtons.length;
-    if (offset < -half) offset += cardButtons.length;
-    const distance = Math.abs(offset);
-
-    card.style.setProperty('--slot', String(offset));
-    card.classList.toggle('is-active', offset === 0);
+    const distance = Math.abs(index - activeIndex);
+    card.classList.toggle('is-active', index === activeIndex);
     card.classList.toggle('is-neighbor', distance === 1);
-    card.classList.toggle('is-far-neighbor', distance === 2 || distance === 3);
-    card.setAttribute('aria-current', offset === 0 ? 'true' : 'false');
-    card.setAttribute('aria-hidden', distance > 3 ? 'true' : 'false');
-    card.tabIndex = distance <= 3 ? 0 : -1;
+    card.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
   });
 
   dotsRoot?.querySelectorAll('.team-carousel-dot').forEach((dot, index) => {
     dot.classList.toggle('is-active', index === activeIndex);
     dot.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
   });
+
+  const viewport = carousel.querySelector('.team-carousel-viewport');
+  const activeCard = cardButtons[activeIndex];
+  if (viewport && activeCard) {
+    const cardCenter = activeCard.offsetLeft + activeCard.offsetWidth / 2;
+    const viewportCenter = viewport.clientWidth / 2;
+    track.style.transform = `translateX(${viewportCenter - cardCenter}px)`;
+  }
 
   if (options.focus) cardButtons[activeIndex]?.focus({ preventScroll: true });
 }
@@ -278,29 +275,63 @@ const modal = root.querySelector('[data-team-player-modal]');
 const modalContent = modal?.querySelector('.team-player-modal-content');
 let modalIndex = 0;
 
-function modalMarkup(player, index) {
+function profileCard(player) {
   const { first, last } = splitPlayerName(player);
-  const quote = String(player.quote || '').trim();
   const facts = [
-    ['Position', player.position],
-    ['Number', player.number],
-    ['Nationality', player.nationality],
-    ['Preferred Foot', player.preferredFoot],
-    ['Height', player.height],
-    ['Weight', player.weight]
-  ].filter(([, value]) => String(value || '').trim());
+    ['DATE OF BIRTH', player.dateOfBirth || 'N/A'],
+    ['NATIONALITY', player.nationality || 'N/A'],
+    ['PREFERRED FOOT', player.preferredFoot || 'N/A'],
+    ['HEIGHT', player.height || 'N/A'],
+    ['WEIGHT', player.weight || 'N/A']
+  ];
 
   return `
-    <div class="team-player-modal-card">${playerCard(player, index, 'is-modal-card')}</div>
-    <div class="team-player-modal-info">
-      <span class="team-player-modal-kicker">ALLSTAR GALAXY PLAYER</span>
-      <h2 id="team-player-modal-name"><small>#${esc(player.number || '—')}</small> ${esc(first)} <strong>${esc(last)}</strong></h2>
-      <p class="team-player-modal-position">${esc(player.position || 'Player')}</p>
-      ${facts.length ? `<dl>${facts.map(([label, value]) => `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>` : ''}
-      ${quote ? `<blockquote>${esc(quote).replace(/\n/g, '<br>')}</blockquote>` : '<p class="team-player-modal-note">Additional player profile information can be managed from Administration.</p>'}
+    <div class="team-profile-card" aria-label="${esc(player.name || `${first} ${last}`)} profile card">
+      <img class="team-profile-template" src="assets/images/team/templates/player-profile-card-template.png" alt="" aria-hidden="true">
+      <div class="team-profile-number">${esc(player.number || '00')}</div>
+      <div class="team-profile-position">${esc(player.position || 'PLAYER')}</div>
+      <div class="team-profile-name">
+        <small>${esc(first)}</small>
+        <strong>${esc(last)}</strong>
+      </div>
+      <div class="team-profile-facts">
+        ${facts.map(([label, value]) => `
+          <div class="team-profile-fact">
+            <span>${esc(label)}</span>
+            <b>${esc(value)}</b>
+          </div>`).join('')}
+      </div>
     </div>`;
 }
 
+function modalMarkup(player, index) {
+  const { first, last } = splitPlayerName(player);
+  const quote = String(player.quote || '').trim();
+  const fullPhoto = assetPath(player.photo, silhouette) || silhouette;
+
+  return `
+    <header class="team-player-modal-header">
+      <span class="team-player-modal-kicker">ALLSTAR GALAXY PLAYER</span>
+      <h2 id="team-player-modal-name"><small>#${esc(player.number || '—')}</small> ${esc(first)} <strong>${esc(last)}</strong></h2>
+      <p class="team-player-modal-position">${esc(player.position || 'Player')}</p>
+    </header>
+
+    <div class="team-player-modal-cards">
+      <div class="team-player-modal-panel">
+        <span class="team-player-card-label">FRONT CARD</span>
+        <div class="team-player-modal-card">${playerCard(player, index, 'is-modal-card')}</div>
+      </div>
+      <div class="team-player-modal-panel">
+        <span class="team-player-card-label">PROFILE CARD</span>
+        ${profileCard(player)}
+      </div>
+    </div>
+
+    <div class="team-player-modal-footer">
+      ${quote ? `<blockquote>${esc(quote).replace(/\n/g, '<br>')}</blockquote>` : '<p class="team-player-modal-note">Player details can be managed from Administration.</p>'}
+      <a class="team-player-photo-link" href="${esc(fullPhoto)}" target="_blank" rel="noopener">Open Full Player Photo</a>
+    </div>`;
+}
 function showModal(index) {
   if (!modal || !modalContent || !players.length) return;
   modalIndex = (index + players.length) % players.length;
