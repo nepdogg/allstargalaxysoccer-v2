@@ -1008,3 +1008,69 @@ body > .team-player-modal .team-profile-card { width: min(310px, 31vw); }
     height: calc(var(--viewer-card-width) * 1.5);
   }
 }
+
+/* ============================================================================
+   V4.0 — TEAM PAGE LOCK CANDIDATE
+   Original-style tighter cover-flow + live/clickable stats + profile auto-fit.
+============================================================================ */
+
+/* Tighter original-style roster stack. The active card dominates while the
+   first and second neighbors overlap behind it instead of reading as 5 tiles. */
+.team-roster-carousel { width:min(100%, 980px); padding:14px 58px 20px; }
+.team-carousel-viewport { min-height:390px; height:clamp(365px, 34vw, 425px); }
+.team-player-card {
+  width:clamp(175px, 17vw, 225px);
+  transform:translate(-50%,-50%) translateX(calc(var(--carousel-offset) * clamp(118px, 12.6vw, 168px))) scale(.58);
+}
+.team-player-card.is-far {
+  opacity:.34; filter:brightness(.58) saturate(.68);
+  transform:translate(-50%,-50%) translateX(calc(var(--carousel-offset) * clamp(118px, 12.6vw, 168px))) scale(.68);
+}
+.team-player-card.is-neighbor {
+  opacity:.66; filter:brightness(.78) saturate(.88);
+  transform:translate(-50%,-50%) translateX(calc(var(--carousel-offset) * clamp(118px, 12.6vw, 168px))) scale(.82);
+}
+.team-player-card.is-active { transform:translate(-50%,-50%) scale(1.08); }
+.team-player-card.is-active:hover,.team-player-card.is-active:focus-visible { transform:translate(-50%,-50%) scale(1.105); }
+.team-carousel-prev { left:24px; }
+.team-carousel-next { right:24px; }
+
+/* Profile name owns the full printed name window. JS applies an auto-fit class
+   for long names, while short names are intentionally allowed to read larger. */
+.team-profile-name { top:23.2%; left:10.5%; right:10.5%; height:13.5%; display:grid; grid-template-rows:34% 66%; place-items:center; overflow:hidden; }
+.team-profile-name small { align-self:end; width:100%; text-align:center; font-size:clamp(.78rem,1.2vw,1.08rem); line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.team-profile-name strong { align-self:start; width:100%; text-align:center; font-size:clamp(1.65rem,3.15vw,2.8rem); line-height:.92; white-space:nowrap; overflow:hidden; transform:scaleX(.92); transform-origin:center top; }
+.team-profile-name.name-medium strong { font-size:clamp(1.42rem,2.75vw,2.45rem); transform:scaleX(.86); }
+.team-profile-name.name-long strong { font-size:clamp(1.14rem,2.2vw,2rem); transform:scaleX(.78); }
+.team-profile-position { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* Use the complete lower quote panel, not a small floating line. */
+.team-profile-quote {
+  left:12.5%; right:12.5%; bottom:3.7%; height:13.5%; max-height:none;
+  display:flex; align-items:center; justify-content:center; margin:0; padding:1.2% 3%;
+  box-sizing:border-box; overflow:hidden; font-size:clamp(.60rem,.92vw,.82rem);
+  line-height:1.18; text-align:center; text-wrap:balance;
+}
+.team-profile-quote.quote-medium { font-size:clamp(.54rem,.82vw,.74rem); }
+.team-profile-quote.quote-long { font-size:clamp(.46rem,.70vw,.64rem); line-height:1.12; }
+
+/* Live Team Stats become interactive dashboard cards. */
+.team-stat-card { position:relative; overflow:hidden; transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
+.team-stat-card.is-clickable { cursor:pointer; }
+.team-stat-card.is-clickable:hover,.team-stat-card.is-clickable:focus-visible { outline:none; transform:translateY(-4px); border-color:var(--accent); box-shadow:0 0 18px rgba(var(--accent-rgb),.32),0 12px 28px rgba(0,0,0,.34); }
+.team-stat-card-link { position:absolute; inset:0; z-index:4; border:0; background:transparent; cursor:pointer; }
+.team-stat-card-destination { position:absolute; right:16px; bottom:13px; color:var(--accent); font-size:.72rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; opacity:.78; }
+.team-stat-card.is-clickable:hover .team-stat-card-destination { opacity:1; }
+.team-stat-featured-badge { display:inline-flex; width:max-content; padding:4px 8px; border:1px solid rgba(var(--accent-rgb),.55); border-radius:999px; color:var(--accent); font-size:.62rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+
+@media (max-width:900px){
+ .team-roster-carousel{width:min(100%,900px);padding-inline:46px}.team-carousel-viewport{min-height:375px;height:410px}
+ .team-player-card{transform:translate(-50%,-50%) translateX(calc(var(--carousel-offset) * clamp(105px,17vw,145px))) scale(.58)}
+ .team-player-card.is-far{transform:translate(-50%,-50%) translateX(calc(var(--carousel-offset) * clamp(105px,17vw,145px))) scale(.65)}
+ .team-player-card.is-neighbor{transform:translate(-50%,-50%) translateX(calc(var(--carousel-offset) * clamp(105px,17vw,145px))) scale(.78)}
+}
+@media (max-width:650px){
+ .team-roster-carousel{padding:14px 32px 18px}.team-carousel-viewport{min-height:350px;height:380px}
+ .team-player-card.is-neighbor{transform:translate(-50%,-50%) translateX(calc(var(--carousel-offset) * 39vw)) scale(.68)}
+ .team-profile-quote{font-size:.58rem}.team-profile-quote.quote-medium{font-size:.52rem}.team-profile-quote.quote-long{font-size:.46rem}
+}

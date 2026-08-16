@@ -121,9 +121,16 @@ function teamStatsMarkup() {
     if (id) awardCounts.set(id, (awardCounts.get(id) || 0) + 1);
   });
 
-  const featured = [...players].sort((a, b) =>
-    (awardCounts.get(String(b.id)) || 0) - (awardCounts.get(String(a.id)) || 0)
-  )[0] || players[0] || {};
+  // V4.0: Featured Player is intentionally automatic. Pick a published
+  // roster player on every page load, while avoiding the same player twice in
+  // a row in this browser when possible.
+  let featured = players[0] || {};
+  if (players.length > 1) {
+    const previousId = sessionStorage.getItem('allstarGalaxyFeaturedPlayer');
+    const pool = players.filter(player => String(player.id || '') !== previousId);
+    featured = pool[Math.floor(Math.random() * pool.length)] || players[Math.floor(Math.random() * players.length)];
+    if (featured?.id) sessionStorage.setItem('allstarGalaxyFeaturedPlayer', String(featured.id));
+  }
   const featuredAwards = awardCounts.get(String(featured.id)) || 0;
   const featuredPhoto = assetPath(featured.photo, silhouette) || silhouette;
 
@@ -141,6 +148,7 @@ function teamStatsMarkup() {
       feature: true,
       body: `
         <div class="team-stat-featured-copy">
+          <span class="team-stat-featured-badge">Random Featured Player</span>
           <b>#${esc(featured.number || '—')} ${esc(featured.name || 'Allstar Galaxy')}</b>
           <span>${esc(featured.position || 'Player')}</span>
           <small>${featuredAwards} Game Award${featuredAwards === 1 ? '' : 's'}</small>
@@ -169,11 +177,23 @@ function teamStatsMarkup() {
     }
   ];
 
-  return cards.map(card => `
-    <article class="team-stat-card${card.feature ? ' team-stat-featured' : ''}">
+  const destinations = {
+    'Featured Player': '#roster',
+    'Club Record': 'updates.html',
+    'Goals & Seasons': 'media.html',
+    'Team Snapshot': '#roster',
+    'Team Honors': 'media.html#game-awards',
+    'Current Standings': 'updates.html'
+  };
+  return cards.map(card => {
+    const destination = destinations[card.title] || '';
+    return `
+    <article class="team-stat-card${card.feature ? ' team-stat-featured' : ''}${destination ? ' is-clickable' : ''}" ${destination ? 'tabindex="0"' : ''} data-stat-destination="${esc(destination)}">
       <h3>${card.title}</h3>
       <div class="team-stat-body">${card.body}</div>
-    </article>`).join('');
+      ${destination ? `<span class="team-stat-card-destination">Explore →</span>` : ''}
+    </article>`;
+  }).join('');
 }
 
 root.innerHTML = `
@@ -278,6 +298,20 @@ carousel?.addEventListener('touchend', event => {
   touchStartX = null;
 }, { passive: true });
 
+/* Live Team Stats navigation ----------------------------------------------- */
+root.querySelectorAll('.team-stat-card[data-stat-destination]').forEach(card => {
+  const go = () => {
+    const destination = card.dataset.statDestination;
+    if (!destination) return;
+    if (destination.startsWith('#')) document.querySelector(destination)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    else window.location.href = destination;
+  };
+  card.addEventListener('click', go);
+  card.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); go(); }
+  });
+});
+
 /* Player viewer ------------------------------------------------------------ */
 const modal = root.querySelector('[data-team-player-modal]');
 const modalContent = modal?.querySelector('.team-player-modal-content');
@@ -343,14 +377,14 @@ function profileCard(player) {
       <img class="team-profile-template" src="assets/images/team/templates/player-profile-card-template.png" alt="" aria-hidden="true">
       <div class="team-profile-number">${esc(player.number || '00')}</div>
       <div class="team-profile-position">${esc(player.position || 'PLAYER')}</div>
-      <div class="team-profile-name">
+      <div class="team-profile-name ${last.length > 14 ? 'name-long' : last.length > 9 ? 'name-medium' : ''}">
         <small>${esc(first)}</small>
         <strong>${esc(last)}</strong>
       </div>
       <div class="team-profile-values" aria-label="Player details">
         ${facts.map((value, index) => `<b class="team-profile-value team-profile-value-${index + 1}">${esc(value)}</b>`).join('')}
       </div>
-      <blockquote class="team-profile-quote">${quote ? esc(quote).replace(/\n/g, '<br>') : 'ALLSTAR GALAXY'}</blockquote>
+      <blockquote class="team-profile-quote ${quote.length > 90 ? 'quote-long' : quote.length > 50 ? 'quote-medium' : ''}">${quote ? esc(quote).replace(/\n/g, '<br>') : 'ALLSTAR GALAXY'}</blockquote>
     </div>`;
 }
 function modalMarkup(player, index) {
