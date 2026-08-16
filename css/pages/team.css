@@ -771,3 +771,240 @@ body > .team-player-modal .team-profile-card { width: min(310px, 31vw); }
   .team-card-lightbox-front .team-player-frame,
   .team-card-lightbox-profile .team-profile-card { height: min(78dvh, 660px) !important; }
 }
+
+/* ============================================================================
+   V3.9 — TEAM ROSTER / PLAYER VIEWER FINALIZATION
+   ----------------------------------------------------------------------------
+   Team-page-only overrides.  The locked universal framework is untouched.
+   Goals:
+   - compact carousel that hugs the card stack instead of leaving dead space;
+   - five-player circular cover-flow on desktop (active + 2 each side);
+   - equal-size Front/Profile cards in the player viewer;
+   - profile values aligned to the printed template rows;
+   - player quote rendered INSIDE the profile card.
+============================================================================ */
+
+/* --- Compact circular roster carousel ------------------------------------ */
+.team-roster-carousel {
+  width: min(100%, 1040px);
+  padding: 18px 54px 26px;
+}
+.team-carousel-viewport {
+  min-height: 415px;
+  height: clamp(380px, 36vw, 455px);
+}
+.team-carousel-track {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  transform: none !important;
+  transition: none;
+}
+.team-player-card {
+  --carousel-offset: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(175px, 17vw, 225px);
+  flex: none;
+  opacity: .22;
+  filter: brightness(.54) saturate(.66);
+  transform: translate(-50%, -50%) translateX(calc(var(--carousel-offset) * clamp(150px, 16.4vw, 218px))) scale(.62);
+  transform-origin: center center;
+  transition: transform .42s cubic-bezier(.2,.72,.2,1), opacity .35s ease, filter .35s ease;
+  z-index: 1;
+}
+.team-player-card.is-far {
+  opacity: .42;
+  filter: brightness(.68) saturate(.78);
+  transform: translate(-50%, -50%) translateX(calc(var(--carousel-offset) * clamp(150px, 16.4vw, 218px))) scale(.70);
+  z-index: 1;
+}
+.team-player-card.is-neighbor {
+  opacity: .74;
+  filter: brightness(.86) saturate(.94);
+  transform: translate(-50%, -50%) translateX(calc(var(--carousel-offset) * clamp(150px, 16.4vw, 218px))) scale(.84);
+  z-index: 2;
+}
+.team-player-card.is-active {
+  opacity: 1;
+  filter: brightness(1.06) saturate(1.12);
+  transform: translate(-50%, -50%) scale(1.06);
+  z-index: 5;
+}
+.team-player-card.is-active:hover,
+.team-player-card.is-active:focus-visible {
+  transform: translate(-50%, -50%) scale(1.085);
+}
+.team-player-card.is-hidden-card {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.team-carousel-arrow {
+  width: 44px;
+  height: 68px;
+}
+.team-carousel-prev { left: 14px; }
+.team-carousel-next { right: 14px; }
+.team-carousel-dots { margin-top: 5px; }
+
+/* --- Player popup: two genuinely matching card canvases ------------------ */
+.team-player-modal-dialog {
+  width: min(1080px, 95vw);
+  padding: 28px 62px 24px;
+}
+.team-player-modal-content { gap: 14px; }
+.team-player-modal-cards {
+  --viewer-card-width: clamp(250px, 27vw, 330px);
+  --viewer-card-height: calc(var(--viewer-card-width) * 1.5);
+  grid-template-columns: repeat(2, var(--viewer-card-width));
+  align-items: start;
+  gap: clamp(28px, 4vw, 56px);
+}
+.team-player-modal-panel { gap: 8px; }
+.team-player-modal-card,
+.team-profile-card {
+  width: var(--viewer-card-width);
+  height: var(--viewer-card-height);
+  aspect-ratio: auto;
+}
+.team-player-modal-card .team-player-card,
+.team-player-modal-card .team-player-frame {
+  width: 100%;
+  height: 100%;
+}
+.team-player-modal-card .team-player-card {
+  position: relative;
+  left: auto;
+  top: auto;
+  opacity: 1;
+  visibility: visible;
+  filter: none;
+  transform: none !important;
+}
+.team-player-modal-card .team-player-frame { aspect-ratio: auto; }
+.team-profile-template { object-fit: fill; }
+
+/* The profile template already prints the labels/icons.  Overlay ONLY the
+   values so there are no duplicate labels competing for the same rows. */
+.team-profile-values {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.team-profile-value {
+  position: absolute;
+  right: 13.1%;
+  width: 35%;
+  color: #ffd000;
+  font-size: clamp(.58rem, .92vw, .82rem);
+  font-weight: 900;
+  line-height: 1;
+  text-align: right;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px rgba(255,208,0,.38);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.team-profile-value-1 { top: 48.1%; }
+.team-profile-value-2 { top: 55.2%; }
+.team-profile-value-3 { top: 62.2%; }
+.team-profile-value-4 { top: 69.2%; }
+.team-profile-value-5 { top: 76.2%; }
+.team-profile-facts { display: none !important; }
+
+/* Name area sits in the blank header panel above the pre-printed detail rows. */
+.team-profile-number {
+  top: 5.5%;
+  left: 10.2%;
+  font-size: clamp(1.75rem, 3vw, 2.8rem);
+}
+.team-profile-position {
+  top: 12.8%;
+  left: 10.8%;
+  max-width: 38%;
+}
+.team-profile-name {
+  top: 24.5%;
+  left: 13%;
+  right: 13%;
+}
+.team-profile-name small {
+  font-size: clamp(.72rem, 1.15vw, 1rem);
+}
+.team-profile-name strong {
+  font-size: clamp(1.38rem, 2.7vw, 2.45rem);
+}
+
+/* Quote is part of the PROFILE CARD, not a floating box below the cards. */
+.team-profile-quote {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 7.2%;
+  max-height: 9.2%;
+  margin: 0;
+  overflow: hidden;
+  color: #fff;
+  font-size: clamp(.50rem, .76vw, .70rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.22;
+  text-align: center;
+  text-shadow: 0 0 7px rgba(var(--accent-rgb), .55);
+}
+.team-player-modal-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+}
+.team-player-photo-link { opacity: .78; }
+.team-player-photo-link:hover,
+.team-player-photo-link:focus-visible { opacity: 1; }
+
+/* Full-card lightbox also uses matching geometry. */
+.team-card-lightbox-card .team-player-card,
+.team-card-lightbox-card .team-player-frame,
+.team-card-lightbox-card .team-profile-card {
+  max-height: 82vh;
+}
+
+@media (max-width: 900px) {
+  .team-roster-carousel { padding-inline: 46px; }
+  .team-carousel-viewport { min-height: 390px; height: 430px; }
+  .team-player-card { width: clamp(170px, 24vw, 215px); }
+  .team-player-card.is-far { opacity: .26; }
+}
+
+@media (max-width: 650px) {
+  .team-roster-carousel { padding: 16px 34px 22px; }
+  .team-carousel-viewport { min-height: 365px; height: 390px; }
+  .team-player-card { width: min(59vw, 210px); }
+  .team-player-card.is-far { display: none; }
+  .team-player-card.is-neighbor {
+    transform: translate(-50%, -50%) translateX(calc(var(--carousel-offset) * 42vw)) scale(.70);
+    opacity: .48;
+  }
+  .team-player-card.is-active { transform: translate(-50%, -50%) scale(1); }
+  .team-player-card.is-active:hover,
+  .team-player-card.is-active:focus-visible { transform: translate(-50%, -50%) scale(1.025); }
+
+  .team-player-modal-dialog {
+    width: 97vw;
+    padding: 50px 22px 24px;
+  }
+  .team-player-modal-cards {
+    --viewer-card-width: min(76vw, 300px);
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 22px;
+  }
+  .team-player-modal-card,
+  .team-profile-card {
+    width: var(--viewer-card-width);
+    height: calc(var(--viewer-card-width) * 1.5);
+  }
+}

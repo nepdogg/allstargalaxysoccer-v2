@@ -230,25 +230,33 @@ function setActive(nextIndex, options = {}) {
   if (!cardButtons.length || !track) return;
   activeIndex = (nextIndex + cardButtons.length) % cardButtons.length;
 
+  /*
+   * V3.9: arrange the roster as a true circular "cover-flow" carousel.
+   * This intentionally does NOT translate one long flex row.  Each card is
+   * positioned around the center card so the first/last roster entries wrap
+   * naturally and the user can always see players on BOTH sides.
+   */
+  const total = cardButtons.length;
   cardButtons.forEach((card, index) => {
-    const distance = Math.abs(index - activeIndex);
-    card.classList.toggle('is-active', index === activeIndex);
+    let offset = index - activeIndex;
+    if (offset > total / 2) offset -= total;
+    if (offset < -total / 2) offset += total;
+
+    const distance = Math.abs(offset);
+    card.style.setProperty('--carousel-offset', String(offset));
+    card.dataset.distance = String(Math.min(distance, 3));
+    card.classList.toggle('is-active', offset === 0);
     card.classList.toggle('is-neighbor', distance === 1);
-    card.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
+    card.classList.toggle('is-far', distance === 2);
+    card.classList.toggle('is-hidden-card', distance > 2);
+    card.setAttribute('aria-current', offset === 0 ? 'true' : 'false');
+    card.tabIndex = distance <= 2 ? 0 : -1;
   });
 
   dotsRoot?.querySelectorAll('.team-carousel-dot').forEach((dot, index) => {
     dot.classList.toggle('is-active', index === activeIndex);
     dot.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
   });
-
-  const viewport = carousel.querySelector('.team-carousel-viewport');
-  const activeCard = cardButtons[activeIndex];
-  if (viewport && activeCard) {
-    const cardCenter = activeCard.offsetLeft + activeCard.offsetWidth / 2;
-    const viewportCenter = viewport.clientWidth / 2;
-    track.style.transform = `translateX(${viewportCenter - cardCenter}px) translateY(-50%)`; // Keep the original vertical centering while moving horizontally.
-  }
 
   if (options.focus) cardButtons[activeIndex]?.focus({ preventScroll: true });
 }
@@ -321,12 +329,13 @@ cardLightbox.querySelectorAll('[data-card-lightbox-close]').forEach(el => el.add
 
 function profileCard(player) {
   const { first, last } = splitPlayerName(player);
+  const quote = String(player.quote || '').trim();
   const facts = [
-    ['DATE OF BIRTH', player.dateOfBirth || 'N/A'],
-    ['NATIONALITY', player.nationality || 'N/A'],
-    ['PREFERRED FOOT', player.preferredFoot || 'N/A'],
-    ['HEIGHT', player.height || 'N/A'],
-    ['WEIGHT', player.weight || 'N/A']
+    player.dateOfBirth || 'N/A',
+    player.nationality || 'N/A',
+    player.preferredFoot || 'N/A',
+    player.height || 'N/A',
+    player.weight || 'N/A'
   ];
 
   return `
@@ -338,16 +347,12 @@ function profileCard(player) {
         <small>${esc(first)}</small>
         <strong>${esc(last)}</strong>
       </div>
-      <div class="team-profile-facts">
-        ${facts.map(([label, value]) => `
-          <div class="team-profile-fact">
-            <span>${esc(label)}</span>
-            <b>${esc(value)}</b>
-          </div>`).join('')}
+      <div class="team-profile-values" aria-label="Player details">
+        ${facts.map((value, index) => `<b class="team-profile-value team-profile-value-${index + 1}">${esc(value)}</b>`).join('')}
       </div>
+      <blockquote class="team-profile-quote">${quote ? esc(quote).replace(/\n/g, '<br>') : 'ALLSTAR GALAXY'}</blockquote>
     </div>`;
 }
-
 function modalMarkup(player, index) {
   const { first, last } = splitPlayerName(player);
   const quote = String(player.quote || '').trim();
@@ -372,8 +377,7 @@ function modalMarkup(player, index) {
     </div>
 
     <div class="team-player-modal-footer">
-      ${quote ? `<blockquote>${esc(quote).replace(/\n/g, '<br>')}</blockquote>` : '<p class="team-player-modal-note">Player details can be managed from Administration.</p>'}
-      <a class="team-player-photo-link" href="${esc(fullPhoto)}" target="_blank" rel="noopener">Open Full Player Photo</a>
+      <a class="team-player-photo-link" href="${esc(fullPhoto)}" target="_blank" rel="noopener">View Original Player Photo</a>
     </div>`;
 }
 function showModal(index) {
