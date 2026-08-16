@@ -145,7 +145,9 @@ function teamStatsMarkup() {
   const cards = [
     {
       title: 'Featured Player',
+      key: 'featured',
       feature: true,
+      playerIndex: Math.max(0, players.indexOf(featured)),
       body: `
         <div class="team-stat-featured-copy">
           <span class="team-stat-featured-badge">Random Featured Player</span>
@@ -157,43 +159,42 @@ function teamStatsMarkup() {
     },
     {
       title: 'Club Record',
+      key: 'record',
       body: `<ul><li><b>${completedGames.length}</b> Games</li><li><b>${wins}</b> Wins</li><li><b>${draws}</b> Draws</li><li><b>${losses}</b> Losses</li></ul>`
     },
     {
       title: 'Goals & Seasons',
+      key: 'goals',
       body: `<ul><li><b>${goalsFor}</b> Goals For</li><li><b>${goalsAgainst}</b> Goals Against</li><li><b>${goalsFor - goalsAgainst}</b> Goal Difference</li><li><b>${seasons.size}</b> Seasons</li></ul>`
     },
     {
       title: 'Team Snapshot',
+      key: 'snapshot',
       body: `<ul><li><b>${esc(latestSeason)}</b></li><li><b>${players.length}</b> Roster Players</li><li><b>${currentCompleted.length}</b> Games Played</li><li><b>${currentRecord.w}-${currentRecord.d}-${currentRecord.l}</b> Current Record</li></ul>`
     },
     {
       title: 'Team Honors',
+      key: 'honors',
       body: `<ul><li><b>${awards.length}</b> Game Awards</li><li><b>${(data.playlists || []).filter(visible).length}</b> Media Collections</li><li><b>${(data.seasons || []).filter(visible).length}</b> Season Collections</li><li><b>${players.length}</b> Players Archived</li></ul>`
     },
     {
       title: 'Current Standings',
+      key: 'standings',
       body: `<ul><li><b>${esc(standingLabel)}</b> Position</li><li><b>${esc(points)}</b> Points</li><li><b>${esc(galaxyStanding.played || '—')}</b> Played</li><li><b>${esc(galaxyStanding.wins || '—')}</b> Wins</li></ul>`
     }
   ];
 
-  const destinations = {
-    'Featured Player': '#roster',
-    'Club Record': 'updates.html',
-    'Goals & Seasons': 'media.html',
-    'Team Snapshot': '#roster',
-    'Team Honors': 'media.html#game-awards',
-    'Current Standings': 'updates.html'
+  const actionLabels = {
+    featured: 'Open Profile →', record: 'View Record →', goals: 'View Stats →',
+    snapshot: 'View Snapshot →', honors: 'View Honors →', standings: 'View Standings →'
   };
-  return cards.map(card => {
-    const destination = destinations[card.title] || '';
-    return `
-    <article class="team-stat-card${card.feature ? ' team-stat-featured' : ''}${destination ? ' is-clickable' : ''}" ${destination ? 'tabindex="0"' : ''} data-stat-destination="${esc(destination)}">
+  return cards.map(card => `
+    <article class="team-stat-card${card.feature ? ' team-stat-featured' : ''} is-clickable" tabindex="0"
+      data-stat-key="${esc(card.key)}" ${card.feature ? `data-featured-player-index="${card.playerIndex}"` : ''}>
       <h3>${card.title}</h3>
       <div class="team-stat-body">${card.body}</div>
-      ${destination ? `<span class="team-stat-card-destination">Explore →</span>` : ''}
-    </article>`;
-  }).join('');
+      <span class="team-stat-card-destination">${actionLabels[card.key]}</span>
+    </article>`).join('');
 }
 
 root.innerHTML = `
@@ -298,19 +299,8 @@ carousel?.addEventListener('touchend', event => {
   touchStartX = null;
 }, { passive: true });
 
-/* Live Team Stats navigation ----------------------------------------------- */
-root.querySelectorAll('.team-stat-card[data-stat-destination]').forEach(card => {
-  const go = () => {
-    const destination = card.dataset.statDestination;
-    if (!destination) return;
-    if (destination.startsWith('#')) document.querySelector(destination)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    else window.location.href = destination;
-  };
-  card.addEventListener('click', go);
-  card.addEventListener('keydown', event => {
-    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); go(); }
-  });
-});
+/* Team Stats interactions are wired after the player viewer so Featured
+   Player can open the exact same player modal as the roster carousel. */
 
 /* Player viewer ------------------------------------------------------------ */
 const modal = root.querySelector('[data-team-player-modal]');
@@ -446,7 +436,56 @@ modal?.querySelectorAll('[data-player-close]').forEach(button => button.addEvent
 modal?.querySelector('.team-player-modal-prev')?.addEventListener('click', () => showModal(modalIndex - 1));
 modal?.querySelector('.team-player-modal-next')?.addEventListener('click', () => showModal(modalIndex + 1));
 
+/* Team Stats detail viewer -------------------------------------------------- */
+const statsModal = document.createElement('div');
+statsModal.className = 'team-stats-modal';
+statsModal.hidden = true;
+statsModal.innerHTML = `
+  <div class="team-stats-modal-backdrop" data-stats-close></div>
+  <section class="team-stats-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="team-stats-modal-title">
+    <button class="team-stats-modal-close" type="button" data-stats-close aria-label="Close team statistics">×</button>
+    <span class="team-stats-modal-kicker">ALLSTAR GALAXY LIVE TEAM DATA</span>
+    <h2 id="team-stats-modal-title"></h2>
+    <div class="team-stats-modal-content"></div>
+  </section>`;
+document.body.append(statsModal);
+
+function statsDetailMarkup(key) {
+  const completedGames = (data.games || []).filter(visible).filter(game => parseResult(game).kind);
+  const latestSeason = latestSeasonName((data.games || []).filter(visible));
+  const currentGames = (data.games || []).filter(visible).filter(game => String(game.season || '') === String(latestSeason));
+  const currentCompleted = currentGames.filter(game => parseResult(game).kind);
+  let wins=0, draws=0, losses=0, goalsFor=0, goalsAgainst=0;
+  completedGames.forEach(game => { const r=parseResult(game); if(r.kind==='win')wins++; if(r.kind==='draw')draws++; if(r.kind==='loss')losses++; if(r.score){goalsFor+=r.score[0];goalsAgainst+=r.score[1];} });
+  const awards=(data.gameAwards||[]).filter(visible), seasons=new Set(completedGames.map(g=>g.season).filter(Boolean));
+  const standings=(data.standings||[]).filter(visible), row=standings.find(r=>/allstar galaxy/i.test(String(r.team||'')))||standings[0]||{};
+  const pct=completedGames.length ? Math.round((wins/completedGames.length)*100) : 0;
+  const current=currentCompleted.reduce((r,g)=>{const k=parseResult(g).kind;if(k==='win')r.w++;if(k==='draw')r.d++;if(k==='loss')r.l++;return r},{w:0,d:0,l:0});
+  const definitions={
+    record:['Club Record',[['Games Played',completedGames.length],['Wins',wins],['Draws',draws],['Losses',losses],['Win Percentage',pct+'%'],['Goal Difference',goalsFor-goalsAgainst]]],
+    goals:['Goals & Seasons',[['Goals For',goalsFor],['Goals Against',goalsAgainst],['Goal Difference',goalsFor-goalsAgainst],['Goals / Game',completedGames.length?(goalsFor/completedGames.length).toFixed(2):'—'],['Seasons',seasons.size],['Current Season',latestSeason]]],
+    snapshot:['Team Snapshot',[['Current Season',latestSeason],['Roster Players',players.length],['Games Played',currentCompleted.length],['Current Record',`${current.w}-${current.d}-${current.l}`],['Media Collections',(data.playlists||[]).filter(visible).length],['Games Archived',(data.games||[]).filter(visible).length]]],
+    honors:['Team Honors',[['Game Awards',awards.length],['Media Collections',(data.playlists||[]).filter(visible).length],['Season Collections',(data.seasons||[]).filter(visible).length],['Players Archived',players.length],['Awarded Players',new Set(awards.map(a=>a.playerId).filter(Boolean)).size],['Seasons',seasons.size]]],
+    standings:['Current Standings',[['Position',row.position&&row.position!=='—'?`#${row.position}`:'Not Published'],['Points',row.points||'—'],['Played',row.played||'—'],['Wins',row.wins||'—'],['Draws',row.draws||'—'],['Losses',row.losses||'—']]]
+  };
+  const [title,items]=definitions[key]||['Team Stats',[]];
+  return {title,html:`<div class="team-stats-detail-grid">${items.map(([label,value])=>`<div class="team-stats-detail-item"><span>${esc(label)}</span><strong>${esc(value)}</strong></div>`).join('')}</div>`};
+}
+function closeStatsModal(){ statsModal.hidden=true; }
+function openStatsModal(key){ const d=statsDetailMarkup(key); statsModal.querySelector('h2').textContent=d.title; statsModal.querySelector('.team-stats-modal-content').innerHTML=d.html; statsModal.hidden=false; statsModal.querySelector('.team-stats-modal-close')?.focus(); }
+statsModal.querySelectorAll('[data-stats-close]').forEach(el=>el.addEventListener('click',closeStatsModal));
+
+root.querySelectorAll('.team-stat-card[data-stat-key]').forEach(card => {
+  const activate=()=>{
+    if(card.dataset.statKey==='featured'){ showModal(Number(card.dataset.featuredPlayerIndex)||0); return; }
+    openStatsModal(card.dataset.statKey);
+  };
+  card.addEventListener('click',activate);
+  card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});
+});
+
 document.addEventListener('keydown', event => {
+  if (!statsModal.hidden) { if (event.key === 'Escape') closeStatsModal(); return; }
   if (!cardLightbox.hidden) {
     if (event.key === 'Escape') closeCardLightbox();
     return;
