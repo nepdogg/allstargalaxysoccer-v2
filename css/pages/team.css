@@ -1074,3 +1074,106 @@ body > .team-player-modal .team-profile-card { width: min(310px, 31vw); }
  .team-player-card.is-neighbor{transform:translate(-50%,-50%) translateX(calc(var(--carousel-offset) * 39vw)) scale(.68)}
  .team-profile-quote{font-size:.58rem}.team-profile-quote.quote-medium{font-size:.52rem}.team-profile-quote.quote-long{font-size:.46rem}
 }
+
+/* ============================================================================
+   V4.1 — TEAM PAGE POLISH / LOCK CANDIDATE
+   - Hover/focus glow on every visible roster card.
+   - Stronger persistent active-card treatment.
+   - Larger Featured Player use of its live stats card.
+   - Slightly more restrained profile jersey number to match original card.
+============================================================================ */
+
+/* Every visible carousel card is interactive, while keeping its cover-flow
+   offset intact. The active card remains visibly selected even when idle. */
+.team-player-card:not(.is-hidden-card) .team-player-frame {
+  transition: box-shadow .22s ease, filter .22s ease;
+}
+.team-player-card:not(.is-hidden-card):hover,
+.team-player-card:not(.is-hidden-card):focus-visible {
+  opacity: 1;
+  filter: brightness(1.08) saturate(1.14);
+  z-index: 6;
+}
+.team-player-card:not(.is-hidden-card):hover .team-player-frame,
+.team-player-card:not(.is-hidden-card):focus-visible .team-player-frame {
+  box-shadow:
+    0 0 12px #fff,
+    0 0 25px var(--accent),
+    0 0 48px rgba(var(--accent-rgb), .72);
+}
+.team-player-card.is-far:hover,
+.team-player-card.is-far:focus-visible {
+  transform: translate(-50%,-50%) translateX(calc(var(--carousel-offset) * clamp(118px, 12.6vw, 168px))) scale(.74);
+}
+.team-player-card.is-neighbor:hover,
+.team-player-card.is-neighbor:focus-visible {
+  transform: translate(-50%,-50%) translateX(calc(var(--carousel-offset) * clamp(118px, 12.6vw, 168px))) scale(.88);
+}
+.team-player-card.is-active {
+  filter: brightness(1.11) saturate(1.18);
+}
+.team-player-card.is-active .team-player-frame {
+  box-shadow:
+    0 0 10px rgba(255,255,255,.75),
+    0 0 24px var(--accent),
+    0 0 52px rgba(var(--accent-rgb), .72);
+}
+.team-player-card.is-active:hover,
+.team-player-card.is-active:focus-visible {
+  transform: translate(-50%,-50%) scale(1.13);
+}
+
+/* Match the original profile-card balance: important, but not oversized. */
+.team-profile-number {
+  top: 5.8%;
+  left: 10.5%;
+  font-size: clamp(1.45rem, 2.45vw, 2.25rem);
+}
+
+/* Let the automatic Featured Player become the visual anchor of this card. */
+.team-stat-featured .team-stat-body {
+  grid-template-columns: minmax(0, 1fr) minmax(150px, 48%);
+  align-items: stretch;
+  gap: 14px;
+  min-height: 158px;
+}
+.team-stat-featured-copy {
+  align-content: center;
+  min-width: 0;
+}
+.team-stat-featured img {
+  width: 100%;
+  height: 100%;
+  max-height: 205px;
+  align-self: end;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: scale(1.08);
+  transform-origin: center bottom;
+}
+
+@media (max-width:900px) {
+  .team-player-card.is-far:hover,
+  .team-player-card.is-far:focus-visible {
+    transform:translate(-50%,-50%) translateX(calc(var(--carousel-offset) * clamp(105px,17vw,145px))) scale(.71);
+  }
+  .team-player-card.is-neighbor:hover,
+  .team-player-card.is-neighbor:focus-visible {
+    transform:translate(-50%,-50%) translateX(calc(var(--carousel-offset) * clamp(105px,17vw,145px))) scale(.84);
+  }
+}
+@media (max-width:650px) {
+  .team-player-card.is-neighbor:hover,
+  .team-player-card.is-neighbor:focus-visible {
+    transform:translate(-50%,-50%) translateX(calc(var(--carousel-offset) * 39vw)) scale(.73);
+  }
+  .team-player-card.is-active:hover,
+  .team-player-card.is-active:focus-visible {
+    transform:translate(-50%,-50%) scale(1.05);
+  }
+  .team-stat-featured .team-stat-body {
+    grid-template-columns: minmax(0, 1fr) minmax(120px, 44%);
+    min-height: 145px;
+  }
+  .team-stat-featured img { max-height: 175px; transform: scale(1.04); }
+}
