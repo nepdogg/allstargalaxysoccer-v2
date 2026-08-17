@@ -144,15 +144,15 @@
     }
   ],
   "social": {
-    "facebook": "#",
-    "instagram": "#",
-    "youtube": "#",
-    "tiktok": "#",
-    "x": "#"
+    "youtube": "https://www.youtube.com/@Allstar-Galaxy",
+    "instagram": "https://www.instagram.com/allstargalaxysoccer/",
+    "facebook": "https://www.facebook.com/profile.php?id=61591642103786",
+    "tiktok": "https://www.tiktok.com/@allstar.galaxy",
+    "x": "https://x.com/Allstar__Galaxy"
   },
   "footer": {
     "credit": "Created by Xitlali Media",
-    "copyright": "\u00a9 2026 Allstar Galaxy",
+    "copyright": "© 2026 Allstar Galaxy",
     "social": [
       "facebook",
       "instagram",
