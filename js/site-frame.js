@@ -63,6 +63,7 @@ export function mountSiteFrame(site,page){
    button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();item.classList.contains('is-open')?delayedClose():open()});
  });
  document.addEventListener('click',()=>closeAll()); document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+ enablePreciseAnchorNavigation(host);
 }
 
 export function mountFooter(site){
@@ -90,3 +91,35 @@ export function mountFooter(site){
  </div>`;
 }
 
+
+
+/* V4.6 — precise submenu anchor navigation below the sticky masthead. */
+function scrollToHashTarget(hash,{replace=false}={}){
+  if(!hash || hash==='#') return false;
+  let target;
+  try{ target=document.querySelector(hash); }catch(e){ return false; }
+  if(!target) return false;
+  const header=document.querySelector('.shared-header');
+  const offset=(header?.getBoundingClientRect().height||0)+18;
+  const y=Math.max(0,window.scrollY+target.getBoundingClientRect().top-offset);
+  window.scrollTo({top:y,behavior:'smooth'});
+  target.classList.remove('anchor-target-flash');
+  void target.offsetWidth;
+  target.classList.add('anchor-target-flash');
+  setTimeout(()=>target.classList.remove('anchor-target-flash'),1150);
+  if(replace) history.replaceState(null,'',hash);
+  return true;
+}
+
+function enablePreciseAnchorNavigation(host){
+  host.querySelectorAll('a[href*="#"]').forEach(link=>{
+    link.addEventListener('click',event=>{
+      const url=new URL(link.href,location.href);
+      if(url.pathname===location.pathname && url.hash && document.querySelector(url.hash)){
+        event.preventDefault();
+        scrollToHashTarget(url.hash,{replace:true});
+      }
+    });
+  });
+  if(location.hash) requestAnimationFrame(()=>setTimeout(()=>scrollToHashTarget(location.hash),80));
+}

@@ -23,10 +23,6 @@
           "href": "team.html#roster"
         },
         {
-          "label": "Player Profiles",
-          "href": "team.html#roster"
-        },
-        {
           "label": "Team Stats",
           "href": "team.html#team-stats"
         },
@@ -152,7 +148,7 @@
   },
   "footer": {
     "credit": "Created by Xitlali Media",
-    "copyright": "© 2026 Allstar Galaxy",
+    "copyright": "\u00a9 2026 Allstar Galaxy",
     "social": [
       "facebook",
       "instagram",
@@ -239,7 +235,7 @@
       }
     ]
   },
-  "version": "3.5.0",
+  "version": "4.6.0",
   "contactEmail": "allstargalaxy@example.com",
   "xitlaliLogo": "assets/images/logos/xitlali-media-logo.png",
   "xitlaliUrl": "https://xitlalimedia.com/",

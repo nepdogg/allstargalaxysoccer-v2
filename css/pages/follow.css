@@ -1,2 +1,17 @@
-/* Follow page content only. Do not style .site-frame, .identity-row, .main-nav, .status-bar, .hero, or .site-footer here. */
-body[data-page="follow"]{}
+/* V4.6 — Follow the Team restored from the original page and integrated into the purple Team family. */
+#page-content{padding-top:clamp(26px,3vw,46px);padding-bottom:clamp(52px,7vw,90px)}
+.follow-hub{max-width:1180px;margin:0 auto;padding:0 clamp(18px,3vw,34px)}
+.follow-intro{text-align:center;margin:0 auto clamp(28px,4vw,46px);max-width:880px}
+.follow-intro h1{margin:0 0 10px;color:var(--accent);font-size:clamp(1.9rem,3.3vw,3.1rem);letter-spacing:.035em;text-shadow:0 0 18px rgba(var(--accent-rgb),.48)}
+.follow-intro p{margin:0;color:#eee8f5;font-size:clamp(1rem,1.25vw,1.18rem)}
+.follow-social-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+.follow-card{min-height:250px;padding:24px 18px 20px;border:1px solid rgba(var(--accent-rgb),.72);border-radius:18px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.12),rgba(4,5,13,.96) 48%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease,background .22s ease;cursor:pointer}
+.follow-card:hover,.follow-card:focus-visible{transform:translateY(-6px) scale(1.015);border-color:var(--accent);background:linear-gradient(145deg,rgba(var(--accent-rgb),.2),rgba(4,5,13,.96) 52%);box-shadow:0 0 16px rgba(var(--accent-rgb),.72),0 0 34px rgba(var(--accent-rgb),.28)}
+.follow-icon-wrap{width:96px;height:96px;display:grid;place-items:center;margin-bottom:14px;filter:drop-shadow(0 0 12px rgba(var(--accent-rgb),.48))}
+.follow-icon-wrap img{display:block;max-width:90px;max-height:90px;object-fit:contain;transition:transform .22s ease,filter .22s ease}.follow-card:hover img{transform:scale(1.08);filter:drop-shadow(0 0 12px rgba(var(--accent-rgb),.8))}
+.follow-card strong{font-size:1.1rem;text-transform:uppercase;color:#fff;margin-bottom:7px}.follow-card>span:last-child{font-size:.9rem;color:#d9d1e8;line-height:1.35}
+.follow-email-card{max-width:760px;min-height:94px;margin:34px auto 0;border:1px solid rgba(var(--accent-rgb),.78);border-radius:18px;background:linear-gradient(90deg,rgba(var(--accent-rgb),.12),rgba(5,6,15,.96),rgba(var(--accent-rgb),.08));display:flex;align-items:center;justify-content:center;gap:18px;padding:20px 26px;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.follow-email-card:hover,.follow-email-card:focus-visible{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 0 17px rgba(var(--accent-rgb),.68),0 0 32px rgba(var(--accent-rgb),.22)}
+.follow-email-icon{font-size:2.2rem;color:var(--accent);text-shadow:0 0 14px rgba(var(--accent-rgb),.65)}.follow-email-card strong{display:block;color:#fff;font-size:1.05rem;letter-spacing:.02em}.follow-email-card small{display:block;margin-top:4px;color:#d9d1e8}
+@media(max-width:950px){.follow-social-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.follow-social-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.follow-card{min-height:205px;padding:18px 12px}.follow-icon-wrap{width:78px;height:78px}.follow-icon-wrap img{max-width:72px;max-height:72px}.follow-email-card{align-items:flex-start;text-align:left;margin-top:24px}}
