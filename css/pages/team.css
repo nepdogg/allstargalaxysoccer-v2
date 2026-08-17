@@ -1329,3 +1329,176 @@ body > .team-player-modal .team-profile-card { width: min(310px, 31vw); }
   .team-stat-featured-copy { padding-bottom: 18px; }
   .team-stat-featured img { max-height: 185px; transform: scale(1.05); }
 }
+
+/* ============================================================================
+   V4.5 — TEAM PAGE FINAL FIT & FINISH
+   ----------------------------------------------------------------------------
+   Final visual polish only. The locked universal framework remains untouched.
+   Goals:
+   1. Bring front-card jersey-number proportions closer to the Profile Card.
+   2. Keep the player-photo action inside the Team purple visual system.
+   3. Give the Team Stats intro safe breathing room above card hover glows.
+   4. Fill the stats cards more confidently, like the Home Explore card family.
+   5. Keep the random Featured Player image clear of its text/action zones.
+============================================================================ */
+
+/* FRONT PLAYER CARD NUMBER -------------------------------------------------
+   The previous number was visually dominating the entire upper-left corner.
+   This scale matches the Profile Card much more closely while keeping the
+   jersey number readable in the roster carousel, player popup and lightbox. */
+.team-player-number {
+  top: 5.4%;
+  left: 9%;
+  font-size: clamp(1.45rem, 2.55vw, 2.9rem);
+  line-height: .9;
+}
+
+/* The center player remains important through size/glow, not an oversized #. */
+.team-player-card.is-active .team-player-number {
+  text-shadow: 0 2px 0 #7b3600, 0 0 7px #ff9d00;
+}
+
+/* PLAYER POPUP SECONDARY ACTION -------------------------------------------
+   Gold belongs to the artwork itself; controls on Team stay Team purple. */
+.team-player-photo-link {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), .08);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), .28);
+}
+.team-player-photo-link:hover,
+.team-player-photo-link:focus-visible {
+  outline: none;
+  color: #fff;
+  background: rgba(var(--accent-rgb), .16);
+  box-shadow: 0 0 11px var(--accent), 0 0 25px rgba(var(--accent-rgb), .58);
+}
+
+/* TEAM STATS SECTION SPACING ----------------------------------------------
+   Prevent a hovering first-row card from visually touching the intro copy. */
+body[data-page="team"] .team-stats-section {
+  row-gap: 16px;
+}
+body[data-page="team"] .team-stats-section > .section-copy {
+  margin-bottom: 18px;
+}
+
+/* TEAM STATS — STRONGER INFORMATION HIERARCHY -----------------------------
+   Same family as the Home Explore cards, but information-first rather than
+   navigation-first. Equal card sizes are retained. */
+.team-stat-card {
+  min-height: 276px;
+  padding: 28px 30px 28px;
+}
+.team-stat-card h3 {
+  margin-bottom: 24px;
+  font-size: clamp(1.45rem, 1.8vw, 1.95rem);
+  line-height: .98;
+}
+.team-stat-body ul {
+  gap: 17px;
+}
+.team-stat-body li {
+  gap: 15px;
+  font-size: clamp(1rem, 1.12vw, 1.16rem);
+  line-height: 1.28;
+}
+.team-stat-body li b {
+  min-width: 52px;
+  font-size: clamp(1.35rem, 1.55vw, 1.7rem);
+  line-height: 1;
+}
+.team-stat-card-destination {
+  right: 25px;
+  bottom: 20px;
+  font-size: .8rem;
+}
+
+/* FEATURED PLAYER ----------------------------------------------------------
+   Keep the portrait substantial, but reserve clear zones for player info and
+   OPEN PROFILE. Different player cutouts can now vary without covering text. */
+.team-stat-featured .team-stat-body {
+  grid-template-columns: minmax(0, 1.18fr) minmax(145px, .82fr);
+  align-items: stretch;
+  gap: 14px;
+  min-height: 180px;
+  padding-bottom: 18px;
+}
+.team-stat-featured-copy {
+  position: relative;
+  z-index: 2;
+  align-content: center;
+  gap: 9px;
+  padding: 0 4px 20px 0;
+}
+.team-stat-featured-copy b {
+  font-size: clamp(1.12rem, 1.4vw, 1.42rem);
+}
+.team-stat-featured-copy span {
+  font-size: 1.02rem;
+}
+.team-stat-featured-copy small {
+  font-size: .92rem;
+}
+.team-stat-featured img {
+  position: relative;
+  z-index: 1;
+  width: 92%;
+  height: 100%;
+  max-height: 200px;
+  justify-self: end;
+  align-self: start;
+  object-fit: contain;
+  object-position: center top;
+  transform: translateY(-3px) scale(.96);
+  transform-origin: center top;
+}
+.team-stat-featured:hover img,
+.team-stat-featured:focus-visible img {
+  transform: translateY(-5px) scale(1.01);
+}
+.team-stat-featured .team-stat-card-destination {
+  z-index: 3;
+  right: 22px;
+  bottom: 18px;
+  padding-left: 8px;
+  background: linear-gradient(90deg, transparent, rgba(4,6,13,.88) 28%);
+}
+
+@media (max-width: 900px) {
+  .team-player-number { font-size: clamp(1.4rem, 3.6vw, 2.65rem); }
+  body[data-page="team"] .team-stats-section > .section-copy { margin-bottom: 14px; }
+  .team-stat-card { min-height: 260px; padding: 25px 25px 26px; }
+  .team-stat-card h3 { font-size: clamp(1.35rem, 2.4vw, 1.75rem); }
+  .team-stat-body li { font-size: .98rem; }
+  .team-stat-body li b { font-size: 1.35rem; }
+  .team-stat-featured .team-stat-body {
+    grid-template-columns: minmax(0,1.12fr) minmax(130px,.88fr);
+    min-height: 168px;
+  }
+  .team-stat-featured img { max-height: 184px; transform: translateY(-2px) scale(.94); }
+  .team-stat-featured:hover img,
+  .team-stat-featured:focus-visible img { transform: translateY(-4px) scale(.99); }
+}
+
+@media (max-width: 650px) {
+  .team-player-number { font-size: clamp(1.35rem, 8vw, 2.45rem); }
+  body[data-page="team"] .team-stats-section > .section-copy { margin-bottom: 10px; }
+  .team-stat-card { min-height: 240px; }
+  .team-stat-card h3 { font-size: 1.4rem; margin-bottom: 20px; }
+  .team-stat-body ul { gap: 14px; }
+  .team-stat-body li { font-size: .95rem; }
+  .team-stat-body li b { min-width: 48px; font-size: 1.28rem; }
+  .team-stat-featured .team-stat-body {
+    grid-template-columns: minmax(0,1.15fr) minmax(112px,.85fr);
+    min-height: 150px;
+    padding-bottom: 16px;
+  }
+  .team-stat-featured img {
+    width: 94%;
+    max-height: 160px;
+    transform: translateY(-1px) scale(.92);
+  }
+  .team-stat-featured:hover img,
+  .team-stat-featured:focus-visible img { transform: translateY(-3px) scale(.96); }
+}
