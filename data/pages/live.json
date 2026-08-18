@@ -5,11 +5,21 @@
   "rgb": "255,51,71",
   "active": "live",
   "hero": [
-    "assets/images/heroes/pages/hero-live.png"
+    "assets/images/heroes/pages/hero-live.png",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-live.png",
   "ticker": "Watch for upcoming and active Allstar Galaxy broadcasts.",
   "icon": "\u2605",
   "section": "live",
-  "tickerHref": "livestream.html#live-stream"
+  "tickerHref": "livestream.html#live-stream",
+  "heroSlots": 10
 }

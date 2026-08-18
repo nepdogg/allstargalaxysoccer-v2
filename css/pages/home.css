@@ -185,3 +185,15 @@ body[data-page="home"] .page-content { gap: 0; }
   .home-live-card:hover,
   .home-live-card:focus-visible { transform: none; }
 }
+
+
+/* ==========================================================================
+   V4.7 — UNIVERSAL CARD ICON LOCKDOWN (HOME)
+   Inline SVGs replace mixed text/emoji symbols. They inherit currentColor, so
+   the icon system remains crisp and theme-aware at every resolution.
+   ========================================================================== */
+.home-card-icon svg {
+  width: 42px; height: 42px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round; overflow: visible;
+}
+.home-card-icon svg path[fill], .home-card-icon svg polygon { fill: currentColor; stroke: currentColor; }

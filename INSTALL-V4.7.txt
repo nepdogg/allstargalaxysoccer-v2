@@ -1,0 +1,11 @@
+ALLSTAR GALAXY V4.7 — HOME / TEAM / UNIVERSAL FRAMEWORK LOCK
+
+1. Extract this ZIP.
+2. Copy all folders/files into the root of your current Allstar Galaxy V2 GitHub repository.
+3. Replace matching files when prompted.
+4. Commit and push to GitHub.
+
+Suggested commit message:
+Finalize Home Team and universal framework
+
+This is update-only and intentionally contains no large image/graphics files.

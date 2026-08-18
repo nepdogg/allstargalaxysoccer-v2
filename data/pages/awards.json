@@ -5,12 +5,22 @@
   "rgb": "255,122,26",
   "active": "awards",
   "hero": [
-    "assets/images/heroes/pages/hero-explore.png"
+    "assets/images/heroes/pages/hero-explore.png",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ],
   "heroInterval": 7000,
   "navTitle": "assets/images/titles/page-titles/navigation-title-shuffle.png",
   "ticker": "Explore Allstar Galaxy goals, saves, assists, plays, and player awards.",
   "icon": "\u2605",
   "section": "explore",
-  "tickerHref": "game-awards.html"
+  "tickerHref": "game-awards.html",
+  "heroSlots": 10
 }

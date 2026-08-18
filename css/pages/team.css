@@ -1629,3 +1629,97 @@ body[data-page="team"] .team-stats-section > .section-copy {
   .team-stat-featured:hover img,
   .team-stat-featured:focus-visible img { transform: translateY(-6px) scale(.94); }
 }
+
+
+/* ==========================================================================
+   V4.7 — TEAM VISUAL LOCKDOWN
+   Final typography, card-icon language, and scalable generated-card regions.
+   These rules intentionally sit last so older migration rules cannot override
+   the locked presentation.
+   ========================================================================== */
+
+/* ---- Roster/front-card typography ---------------------------------------
+   Use the artwork itself as the safe region. Names auto-shrink by surname
+   length and never receive an extra browser-drawn position box. */
+.team-player-name {
+  left: 8.5%; right: 8.5%; bottom: 4.2%; height: 27.8%;
+  grid-template-rows: 22% 51% 27%; overflow: hidden;
+}
+.team-player-name small {
+  width: 94%; max-width: 94%; font-size: clamp(.62rem,1.3vw,1.12rem);
+  line-height: 1; letter-spacing: .15em; text-align:center;
+}
+.team-player-name strong {
+  width: 96%; max-width: 96%; display:block; margin:0 auto;
+  font-size: clamp(1.28rem,3.55vw,3.15rem); line-height:.84;
+  transform: scaleX(.80); transform-origin:center; overflow:visible;
+}
+.team-player-name em {
+  align-self:center; width: 90%; max-width:90%; min-width:0; padding:0;
+  border:0; background:transparent; box-shadow:none;
+  font-size:clamp(.54rem,1.03vw,.88rem); line-height:1; text-align:center;
+}
+.team-player-name.name-length-12 strong,.team-player-name.name-length-13 strong{font-size:clamp(1.14rem,3.15vw,2.75rem)}
+.team-player-name.name-length-14 strong,.team-player-name.name-length-15 strong{font-size:clamp(1.02rem,2.85vw,2.48rem)}
+.team-player-name.name-length-16 strong,.team-player-name.name-length-17 strong{font-size:clamp(.90rem,2.52vw,2.18rem)}
+.team-player-name.name-length-18 strong,.team-player-name.name-length-19 strong,.team-player-name.name-length-20 strong{font-size:clamp(.80rem,2.22vw,1.92rem)}
+
+/* ---- Profile-card name --------------------------------------------------
+   First + last name are centered as one group in the entire printed name
+   window. The existing name-medium/name-long classes remain the fit guards. */
+.team-profile-name {
+  top: 23.9%; left: 9.5%; right: 9.5%; height: 15.6%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:2%; overflow:hidden; text-align:center;
+}
+.team-profile-name small { width:100%; margin:0; line-height:1; text-align:center; }
+.team-profile-name strong {
+  width:96%; max-width:96%; margin:0 auto; line-height:.88; text-align:center;
+  transform-origin:center center;
+}
+
+/* ---- Profile quote ------------------------------------------------------
+   Occupy the complete printed quote zone rather than a small line. */
+.team-profile-quote {
+  left: 10.5%; right: 10.5%; bottom: 3.4%; height: 15.4%;
+  margin:0; padding:1.2% 2%; display:flex; align-items:center; justify-content:center;
+  text-align:center; text-wrap:balance; line-height:1.32; overflow:hidden;
+}
+.team-profile-quote.quote-medium{line-height:1.25}.team-profile-quote.quote-long{line-height:1.17}
+
+/* ---- Team Stats cards: same component language as Home ----------------- */
+.team-stat-card { position:relative; }
+.team-stat-card h3 { max-width:76%; }
+.team-stat-card-icon {
+  position:absolute; top:22px; right:22px; z-index:3; width:50px; height:50px;
+  display:grid; place-items:center; color:#fff;
+  filter:drop-shadow(0 0 7px rgba(var(--accent-rgb),.72));
+  transition:transform .2s ease,filter .2s ease,color .2s ease;
+  pointer-events:none;
+}
+.team-stat-card-icon svg {
+  width:38px; height:38px; fill:none; stroke:currentColor; stroke-width:1.8;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.team-stat-card.is-clickable:hover .team-stat-card-icon,
+.team-stat-card.is-clickable:focus-visible .team-stat-card-icon {
+  color:var(--accent); transform:scale(1.09) rotate(-3deg);
+  filter:drop-shadow(0 0 12px var(--accent));
+}
+/* Featured Player already owns the right side with a cutout. Use a smaller
+   star icon so it complements rather than competes with the photograph. */
+.team-stat-featured .team-stat-card-icon { width:34px; height:34px; top:20px; right:20px; opacity:.9; }
+.team-stat-featured .team-stat-card-icon svg { width:28px; height:28px; }
+
+/* Home-style CTA rule: white at rest, Team purple only on hover/focus. */
+.team-stat-card-destination { color:#fff; opacity:.96; transition:color .18s ease,transform .18s ease,text-shadow .18s ease; }
+.team-stat-card.is-clickable:hover .team-stat-card-destination,
+.team-stat-card.is-clickable:focus-visible .team-stat-card-destination {
+  color:var(--accent); transform:translateX(4px); opacity:1;
+  text-shadow:0 0 9px rgba(var(--accent-rgb),.82);
+}
+
+@media(max-width:650px){
+  .team-stat-card-icon{top:18px;right:18px;width:42px;height:42px}.team-stat-card-icon svg{width:32px;height:32px}
+  .team-stat-card h3{max-width:74%}
+}

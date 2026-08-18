@@ -982,3 +982,16 @@
               text-shadow .18s ease, box-shadow .18s ease;
 }
 .status-message-link.is-changing { opacity: .12; }
+
+
+/* ==========================================================================
+   V4.7 — SHARED HERO CAROUSEL LOCKDOWN
+   Every page reserves ten content slots in data. Only populated slides create
+   visitor-facing dots, preventing fake/empty navigation while eliminating any
+   future framework work when photography is added.
+   ========================================================================== */
+.hero-dots { max-width:92%; flex-wrap:wrap; justify-content:center; }
+.hero-dot { transition:transform .18s ease,background .18s ease,box-shadow .18s ease,opacity .18s ease; }
+.hero-dot:hover,.hero-dot:focus-visible { outline:none; transform:scale(1.18); background:rgba(255,255,255,.78); box-shadow:0 0 10px var(--accent); }
+.hero-dot.is-active { transform:scale(1.28); background:var(--accent); box-shadow:0 0 10px var(--accent),0 0 18px rgba(var(--accent-rgb),.58); }
+@media(prefers-reduced-motion:reduce){.hero-track,.hero-dot{transition:none}}

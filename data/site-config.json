@@ -23,10 +23,6 @@
           "href": "team.html#roster"
         },
         {
-          "label": "Player Profiles",
-          "href": "team.html#roster"
-        },
-        {
           "label": "Team Stats",
           "href": "team.html#team-stats"
         },
@@ -239,7 +235,7 @@
       }
     ]
   },
-  "version": "4.6.0",
+  "version": "4.7.0",
   "contactEmail": "allstargalaxy@example.com",
   "xitlaliLogo": "assets/images/logos/xitlali-media-logo.png",
   "xitlaliUrl": "https://xitlalimedia.com/",
@@ -253,5 +249,12 @@
     "rotationMs": 7000,
     "nextFallbackMessage": "Next Game \u2014 check Updates for the next Allstar Galaxy match.",
     "nextFallbackHref": "updates.html#schedule-standings"
+  },
+  "heroCarousel": {
+    "maxSlots": 10,
+    "intervalMs": 7000,
+    "pauseOnHover": true,
+    "swipe": true,
+    "showOnlyPopulatedDots": true
   }
 }

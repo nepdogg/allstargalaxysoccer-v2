@@ -88,6 +88,20 @@ function latestSeasonName(games) {
   return ordered.at(-1)?.season || 'Current Season';
 }
 
+
+function teamStatIconSvg(key) {
+  const common = `viewBox="0 0 24 24" aria-hidden="true" focusable="false"`;
+  const icons = {
+    featured: `<svg ${common}><path d="M12 3 14.4 8l5.5.8-4 3.9.95 5.5L12 15.65 7.15 18.2l.95-5.5-4-3.9L9.6 8Z"/><circle cx="12" cy="11" r="2.2"/></svg>`,
+    record: `<svg ${common}><path d="M8 4h8v4a4 4 0 0 1-8 0Z"/><path d="M8 6H5v1a4 4 0 0 0 4 4"/><path d="M16 6h3v1a4 4 0 0 1-4 4"/><path d="M12 12v5M9 20h6M10 17h4"/></svg>`,
+    goals: `<svg ${common}><circle cx="12" cy="12" r="8.5"/><path d="m12 8 3 2.2-1.15 3.5h-3.7L9 10.2Z"/><path d="m6.2 9.2 2.8 1m6 0 2.8-1M10.2 13.7l-1.7 3M13.8 13.7l1.7 3"/></svg>`,
+    snapshot: `<svg ${common}><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3 19c.6-3.1 2.5-5 5-5s4.4 1.9 5 5"/><path d="M13 18c.5-2.5 1.9-4 4-4 2 0 3.5 1.5 4 4"/></svg>`,
+    honors: `<svg ${common}><circle cx="12" cy="9" r="5"/><path d="m9 13-2 8 5-2 5 2-2-8"/><path d="m12 6 1 2 2 .3-1.5 1.5.4 2.2-1.9-1-1.9 1 .4-2.2L9 8.3 11 8Z"/></svg>`,
+    standings: `<svg ${common}><path d="M5 20V12h3v8ZM10.5 20V8h3v12ZM16 20V4h3v16Z"/><path d="M3 20h18"/></svg>`
+  };
+  return icons[key] || icons.snapshot;
+}
+
 function teamStatsMarkup() {
   const completedGames = (data.games || []).filter(visible).filter(game => parseResult(game).kind);
   const latestSeason = latestSeasonName((data.games || []).filter(visible));
@@ -192,6 +206,7 @@ function teamStatsMarkup() {
     <article class="team-stat-card${card.feature ? ' team-stat-featured' : ''} is-clickable" tabindex="0"
       data-stat-key="${esc(card.key)}" ${card.feature ? `data-featured-player-index="${card.playerIndex}"` : ''}>
       <h3>${card.title}</h3>
+      <span class="team-stat-card-icon">${teamStatIconSvg(card.key)}</span>
       <div class="team-stat-body">${card.body}</div>
       <span class="team-stat-card-destination">${actionLabels[card.key]}</span>
     </article>`).join('');

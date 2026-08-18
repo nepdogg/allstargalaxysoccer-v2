@@ -7,11 +7,19 @@
   "hero": [
     "assets/images/heroes/pages/hero-home.png",
     "assets/images/heroes/pages/hero-homepage.png",
-    "assets/images/heroes/pages/home-hero.png"
+    "assets/images/heroes/pages/home-hero.png",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-home.png",
   "ticker": "Explore the Allstar Galaxy \u2014 choose a feature to begin.",
   "icon": "\u2605",
   "section": "home",
-  "tickerHref": "explore.html"
+  "tickerHref": "explore.html",
+  "heroSlots": 10
 }

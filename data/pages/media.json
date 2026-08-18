@@ -5,11 +5,21 @@
   "rgb": "36,191,255",
   "active": "media",
   "hero": [
-    "assets/images/heroes/pages/hero-media.png"
+    "assets/images/heroes/pages/hero-media.png",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-media.png",
   "ticker": "Browse the complete Allstar Galaxy media library.",
   "icon": "\u2605",
   "section": "media",
-  "tickerHref": "media.html#latest-games"
+  "tickerHref": "media.html#latest-games",
+  "heroSlots": 10
 }

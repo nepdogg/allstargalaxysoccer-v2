@@ -134,7 +134,15 @@ async function hydrateLatestStatus(site,page,host){
 
 export function mountSiteFrame(site,page){
  const host=document.querySelector('#site-frame');
- const images=Array.isArray(page.hero)?page.hero.map(x=>String(x||'').trim()).filter(Boolean):[];
+ /* Every page permanently owns the same configurable hero architecture.
+    Page JSON reserves up to 10 slots, but visitors only see dots/slides for
+    populated slots. Adding future photography is therefore content work, not
+    a framework redesign. */
+ const heroConfig=site.heroCarousel||{};
+ const maxHeroSlots=Math.max(1,Number(page.heroSlots||heroConfig.maxSlots||10));
+ const heroSlots=Array.isArray(page.hero)?page.hero.slice(0,maxHeroSlots):[];
+ while(heroSlots.length<maxHeroSlots)heroSlots.push('');
+ const images=heroSlots.map(x=>String(x||'').trim()).filter(Boolean);
  host.className='site-frame';
  host.innerHTML=`<header class="shared-header"><div class="identity-row"><a class="brand-home brand-home-left" href="index.html"><img class="brand-logo" src="${site.logo}" alt="Allstar Galaxy"></a><img class="nav-title" src="${page.navTitle}" alt="The Official Home of the Allstar Galaxy"><a class="brand-home brand-home-right" href="index.html"><img class="brand-logo" src="${site.logo}" alt="Allstar Galaxy"></a><a class="search-control" href="search.html"><span>⌕</span><b>Search</b></a></div><nav class="main-nav" aria-label="Main navigation">${nav(site,page)}</nav><div class="status-module"><span class="status-border status-border-top"></span><span class="energy-rail energy-rail-top"><i></i></span><div class="status-bar"><span class="status-side status-side-left" aria-hidden="true"><span class="status-icon">${page.icon||'★'}</span><span class="status-open">OPEN →</span></span><a class="status-text status-message-link" href="${page.tickerHref||page.statusHref||'#main'}">${page.ticker||''}</a><span class="status-side status-side-right" aria-hidden="true"><span class="status-open">← OPEN</span><span class="status-icon">${page.icon||'★'}</span></span></div><span class="energy-rail energy-rail-bottom"><i></i></span><span class="status-border status-border-bottom"></span></div></header>`;
 
@@ -143,10 +151,19 @@ export function mountSiteFrame(site,page){
  const hero=document.createElement('section'); hero.className='hero'; hero.setAttribute('aria-label',`${page.title} hero`);
  hero.innerHTML=images.length?`<div class="hero-track">${images.map((src,i)=>`<img class="hero-slide" src="${src}" alt="${page.title} hero ${i+1}" ${i?'loading="lazy"':'fetchpriority="high"'}>`).join('')}</div><div class="hero-dots">${images.map((_,i)=>`<button class="hero-dot ${i?'':'is-active'}" type="button" aria-label="Show hero ${i+1}" aria-pressed="${!i}" data-index="${i}"></button>`).join('')}</div>`:`<div class="placeholder-panel">Hero image not configured.</div>`;
  host.after(hero);
- const track=hero.querySelector('.hero-track'),dots=[...hero.querySelectorAll('.hero-dot')]; let index=0,timer;
+ const track=hero.querySelector('.hero-track'),dots=[...hero.querySelectorAll('.hero-dot')]; let index=0,timer,touchStartX=null;
+ const reduceMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+ const intervalMs=Number(page.heroInterval||heroConfig.intervalMs)||7000;
  const show=i=>{if(!track||!dots.length)return;index=(i+dots.length)%dots.length;track.style.transform=`translateX(-${index*100}%)`;dots.forEach((d,j)=>{d.classList.toggle('is-active',j===index);d.setAttribute('aria-pressed',String(j===index))})};
- const restart=()=>{clearInterval(timer);if(dots.length>1)timer=setInterval(()=>show(index+1),Number(page.heroInterval)||7000)};
- dots.forEach(d=>d.onclick=()=>{show(+d.dataset.index);restart()}); restart();
+ const pause=()=>clearInterval(timer);
+ const restart=()=>{pause();if(!reduceMotion&&dots.length>1)timer=setInterval(()=>show(index+1),intervalMs)};
+ dots.forEach(d=>d.onclick=()=>{show(+d.dataset.index);restart()});
+ if(heroConfig.pauseOnHover!==false){hero.addEventListener('mouseenter',pause);hero.addEventListener('mouseleave',restart);hero.addEventListener('focusin',pause);hero.addEventListener('focusout',restart)}
+ if(heroConfig.swipe!==false){
+   hero.addEventListener('touchstart',event=>{touchStartX=event.touches?.[0]?.clientX??null},{passive:true});
+   hero.addEventListener('touchend',event=>{if(touchStartX==null)return;const end=event.changedTouches?.[0]?.clientX??touchStartX;const delta=end-touchStartX;touchStartX=null;if(Math.abs(delta)>45&&dots.length>1){show(index+(delta<0?1:-1));restart()}},{passive:true});
+ }
+ restart();
 
  /* Forgiving dropdown behavior: hover bridge + 280ms close delay + click/touch. */
  const items=[...host.querySelectorAll('.nav-item')];

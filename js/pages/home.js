@@ -19,7 +19,7 @@ const CARD_DEFINITIONS = [
     description: 'Let the Galaxy choose a random game and video from the archive.',
     href: 'galaxy-shuffle.html',
     cta: 'Start Shuffle →',
-    icon: '◉'
+    icon: 'shuffle'
   },
   {
     id: 'search',
@@ -27,7 +27,7 @@ const CARD_DEFINITIONS = [
     description: 'Find games, players, opponents, seasons, awards, and playlists.',
     href: 'search.html',
     cta: 'Search the Galaxy →',
-    icon: '⌕'
+    icon: 'search'
   },
   {
     id: 'latest',
@@ -35,7 +35,7 @@ const CARD_DEFINITIONS = [
     description: 'Open the newest matches and choose from every available game video.',
     href: 'media.html#latest-games',
     cta: 'Watch Latest Games →',
-    icon: '▤'
+    icon: 'latest'
   },
   {
     id: 'awards',
@@ -43,7 +43,7 @@ const CARD_DEFINITIONS = [
     description: 'Celebrate the player, goal, save, assist, and play of each game.',
     href: 'game-awards.html',
     cta: 'View Game Awards →',
-    icon: '♜'
+    icon: 'awards'
   },
   {
     id: 'best',
@@ -51,7 +51,7 @@ const CARD_DEFINITIONS = [
     description: 'Watch the greatest goals, saves, assists, plays, and moments.',
     href: 'media.html#best-of',
     cta: 'Explore the Best →',
-    icon: '★'
+    icon: 'best'
   },
   {
     id: 'archive',
@@ -59,9 +59,23 @@ const CARD_DEFINITIONS = [
     description: 'Browse the full collection of seasons, games, playlists, and videos.',
     href: 'seasons.html',
     cta: 'Open the Archive →',
-    icon: '□'
+    icon: 'archive'
   }
 ];
+
+
+function homeIconSvg(id) {
+  const common = `viewBox="0 0 24 24" aria-hidden="true" focusable="false"`;
+  const icons = {
+    shuffle: `<svg ${common}><path d="M4 7h3.5c3.5 0 4.5 10 9 10H20"/><path d="m17 14 3 3-3 3"/><path d="M4 17h3.5c1.7 0 2.8-2.4 4-4.8"/><path d="M13 9c1-1.2 2.1-2 3.5-2H20"/><path d="m17 4 3 3-3 3"/></svg>`,
+    search: `<svg ${common}><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 5 5"/></svg>`,
+    latest: `<svg ${common}><rect x="4" y="4" width="16" height="16" rx="2"/><path d="m10 9 5 3-5 3Z"/><path d="M7 6.8h10"/></svg>`,
+    awards: `<svg ${common}><path d="M8 4h8v4a4 4 0 0 1-8 0Z"/><path d="M8 6H5v1a4 4 0 0 0 4 4"/><path d="M16 6h3v1a4 4 0 0 1-4 4"/><path d="M12 12v5"/><path d="M8.5 20h7"/><path d="M10 17h4"/></svg>`,
+    best: `<svg ${common}><path d="m12 3 2.75 5.57 6.15.9-4.45 4.33 1.05 6.12L12 17.03l-5.5 2.89 1.05-6.12L3.1 9.47l6.15-.9Z"/></svg>`,
+    archive: `<svg ${common}><path d="M4 7h16v13H4Z"/><path d="M3 4h18v4H3Z"/><path d="M9 11h6"/></svg>`
+  };
+  return icons[id] || icons.archive;
+}
 
 function isPublished(item = {}) {
   const status = String(item.status ?? 'published').trim().toLowerCase();
@@ -105,7 +119,7 @@ function metricsFrom(data = {}) {
 function cardMarkup(card, metric = 'LIVE') {
   return `
     <a class="home-live-card" href="${card.href}" aria-label="${card.title}: ${card.cta.replace(' →', '')}">
-      <span class="home-card-icon" aria-hidden="true">${card.icon}</span>
+      <span class="home-card-icon">${homeIconSvg(card.icon)}</span>
       <h2>${card.title}</h2>
       <p>${card.description}</p>
       <span class="home-card-metric" data-metric="${card.id}">${metric}</span>

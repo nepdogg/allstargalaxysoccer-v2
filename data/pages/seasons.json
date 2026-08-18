@@ -5,11 +5,21 @@
   "rgb": "36,191,255",
   "active": "seasons",
   "hero": [
-    "assets/images/heroes/pages/hero-media.png"
+    "assets/images/heroes/pages/hero-media.png",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-media.png",
   "ticker": "Browse complete Allstar Galaxy seasons and historical collections.",
   "icon": "\u2605",
   "section": "media",
-  "tickerHref": "seasons.html"
+  "tickerHref": "seasons.html",
+  "heroSlots": 10
 }

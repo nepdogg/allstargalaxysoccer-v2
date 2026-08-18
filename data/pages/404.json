@@ -6,11 +6,20 @@
   "active": "404",
   "hero": [
     "assets/images/heroes/pages/hero-404.png",
-    "assets/images/heroes/pages/404-hero.png"
+    "assets/images/heroes/pages/404-hero.png",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-home.png",
   "ticker": "Lost in the Galaxy? Search the site or choose a destination below.",
   "icon": "\u2726",
   "section": "404",
-  "tickerHref": "search.html"
+  "tickerHref": "search.html",
+  "heroSlots": 10
 }

@@ -6,11 +6,20 @@
   "active": "about",
   "hero": [
     "assets/images/heroes/pages/about-hero.png",
-    "assets/images/heroes/pages/home-about.png"
+    "assets/images/heroes/pages/home-about.png",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-about.png",
   "ticker": "Discover the story, mission, and production behind Allstar Galaxy.",
   "icon": "\u2605",
   "section": "team",
-  "tickerHref": "about.html"
+  "tickerHref": "about.html",
+  "heroSlots": 10
 }

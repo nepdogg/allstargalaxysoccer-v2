@@ -6,11 +6,20 @@
   "active": "shuffle",
   "hero": [
     "assets/images/heroes/pages/hero-shuffle-v233.png",
-    "assets/images/heroes/pages/hero-shuffle.png"
+    "assets/images/heroes/pages/hero-shuffle.png",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-shuffle.png",
   "ticker": "Let the Galaxy choose a random video from the archive.",
   "icon": "\u2605",
   "section": "explore",
-  "tickerHref": "galaxy-shuffle.html"
+  "tickerHref": "galaxy-shuffle.html",
+  "heroSlots": 10
 }

@@ -5,11 +5,21 @@
   "rgb": "255,68,183",
   "active": "search",
   "hero": [
-    "assets/images/heroes/pages/hero-search.png"
+    "assets/images/heroes/pages/hero-search.png",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ],
   "navTitle": "assets/images/titles/page-titles/navigation-title-about.png",
   "ticker": "Search every player, game, season, award, video, and page.",
   "icon": "\u2315",
   "section": "search",
-  "tickerHref": "search.html#search"
+  "tickerHref": "search.html#search",
+  "heroSlots": 10
 }
