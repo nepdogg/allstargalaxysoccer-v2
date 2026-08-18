@@ -122,8 +122,11 @@
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), #fff 48%, #dbe1e8 62%, transparent);
   box-shadow: 0 0 10px #fff, 0 0 20px var(--accent);
 }
-.energy-rail-top i { animation: energy-right 4.2s linear infinite; }
-.energy-rail-bottom i { animation: energy-left 4.2s linear infinite; }
+/* Final status energy behavior: each rail travels to the opposite side and then
+   reverses instead of teleporting back to its start. Top and bottom are always
+   moving in opposite directions. */
+.energy-rail-top i { animation: energy-right 4.2s linear infinite alternate; }
+.energy-rail-bottom i { animation: energy-left 4.2s linear infinite alternate; }
 .status-bar {
   position: relative;
   z-index: 2;
@@ -966,8 +969,16 @@
   .footer-meta { padding-bottom:20px; }
 }
 
-/* V4.6 precise anchor destination feedback. */
-.anchor-section,[id="roster"],[id="team-stats"],[id="about-story"],[id="about-mission"],[id="about-media"]{scroll-margin-top:220px}
-.anchor-target-flash{animation:asgAnchorPulse 1.05s ease-out}
-@keyframes asgAnchorPulse{0%{filter:drop-shadow(0 0 0 rgba(var(--accent-rgb),0))}28%{filter:drop-shadow(0 0 16px rgba(var(--accent-rgb),.72))}100%{filter:drop-shadow(0 0 0 rgba(var(--accent-rgb),0))}}
-@media(max-width:760px){.anchor-section,[id="roster"],[id="team-stats"],[id="about-story"],[id="about-mission"],[id="about-media"]{scroll-margin-top:170px}}
+
+/* ============================================================================
+   V4.6 — GLOBAL + PAGE-AWARE STATUS ROTATION
+   ----------------------------------------------------------------------------
+   The locked status frame is unchanged. Only the center message transitions
+   between Latest / Next / current-page context. Top and bottom energy rails
+   continue to travel in opposite directions using the existing animations.
+============================================================================ */
+.status-message-link {
+  transition: opacity .16s ease, color .18s ease, background .18s ease,
+              text-shadow .18s ease, box-shadow .18s ease;
+}
+.status-message-link.is-changing { opacity: .12; }

@@ -1,12 +1,15 @@
 {
   "file": "follow.html",
-  "title": "Follow the Team",
-  "accent": "#c83cff",
-  "rgb": "200,60,255",
+  "title": "Follow",
+  "accent": "#cf39ff",
+  "rgb": "207,57,255",
   "active": "follow",
-  "hero": ["assets/images/heroes/pages/hero-follow.png"],
-  "navTitle": "assets/images/titles/page-titles/navigation-title-team.png",
-  "ticker": "Follow Allstar Galaxy across social media for videos, photos, updates, and highlights.",
-  "tickerHref": "follow.html#follow",
-  "icon": "★"
+  "hero": [
+    "assets/images/heroes/pages/hero-follow.png"
+  ],
+  "navTitle": "assets/images/titles/page-titles/navigation-title-follow.png",
+  "ticker": "Follow Allstar Galaxy across every social platform.",
+  "icon": "\u2605",
+  "section": "team",
+  "tickerHref": "follow.html"
 }

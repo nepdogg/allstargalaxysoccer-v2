@@ -1,12 +1,16 @@
 {
   "file": "about.html",
-  "title": "About Allstar Galaxy",
-  "accent": "#c83cff",
-  "rgb": "200,60,255",
+  "title": "About",
+  "accent": "#cf39ff",
+  "rgb": "207,57,255",
   "active": "about",
-  "hero": ["assets/images/heroes/pages/about-hero.png", "assets/images/heroes/pages/home-about.png"],
-  "navTitle": "assets/images/titles/page-titles/navigation-title-team.png",
-  "ticker": "Discover the story, mission, and media project behind Allstar Galaxy.",
-  "tickerHref": "about.html#about-story",
-  "icon": "★"
+  "hero": [
+    "assets/images/heroes/pages/about-hero.png",
+    "assets/images/heroes/pages/home-about.png"
+  ],
+  "navTitle": "assets/images/titles/page-titles/navigation-title-about.png",
+  "ticker": "Discover the story, mission, and production behind Allstar Galaxy.",
+  "icon": "\u2605",
+  "section": "team",
+  "tickerHref": "about.html"
 }

@@ -1,0 +1,17 @@
+ALLSTAR GALAXY V4.6 — SITE STATUS + TEAM FINAL LOCK UPDATE
+
+This is an UPDATE-ONLY package and contains NO large website graphics/images.
+
+INSTALL:
+1. Extract this ZIP.
+2. Copy its folders/files into the ROOT of your current Allstar Galaxy V2 GitHub repository.
+3. Allow the matching files to be replaced/overwritten.
+4. Commit and push to GitHub.
+
+Suggested commit message:
+Finalize Team page and add live site-wide status rotation
+
+IMPORTANT:
+- Do NOT delete your assets/images folder.
+- This package assumes you are applying it over the current V4.5/V4.4-based repository.
+- Shared header/footer structure is not redesigned.
