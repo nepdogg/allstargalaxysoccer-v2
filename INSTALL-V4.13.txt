@@ -1,0 +1,13 @@
+ALLSTAR GALAXY V4.13 — TEAM + UPDATES MODAL CONSISTENCY FIX
+
+COPY THESE FILES OVER THE CURRENT V2 REPOSITORY:
+- js/pages/team.js
+- css/pages/team.css
+- css/pages/updates.css
+
+CHANGES:
+1. Team Stats popups now have Previous/Next arrows.
+2. Left/Right keyboard arrows cycle Team Stats popups.
+3. Updates graphic popup now uses the same compact centered modal language as Team Stats.
+4. Updates Previous/Next arrows remain available for Schedule/Results/Standings/Latest News.
+5. No Home page or universal framework layout changes.

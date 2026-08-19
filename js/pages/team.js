@@ -507,9 +507,13 @@ statsModal.innerHTML = `
   <div class="team-stats-modal-backdrop" data-stats-close></div>
   <section class="team-stats-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="team-stats-modal-title">
     <button class="team-stats-modal-close" type="button" data-stats-close aria-label="Close team statistics">×</button>
-    <span class="team-stats-modal-kicker">ALLSTAR GALAXY LIVE TEAM DATA</span>
-    <h2 id="team-stats-modal-title"></h2>
-    <div class="team-stats-modal-content"></div>
+    <button class="team-stats-modal-nav team-stats-modal-prev" type="button" aria-label="Previous team stat">‹</button>
+    <div class="team-stats-modal-main">
+      <span class="team-stats-modal-kicker">ALLSTAR GALAXY LIVE TEAM DATA</span>
+      <h2 id="team-stats-modal-title"></h2>
+      <div class="team-stats-modal-content"></div>
+    </div>
+    <button class="team-stats-modal-nav team-stats-modal-next" type="button" aria-label="Next team stat">›</button>
   </section>`;
 document.body.append(statsModal);
 
@@ -534,9 +538,24 @@ function statsDetailMarkup(key) {
   const [title,items]=definitions[key]||['Team Stats',[]];
   return {title,html:`<div class="team-stats-detail-grid">${items.map(([label,value])=>`<div class="team-stats-detail-item"><span>${esc(label)}</span><strong>${esc(value)}</strong></div>`).join('')}</div>`};
 }
-function closeStatsModal(){ statsModal.hidden=true; }
-function openStatsModal(key){ const d=statsDetailMarkup(key); statsModal.querySelector('h2').textContent=d.title; statsModal.querySelector('.team-stats-modal-content').innerHTML=d.html; statsModal.hidden=false; statsModal.querySelector('.team-stats-modal-close')?.focus(); }
+const statsKeys=['record','goals','snapshot','honors','standings'];
+let statsModalIndex=0;
+function closeStatsModal(){ statsModal.hidden=true; document.body.classList.remove('team-modal-open'); }
+function openStatsModal(key){
+  const found=statsKeys.indexOf(key);
+  if(found>=0) statsModalIndex=found;
+  const activeKey=statsKeys[statsModalIndex]||'record';
+  const d=statsDetailMarkup(activeKey);
+  statsModal.querySelector('h2').textContent=d.title;
+  statsModal.querySelector('.team-stats-modal-content').innerHTML=d.html;
+  statsModal.hidden=false;
+  document.body.classList.add('team-modal-open');
+  statsModal.querySelector('.team-stats-modal-close')?.focus();
+}
+function moveStatsModal(delta){ statsModalIndex=(statsModalIndex+delta+statsKeys.length)%statsKeys.length; openStatsModal(statsKeys[statsModalIndex]); }
 statsModal.querySelectorAll('[data-stats-close]').forEach(el=>el.addEventListener('click',closeStatsModal));
+statsModal.querySelector('.team-stats-modal-prev')?.addEventListener('click',()=>moveStatsModal(-1));
+statsModal.querySelector('.team-stats-modal-next')?.addEventListener('click',()=>moveStatsModal(1));
 
 root.querySelectorAll('.team-stat-card[data-stat-key]').forEach(card => {
   const activate=()=>{
@@ -548,7 +567,12 @@ root.querySelectorAll('.team-stat-card[data-stat-key]').forEach(card => {
 });
 
 document.addEventListener('keydown', event => {
-  if (!statsModal.hidden) { if (event.key === 'Escape') closeStatsModal(); return; }
+  if (!statsModal.hidden) {
+    if (event.key === 'Escape') closeStatsModal();
+    if (event.key === 'ArrowLeft') moveStatsModal(-1);
+    if (event.key === 'ArrowRight') moveStatsModal(1);
+    return;
+  }
   if (!cardLightbox.hidden) {
     if (event.key === 'Escape') closeCardLightbox();
     return;
