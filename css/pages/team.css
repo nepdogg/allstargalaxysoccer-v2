@@ -1723,3 +1723,188 @@ body[data-page="team"] .team-stats-section > .section-copy {
   .team-stat-card-icon{top:18px;right:18px;width:42px;height:42px}.team-stat-card-icon svg{width:32px;height:32px}
   .team-stat-card h3{max-width:74%}
 }
+
+
+/* ============================================================================
+   V4.8 — ORIGINAL ROSTER CAROUSEL HYBRID
+   ----------------------------------------------------------------------------
+   PURPOSE
+   - Restore the wider, denser proportions of the original Team roster carousel.
+   - Keep the newer dual Front Card + Profile Card popup unchanged.
+   - Keep every visible roster card clickable and give EVERY card a hover glow.
+   - Keep the current/center card permanently highlighted so users always know
+     which player is selected.
+
+   IMPORTANT
+   This is intentionally an override block. It does not change the universal
+   header, status bar, hero, footer, Home page, or Team Stats system.
+============================================================================ */
+
+body[data-page="team"] .team-roster-carousel {
+  width: min(100%, 1240px);
+  margin-inline: auto;
+  padding: 22px 34px 34px;
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+body[data-page="team"] .team-carousel-viewport {
+  min-height: clamp(455px, 41vw, 590px);
+}
+
+/* The original carousel showed a stronger fan/stack.  The selected card is
+   large and readable, while 3 roster positions can remain visible on each side. */
+body[data-page="team"] .team-player-card {
+  width: clamp(210px, 20vw, 300px);
+  --original-x-step: clamp(112px, 10.6vw, 166px);
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--carousel-offset) * var(--original-x-step)))
+    scale(.66);
+  opacity: .28;
+  filter: brightness(.58) saturate(.64);
+  transition:
+    transform .26s cubic-bezier(.2,.75,.2,1),
+    opacity .24s ease,
+    filter .24s ease,
+    box-shadow .24s ease;
+  pointer-events: auto;
+}
+
+body[data-page="team"] .team-player-card.is-far {
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--carousel-offset) * var(--original-x-step)))
+    scale(.70);
+  opacity: .34;
+  filter: brightness(.64) saturate(.72);
+  z-index: 3;
+}
+
+body[data-page="team"] .team-player-card.is-neighbor {
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--carousel-offset) * var(--original-x-step)))
+    scale(.84);
+  opacity: .64;
+  filter: brightness(.80) saturate(.90);
+  z-index: 6;
+}
+
+body[data-page="team"] .team-player-card.is-active {
+  transform: translate(-50%, -50%) scale(1.08);
+  opacity: 1;
+  filter: brightness(1.08) saturate(1.12);
+  z-index: 12;
+}
+
+body[data-page="team"] .team-player-card.is-hidden-card {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Base glow for visible cards. */
+body[data-page="team"] .team-player-card:not(.is-hidden-card) .team-player-frame {
+  box-shadow:
+    0 0 12px rgba(var(--accent-rgb), .46),
+    0 0 24px rgba(var(--accent-rgb), .25);
+}
+
+/* Permanent stronger glow on the current/center card. */
+body[data-page="team"] .team-player-card.is-active .team-player-frame {
+  box-shadow:
+    0 0 16px var(--accent),
+    0 0 34px rgba(var(--accent-rgb), .78),
+    0 0 58px rgba(var(--accent-rgb), .38);
+}
+
+/* Every visible card, including the center card, gets hover/focus feedback. */
+body[data-page="team"] .team-player-card:not(.is-hidden-card):hover,
+body[data-page="team"] .team-player-card:not(.is-hidden-card):focus-visible {
+  outline: none;
+  opacity: 1;
+  filter: brightness(1.10) saturate(1.18);
+  z-index: 20;
+}
+
+body[data-page="team"] .team-player-card.is-far:hover,
+body[data-page="team"] .team-player-card.is-far:focus-visible {
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--carousel-offset) * var(--original-x-step)))
+    scale(.76);
+}
+
+body[data-page="team"] .team-player-card.is-neighbor:hover,
+body[data-page="team"] .team-player-card.is-neighbor:focus-visible {
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--carousel-offset) * var(--original-x-step)))
+    scale(.91);
+}
+
+body[data-page="team"] .team-player-card.is-active:hover,
+body[data-page="team"] .team-player-card.is-active:focus-visible {
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+body[data-page="team"] .team-player-card:not(.is-hidden-card):hover .team-player-frame,
+body[data-page="team"] .team-player-card:not(.is-hidden-card):focus-visible .team-player-frame {
+  box-shadow:
+    0 0 18px var(--accent),
+    0 0 40px rgba(var(--accent-rgb), .78),
+    0 0 64px rgba(var(--accent-rgb), .36);
+}
+
+/* Keep original-card typography readable at the wider carousel size. */
+body[data-page="team"] .team-roster-carousel .team-player-number {
+  font-size: clamp(1.9rem, 3.35vw, 3.35rem);
+}
+body[data-page="team"] .team-roster-carousel .team-player-name small {
+  font-size: clamp(.66rem, 1.16vw, 1.02rem);
+}
+body[data-page="team"] .team-roster-carousel .team-player-name strong {
+  font-size: clamp(1.42rem, 2.85vw, 2.8rem);
+  line-height: .88;
+}
+body[data-page="team"] .team-roster-carousel .team-player-name em {
+  font-size: clamp(.56rem, .94vw, .82rem);
+}
+
+/* Pull arrows farther toward the page edges like the original carousel. */
+body[data-page="team"] .team-carousel-prev { left: 14px; }
+body[data-page="team"] .team-carousel-next { right: 14px; }
+
+@media (max-width: 900px) {
+  body[data-page="team"] .team-roster-carousel {
+    width: 100%;
+    padding-inline: 26px;
+  }
+  body[data-page="team"] .team-player-card {
+    width: min(42vw, 270px);
+    --original-x-step: clamp(92px, 16vw, 132px);
+  }
+  body[data-page="team"] .team-player-card.is-far { opacity: .24; }
+}
+
+@media (max-width: 640px) {
+  body[data-page="team"] .team-carousel-viewport { min-height: 430px; }
+  body[data-page="team"] .team-player-card {
+    width: min(60vw, 250px);
+    --original-x-step: clamp(82px, 25vw, 112px);
+  }
+  /* Phone keeps the center + immediate neighbors readable without crowding. */
+  body[data-page="team"] .team-player-card.is-far {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  body[data-page="team"] .team-player-card.is-active {
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+  body[data-page="team"] .team-player-card.is-active:hover,
+  body[data-page="team"] .team-player-card.is-active:focus-visible {
+    transform: translate(-50%, -50%) scale(1.07);
+  }
+}

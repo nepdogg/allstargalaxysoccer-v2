@@ -283,10 +283,10 @@ function setActive(nextIndex, options = {}) {
     card.dataset.distance = String(Math.min(distance, 3));
     card.classList.toggle('is-active', offset === 0);
     card.classList.toggle('is-neighbor', distance === 1);
-    card.classList.toggle('is-far', distance === 2);
-    card.classList.toggle('is-hidden-card', distance > 2);
+    card.classList.toggle('is-far', distance === 2 || distance === 3);
+    card.classList.toggle('is-hidden-card', distance > 3);
     card.setAttribute('aria-current', offset === 0 ? 'true' : 'false');
-    card.tabIndex = distance <= 2 ? 0 : -1;
+    card.tabIndex = distance <= 3 ? 0 : -1;
   });
 
   dotsRoot?.querySelectorAll('.team-carousel-dot').forEach((dot, index) => {

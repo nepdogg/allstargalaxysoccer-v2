@@ -1,0 +1,12 @@
+ALLSTAR GALAXY V4.8 — TEAM ORIGINAL CAROUSEL HYBRID
+
+Copy these folders/files into the root of the current Allstar Galaxy V2 repository and replace matching files:
+
+css/pages/team.css
+js/pages/team.js
+docs/V4.8-TEAM-ORIGINAL-CAROUSEL-HYBRID.md
+
+No image/graphic files are included.
+
+Suggested GitHub commit message:
+Restore original Team carousel with full hover effects
