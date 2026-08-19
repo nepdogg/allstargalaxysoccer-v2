@@ -464,6 +464,10 @@ function showModal(index) {
   teamCarouselPaused = true;
   stopTeamCarouselAutoplay();
   modalIndex = (index + players.length) % players.length;
+  // Keep the roster carousel synchronized with the player being viewed in the popup.
+  // This makes the modal arrows feel like an extension of the carousel rather than
+  // a separate navigation system.
+  if (cardButtons.length) setActive(modalIndex);
   modalContent.innerHTML = modalMarkup(players[modalIndex], modalIndex);
   modalContent.querySelectorAll('[data-card-zoom]').forEach(panel => {
     const open = () => openCardLightbox(panel.dataset.cardZoom);

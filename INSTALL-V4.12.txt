@@ -1,0 +1,19 @@
+ALLSTAR GALAXY V4.12 — HOME / TEAM / UPDATES FINAL INTERACTION LOCK
+
+Copy these files over the matching paths in the current Allstar Galaxy V2 repository.
+
+Updates page:
+- Team-style centered green popup shell
+- Large contained graphic/placeholder area
+- Previous/Next navigation remains inside the popup
+- Keyboard arrows + Escape retained
+- Background scroll locked while open
+- Focus returns to the card after close
+
+Team page:
+- Previous/Next arrows already browse players inside the dual-card popup
+- Popup navigation now also synchronizes the roster carousel underneath
+- Existing Front Card + Profile Card dual-view is preserved
+
+Home page:
+- No visual changes in this patch; current locked Home design is preserved.

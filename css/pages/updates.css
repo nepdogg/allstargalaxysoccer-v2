@@ -5,3 +5,145 @@
 .updates-modal-placeholder{min-height:min(68vh,760px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;border:1px solid rgba(69,239,99,.55);background:rgba(0,20,8,.72);color:#45ef63;border-radius:14px;padding:28px}
 .updates-modal-placeholder strong{font-size:clamp(1.5rem,4vw,3rem);text-transform:uppercase}
 .updates-modal-placeholder span{color:#d7e7da;font-size:clamp(.9rem,1.5vw,1.1rem)}
+
+
+/* ==========================================================================
+   V4.12 — TEAM-STYLE UPDATE VIEWER
+   Shared modal language: centered panel, visible previous/next controls,
+   contained artwork, responsive sizing, and a full-width empty placeholder.
+   ========================================================================== */
+.updates-lightbox {
+  padding: 24px;
+}
+.updates-lightbox-backdrop {
+  background: rgba(0,0,0,.88);
+  backdrop-filter: blur(12px);
+}
+.updates-lightbox-dialog {
+  width: min(1180px, 96vw);
+  height: auto;
+  max-height: 94vh;
+  grid-template-columns: 52px minmax(0,1fr) 52px;
+  gap: 18px;
+  padding: 34px 56px 32px;
+  border: 2px solid #45ef63;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(69,239,99,.16), transparent 34%),
+    linear-gradient(180deg, rgba(69,239,99,.055), transparent 28%),
+    rgba(3,8,7,.98);
+  box-shadow: 0 0 24px #45ef63, 0 0 70px rgba(69,239,99,.34);
+  overflow: auto;
+}
+.updates-lightbox-content {
+  min-width: 0;
+  height: auto;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 5px;
+}
+.updates-lightbox-content h2 {
+  margin: 0;
+  color: #45ef63;
+  font-size: clamp(1.8rem,3vw,3.1rem);
+  line-height: 1;
+  letter-spacing: .035em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.updates-lightbox-time {
+  margin: 2px 0 14px;
+  color: #d6d8dc;
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-align: center;
+}
+.updates-full-image {
+  width: 100%;
+  min-height: 0;
+  max-height: calc(94vh - 170px);
+  display: grid;
+  place-items: center;
+  overflow: auto;
+  padding: 6px;
+  touch-action: pinch-zoom;
+}
+.updates-full-image img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(94vh - 190px);
+  object-fit: contain;
+  border-radius: 8px;
+  filter: drop-shadow(0 0 12px rgba(69,239,99,.26));
+}
+.updates-modal-placeholder {
+  width: min(860px, 100%);
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 32px;
+  border: 1px solid rgba(69,239,99,.56);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at center, rgba(69,239,99,.10), transparent 62%),
+    rgba(0,20,8,.62);
+  color: #45ef63;
+  text-align: center;
+}
+.updates-modal-placeholder strong {
+  font-size: clamp(1.6rem,3.2vw,2.8rem);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.updates-modal-placeholder span {
+  color: #d7e7da;
+  font-size: clamp(.9rem,1.3vw,1.08rem);
+}
+.updates-close,
+.updates-nav {
+  border: 1px solid #45ef63;
+  color: #fff;
+  background: rgba(4,12,8,.94);
+  box-shadow: 0 0 12px rgba(69,239,99,.38);
+}
+.updates-close {
+  top: 14px;
+  right: 14px;
+  width: 44px;
+  height: 44px;
+}
+.updates-nav {
+  width: 42px;
+  height: 72px;
+  justify-self: center;
+  align-self: center;
+  border-radius: 12px;
+  font-size: 2rem;
+}
+.updates-close:hover,.updates-close:focus-visible,
+.updates-nav:hover,.updates-nav:focus-visible {
+  outline: none;
+  color: #45ef63;
+  box-shadow: 0 0 12px #45ef63, 0 0 24px rgba(69,239,99,.36);
+}
+@media(max-width:700px){
+  .updates-lightbox{padding:10px}
+  .updates-lightbox-dialog{
+    width:96vw;
+    max-height:94vh;
+    grid-template-columns:38px minmax(0,1fr) 38px;
+    gap:5px;
+    padding:52px 8px 22px;
+  }
+  .updates-nav{width:34px;height:60px;font-size:1.8rem}
+  .updates-full-image{max-height:calc(94vh - 155px);padding:2px}
+  .updates-full-image img{max-height:calc(94vh - 175px)}
+  .updates-modal-placeholder{width:100%;aspect-ratio:4/5;padding:18px}
+}
