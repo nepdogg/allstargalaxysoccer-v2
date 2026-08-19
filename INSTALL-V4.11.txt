@@ -1,0 +1,11 @@
+ALLSTAR GALAXY V4.11 — UPDATES PAGE INTERACTION FIX
+
+Replace the matching V4.10 files with these files.
+
+Changes:
+1. Removed redundant “Updates Home” item from the Updates submenu. The main Updates navigation button already opens updates.html.
+2. All four live cards now open their large popup viewer when clicked, even before a graphic has been uploaded.
+3. Empty cards show a large in-popup placeholder. Once a graphic path is added to data/updates-cards.json, that same popup automatically displays the full graphic.
+4. Previous/Next buttons move through all four Updates modules.
+
+Suggested commit: Fix Updates submenu and live card popups

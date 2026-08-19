@@ -42,10 +42,6 @@
       "href": "updates.html",
       "submenu": [
         {
-          "label": "Updates Home",
-          "href": "updates.html"
-        },
-        {
           "label": "Schedule",
           "href": "updates.html#schedule"
         },
@@ -239,7 +235,7 @@
       }
     ]
   },
-  "version": "4.7.0",
+  "version": "4.11.0",
   "contactEmail": "allstargalaxy@example.com",
   "xitlaliLogo": "assets/images/logos/xitlali-media-logo.png",
   "xitlaliUrl": "https://xitlalimedia.com/",
