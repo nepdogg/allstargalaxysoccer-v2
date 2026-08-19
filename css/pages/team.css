@@ -1908,3 +1908,108 @@ body[data-page="team"] .team-carousel-next { right: 14px; }
     transform: translate(-50%, -50%) scale(1.07);
   }
 }
+
+/* ============================================================================
+   V4.9 — ORIGINAL CAROUSEL BEHAVIOR + DUAL-CARD POPUP FIX
+   ----------------------------------------------------------------------------
+   1. Scope all cover-flow dimming/transforms to the roster carousel ONLY.
+      The V4.8 rules were also matching the Front Card inside the modal, which
+      is why the Front Card appeared dark/inactive while the Profile Card was
+      bright.
+   2. Restore a clearer original-style card typography at every carousel scale.
+   3. Keep both cards in the dual-card player viewer equally active/bright.
+============================================================================ */
+
+/* Modal cards are presentation cards, not carousel cards. Force them back to
+   full opacity/brightness and remove all cover-flow state styling. */
+body[data-page="team"] .team-player-modal .team-player-modal-card .team-player-card,
+body[data-page="team"] .team-player-modal .team-player-modal-card .team-player-card:hover,
+body[data-page="team"] .team-player-modal .team-player-modal-card .team-player-card:focus-visible {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+}
+body[data-page="team"] .team-player-modal .team-player-modal-card .team-player-frame {
+  opacity: 1 !important;
+  filter: none !important;
+  box-shadow: 0 0 14px rgba(var(--accent-rgb),.50), 0 0 30px rgba(var(--accent-rgb),.28) !important;
+}
+body[data-page="team"] .team-player-modal .team-profile-card {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Make the generated front-card lettering read more like the original cards:
+   less horizontal squeezing, stronger white face, and safer line proportions. */
+body[data-page="team"] .team-roster-carousel .team-player-name {
+  left: 7.5%;
+  right: 7.5%;
+  bottom: 4.6%;
+  height: 28.2%;
+  grid-template-rows: 21% 51% 28%;
+}
+body[data-page="team"] .team-roster-carousel .team-player-name small {
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: clamp(.72rem, 1.28vw, 1.08rem);
+  letter-spacing: .12em;
+  text-shadow: 0 1px 0 #6a3700, 0 0 7px rgba(255,196,0,.62);
+}
+body[data-page="team"] .team-roster-carousel .team-player-name strong {
+  width: 100%;
+  max-width: 100%;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: clamp(1.55rem, 3vw, 3rem);
+  line-height: .92;
+  letter-spacing: .01em;
+  transform: scaleX(.90);
+  text-shadow: 0 2px 0 #666, 0 0 7px rgba(255,255,255,.72), 0 5px 8px rgba(0,0,0,.9);
+}
+body[data-page="team"] .team-roster-carousel .team-player-name em {
+  width: 94%;
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: clamp(.62rem, 1.05vw, .90rem);
+  letter-spacing: .10em;
+  color: #ffc400;
+  text-shadow: 0 0 6px rgba(255,196,0,.45);
+}
+
+/* Long surnames shrink without changing the typeface or becoming clipped. */
+body[data-page="team"] .team-roster-carousel .team-player-name.name-length-12 strong,
+body[data-page="team"] .team-roster-carousel .team-player-name.name-length-13 strong { font-size: clamp(1.38rem,2.72vw,2.72rem); }
+body[data-page="team"] .team-roster-carousel .team-player-name.name-length-14 strong,
+body[data-page="team"] .team-roster-carousel .team-player-name.name-length-15 strong { font-size: clamp(1.24rem,2.46vw,2.46rem); }
+body[data-page="team"] .team-roster-carousel .team-player-name.name-length-16 strong,
+body[data-page="team"] .team-roster-carousel .team-player-name.name-length-17 strong { font-size: clamp(1.10rem,2.20vw,2.18rem); }
+body[data-page="team"] .team-roster-carousel .team-player-name.name-length-18 strong,
+body[data-page="team"] .team-roster-carousel .team-player-name.name-length-19 strong,
+body[data-page="team"] .team-roster-carousel .team-player-name.name-length-20 strong { font-size: clamp(.98rem,1.98vw,1.96rem); }
+
+/* Use the same readable front-card typography in the dual popup, but let the
+   card itself remain the exact newer dual-card presentation size. */
+body[data-page="team"] .team-player-modal .team-player-name small {
+  font-family: "Arial Black", Impact, sans-serif;
+  letter-spacing: .12em;
+}
+body[data-page="team"] .team-player-modal .team-player-name strong {
+  font-family: Impact, "Arial Black", sans-serif;
+  line-height: .92;
+  transform: scaleX(.90);
+}
+body[data-page="team"] .team-player-modal .team-player-name em {
+  font-family: "Arial Black", Impact, sans-serif;
+  letter-spacing: .10em;
+}
+
+/* The two card panels are peers. Hovering one may glow it, but the other must
+   never dim or become visually "inactive". */
+body[data-page="team"] .team-player-modal-panel {
+  opacity: 1 !important;
+  filter: none !important;
+}
+body[data-page="team"] .team-player-modal-panel:hover,
+body[data-page="team"] .team-player-modal-panel:focus-visible {
+  opacity: 1 !important;
+  filter: brightness(1.04) !important;
+}

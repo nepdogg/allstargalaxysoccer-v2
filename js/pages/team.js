@@ -252,13 +252,39 @@ const dotsRoot = carousel?.querySelector('.team-carousel-dots');
 let activeIndex = 0;
 let touchStartX = null;
 
+/* V4.9 — restore automatic roster rotation. The carousel advances on its own,
+   pauses while the visitor is interacting with it or a player popup is open,
+   and respects reduced-motion preferences. */
+const TEAM_CAROUSEL_AUTOPLAY_MS = 6500;
+const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+let teamCarouselTimer = null;
+let teamCarouselPaused = false;
+
+function stopTeamCarouselAutoplay() {
+  if (teamCarouselTimer) window.clearInterval(teamCarouselTimer);
+  teamCarouselTimer = null;
+}
+
+function startTeamCarouselAutoplay() {
+  stopTeamCarouselAutoplay();
+  if (reduceMotion || teamCarouselPaused || document.hidden || cardButtons.length < 2) return;
+  teamCarouselTimer = window.setInterval(() => {
+    if (!teamCarouselPaused && !document.hidden && modal?.hidden !== false) setActive(activeIndex + 1);
+  }, TEAM_CAROUSEL_AUTOPLAY_MS);
+}
+
+function restartTeamCarouselAutoplay() {
+  if (reduceMotion) return;
+  startTeamCarouselAutoplay();
+}
+
 function buildDots() {
   if (!dotsRoot) return;
   dotsRoot.innerHTML = players.map((player, index) =>
     `<button type="button" class="team-carousel-dot" data-dot-index="${index}" aria-label="Show ${esc(player.name || `player ${index + 1}`)}"></button>`
   ).join('');
   dotsRoot.querySelectorAll('.team-carousel-dot').forEach(dot => {
-    dot.addEventListener('click', () => setActive(Number(dot.dataset.dotIndex)));
+    dot.addEventListener('click', () => { setActive(Number(dot.dataset.dotIndex)); restartTeamCarouselAutoplay(); });
   });
 }
 
@@ -298,12 +324,24 @@ function setActive(nextIndex, options = {}) {
 }
 
 buildDots();
-requestAnimationFrame(() => setActive(0));
+requestAnimationFrame(() => { setActive(0); startTeamCarouselAutoplay(); });
 window.addEventListener('resize', () => requestAnimationFrame(() => setActive(activeIndex)));
-carousel?.querySelector('.team-carousel-prev')?.addEventListener('click', () => setActive(activeIndex - 1));
-carousel?.querySelector('.team-carousel-next')?.addEventListener('click', () => setActive(activeIndex + 1));
+carousel?.querySelector('.team-carousel-prev')?.addEventListener('click', () => { setActive(activeIndex - 1); restartTeamCarouselAutoplay(); });
+carousel?.querySelector('.team-carousel-next')?.addEventListener('click', () => { setActive(activeIndex + 1); restartTeamCarouselAutoplay(); });
+
+carousel?.addEventListener('mouseenter', () => { teamCarouselPaused = true; stopTeamCarouselAutoplay(); });
+carousel?.addEventListener('mouseleave', () => { teamCarouselPaused = false; startTeamCarouselAutoplay(); });
+carousel?.addEventListener('focusin', () => { teamCarouselPaused = true; stopTeamCarouselAutoplay(); });
+carousel?.addEventListener('focusout', event => {
+  if (carousel.contains(event.relatedTarget)) return;
+  teamCarouselPaused = false;
+  startTeamCarouselAutoplay();
+});
+document.addEventListener('visibilitychange', () => document.hidden ? stopTeamCarouselAutoplay() : startTeamCarouselAutoplay());
 
 carousel?.addEventListener('touchstart', event => {
+  teamCarouselPaused = true;
+  stopTeamCarouselAutoplay();
   touchStartX = event.touches[0]?.clientX ?? null;
 }, { passive: true });
 carousel?.addEventListener('touchend', event => {
@@ -312,6 +350,8 @@ carousel?.addEventListener('touchend', event => {
   const distance = touchStartX - endX;
   if (Math.abs(distance) > 45) setActive(activeIndex + (distance > 0 ? 1 : -1));
   touchStartX = null;
+  teamCarouselPaused = false;
+  restartTeamCarouselAutoplay();
 }, { passive: true });
 
 /* Team Stats interactions are wired after the player viewer so Featured
@@ -421,6 +461,8 @@ function modalMarkup(player, index) {
 }
 function showModal(index) {
   if (!modal || !modalContent || !players.length) return;
+  teamCarouselPaused = true;
+  stopTeamCarouselAutoplay();
   modalIndex = (index + players.length) % players.length;
   modalContent.innerHTML = modalMarkup(players[modalIndex], modalIndex);
   modalContent.querySelectorAll('[data-card-zoom]').forEach(panel => {
@@ -440,7 +482,9 @@ function closeModal() {
   closeCardLightbox();
   modal.hidden = true;
   document.body.classList.remove('team-modal-open');
+  teamCarouselPaused = false;
   cardButtons[activeIndex]?.focus({ preventScroll: true });
+  restartTeamCarouselAutoplay();
 }
 
 cardButtons.forEach((card, index) => card.addEventListener('click', () => {

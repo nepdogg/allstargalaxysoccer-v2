@@ -1,0 +1,11 @@
+ALLSTAR GALAXY V4.9 — TEAM CAROUSEL BEHAVIOR FIX
+
+Copy these files over the matching files in the current V2 repository:
+- js/pages/team.js
+- css/pages/team.css
+
+Optional documentation:
+- docs/V4.9-TEAM-CAROUSEL-BEHAVIOR-FIX.md
+
+No graphics or site-wide framework files are changed.
+Suggested commit: Fix Team carousel autoplay and dual-card popup
