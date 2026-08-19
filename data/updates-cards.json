@@ -1,0 +1,60 @@
+{
+  "cards": [
+    {
+      "id": "schedule",
+      "title": "Schedule",
+      "eyebrow": "UPCOMING MATCHES",
+      "summary": "View the latest Allstar Galaxy schedule.",
+      "graphic": "",
+      "alt": "Current Allstar Galaxy schedule",
+      "updated": "",
+      "badge": "",
+      "icon": "calendar",
+      "cta": "VIEW FULL SCHEDULE →",
+      "status": "published",
+      "order": 1
+    },
+    {
+      "id": "results",
+      "title": "Results",
+      "eyebrow": "LATEST RESULTS",
+      "summary": "View the latest Allstar Galaxy match results.",
+      "graphic": "",
+      "alt": "Latest Allstar Galaxy results",
+      "updated": "",
+      "badge": "",
+      "icon": "results",
+      "cta": "VIEW FULL RESULTS →",
+      "status": "published",
+      "order": 2
+    },
+    {
+      "id": "standings",
+      "title": "Standings",
+      "eyebrow": "CURRENT LEAGUE TABLE",
+      "summary": "View the latest league standings.",
+      "graphic": "",
+      "alt": "Current league standings",
+      "updated": "",
+      "badge": "",
+      "icon": "standings",
+      "cta": "VIEW FULL STANDINGS →",
+      "status": "published",
+      "order": 3
+    },
+    {
+      "id": "latest-news",
+      "title": "Latest News",
+      "eyebrow": "LATEST UPDATE",
+      "summary": "Read the newest Allstar Galaxy update.",
+      "graphic": "",
+      "alt": "Latest Allstar Galaxy news update",
+      "updated": "",
+      "badge": "",
+      "icon": "news",
+      "cta": "VIEW LATEST NEWS →",
+      "status": "published",
+      "order": 4
+    }
+  ]
+}

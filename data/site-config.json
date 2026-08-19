@@ -42,16 +42,20 @@
       "href": "updates.html",
       "submenu": [
         {
+          "label": "Updates Home",
+          "href": "updates.html"
+        },
+        {
           "label": "Schedule",
-          "href": "updates.html#schedule-standings"
+          "href": "updates.html#schedule"
         },
         {
           "label": "Results",
-          "href": "updates.html#schedule-standings"
+          "href": "updates.html#results"
         },
         {
-          "label": "League Standings",
-          "href": "updates.html#schedule-standings"
+          "label": "Standings",
+          "href": "updates.html#standings"
         },
         {
           "label": "Latest News",

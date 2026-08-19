@@ -1,0 +1,16 @@
+ALLSTAR GALAXY V4.10 — UPDATES PAGE FINAL DESIGN
+
+Copy these files into the matching folders of the current Allstar Galaxy V2 repository and replace matching files.
+
+IMPORTANT: this update assumes the current V2 page loader already loads js/pages/updates.js and css/pages/updates.css for updates.html, as it does for the other page modules.
+
+The four live modules are controlled by data/updates-cards.json.
+For each module, set "graphic" to the repository path of the uploaded image and "updated" to an ISO date/time or readable date.
+Example:
+  "graphic": "assets/images/updates/schedule-current.png",
+  "updated": "2026-08-18T21:00:00-07:00"
+
+Administration can later edit this same data structure: title, summary, graphic, updated timestamp, badge, icon, CTA, visibility/status, and order.
+
+Suggested commit:
+Finalize Updates page live graphic modules
